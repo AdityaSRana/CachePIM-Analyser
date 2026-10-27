@@ -1,0 +1,77 @@
+{
+  "selected_lambda": 0.0,
+  "scores": [
+    {
+      "lambda_weight": 0.0,
+      "mean_normalized_regret": 0.0,
+      "mean_regret_ns": 0.0,
+      "mean_selected_model_ns": 8579.333333333334,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 0.25,
+      "mean_normalized_regret": 2.1163842212861743,
+      "mean_regret_ns": 21805.56666666667,
+      "mean_selected_model_ns": 30384.900000000005,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 0.5,
+      "mean_normalized_regret": 2.1163842212861743,
+      "mean_regret_ns": 21805.56666666667,
+      "mean_selected_model_ns": 30384.900000000005,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 1.0,
+      "mean_normalized_regret": 2.9944684734154787,
+      "mean_regret_ns": 26655.233333333337,
+      "mean_selected_model_ns": 35234.566666666666,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 1.5,
+      "mean_normalized_regret": 2.9944684734154787,
+      "mean_regret_ns": 26655.233333333337,
+      "mean_selected_model_ns": 35234.566666666666,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 2.0,
+      "mean_normalized_regret": 3.6936859699505455,
+      "mean_regret_ns": 30346.6,
+      "mean_selected_model_ns": 38925.933333333334,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 3.0,
+      "mean_normalized_regret": 3.6936859699505455,
+      "mean_regret_ns": 30346.6,
+      "mean_selected_model_ns": 38925.933333333334,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 4.0,
+      "mean_normalized_regret": 3.6936859699505455,
+      "mean_regret_ns": 30346.6,
+      "mean_selected_model_ns": 38925.933333333334,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    }
+  ]
+}

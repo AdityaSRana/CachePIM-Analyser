@@ -1,145 +1,721 @@
-metric_name,policy_name,workload_type,configuration_group,number_of_master_seeds,mean,sample_std,median,confidence_interval_low,confidence_interval_high,ci_method
-selected_model_ns,CPU-cache,MIXED_PHASE,default,15,49531.19999999999,23286.998579832973,44539.2,36635.2900280412,62427.10997195878,students_t_95
-cache_hit_rate,CPU-cache,MIXED_PHASE,default,15,0.720703125,0.1457769842988342,0.751953125,0.639974521910314,0.801431728089686,students_t_95
-regret_ns,CPU-cache,MIXED_PHASE,default,15,48209.19999999999,23286.998579832973,43217.2,35313.2900280412,61105.10997195878,students_t_95
-normalized_regret,CPU-cache,MIXED_PHASE,default,15,36.46686838124055,17.614976232853987,32.69077155824508,26.712019688382163,46.22171707409894,students_t_95
-bad_offload,CPU-cache,MIXED_PHASE,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,CPU-cache,MIXED_PHASE,default,15,1.0,0.0,1.0,1.0,1.0,none
-selected_model_ns,CPU-cache,RANDOM,default,15,55495.599999999984,31769.534554799055,44149.2,37902.21817944502,73088.98182055494,students_t_95
-cache_hit_rate,CPU-cache,RANDOM,default,15,0.6833658854166667,0.19887779544019843,0.75439453125,0.5732310332747711,0.7935007375585622,students_t_95
-regret_ns,CPU-cache,RANDOM,default,15,54173.599999999984,31769.534554799055,42827.2,36580.21817944502,71766.98182055494,students_t_95
-normalized_regret,CPU-cache,RANDOM,default,15,40.978517397881994,24.031417968834386,32.39576399394856,27.67036170911122,54.28667308665277,students_t_95
-bad_offload,CPU-cache,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,CPU-cache,RANDOM,default,15,1.0,0.0,1.0,1.0,1.0,none
-selected_model_ns,CPU-cache,REUSE,default,15,33582.8,9286.11289430159,33463.2,28440.32208624827,38725.277913751735,students_t_95
-cache_hit_rate,CPU-cache,REUSE,default,15,0.8205403645833333,0.058131215534239736,0.8212890625,0.7883483704317424,0.8527323587349243,students_t_95
-regret_ns,CPU-cache,REUSE,default,15,32260.800000000003,9286.11289430159,32141.199999999997,27118.32208624827,37403.277913751735,students_t_95
-normalized_regret,CPU-cache,REUSE,default,15,24.40302571860817,7.024291145462625,24.3125567322239,20.513102939673427,28.292948497542913,students_t_95
-bad_offload,CPU-cache,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,CPU-cache,REUSE,default,15,1.0,0.0,1.0,1.0,1.0,none
-selected_model_ns,CPU-cache,STREAM,default,15,96153.60000000002,76369.15031907284,59596.8,53861.774208304734,138445.4257916953,students_t_95
-cache_hit_rate,CPU-cache,STREAM,default,15,0.9166666666666666,0.030496877279641666,0.9375,0.8997780589538321,0.9335552743795011,students_t_95
-regret_ns,CPU-cache,STREAM,default,15,90607.60000000002,73438.1731985679,54818.8,49938.89523638932,131276.3047636107,students_t_95
-normalized_regret,CPU-cache,STREAM,default,15,14.242190604323921,4.3708487017265565,11.47316868982838,11.821695272334988,16.662685936312855,students_t_95
-bad_offload,CPU-cache,STREAM,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,CPU-cache,STREAM,default,15,1.0,0.0,1.0,1.0,1.0,none
-selected_model_ns,CPU-no-cache,MIXED_PHASE,default,15,164659.20000000004,3.012532656469648e-11,164659.2,164659.2,164659.20000000007,students_t_95
-cache_hit_rate,CPU-no-cache,MIXED_PHASE,default,15,0.720703125,0.1457769842988342,0.751953125,0.639974521910314,0.801431728089686,students_t_95
-regret_ns,CPU-no-cache,MIXED_PHASE,default,15,163337.20000000004,3.012532656469648e-11,163337.2,163337.2,163337.20000000007,students_t_95
-normalized_regret,CPU-no-cache,MIXED_PHASE,default,15,123.55310136157341,2.941926422333641e-14,123.55310136157338,123.55310136157341,123.55310136157341,none
-bad_offload,CPU-no-cache,MIXED_PHASE,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,CPU-no-cache,MIXED_PHASE,default,15,0.300810401119403,0.14142543252871972,0.2704932369402985,0.22249160707717036,0.3791291951616356,students_t_95
-selected_model_ns,CPU-no-cache,RANDOM,default,15,164659.20000000004,3.012532656469648e-11,164659.2,164659.2,164659.20000000007,students_t_95
-cache_hit_rate,CPU-no-cache,RANDOM,default,15,0.6833658854166667,0.19887779544019843,0.75439453125,0.5732310332747711,0.7935007375585622,students_t_95
-regret_ns,CPU-no-cache,RANDOM,default,15,163337.20000000004,3.012532656469648e-11,163337.2,163337.2,163337.20000000007,students_t_95
-normalized_regret,CPU-no-cache,RANDOM,default,15,123.55310136157341,2.941926422333641e-14,123.55310136157338,123.55310136157341,123.55310136157341,none
-bad_offload,CPU-no-cache,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,CPU-no-cache,RANDOM,default,15,0.3370330962375621,0.19294114483004324,0.26812470848880593,0.23018585162229033,0.4438803408528339,students_t_95
-selected_model_ns,CPU-no-cache,REUSE,default,15,164659.20000000004,3.012532656469648e-11,164659.2,164659.2,164659.20000000007,students_t_95
-cache_hit_rate,CPU-no-cache,REUSE,default,15,0.8205403645833333,0.058131215534239736,0.8212890625,0.7883483704317424,0.8527323587349243,students_t_95
-regret_ns,CPU-no-cache,REUSE,default,15,163337.20000000004,3.012532656469648e-11,163337.2,163337.2,163337.20000000007,students_t_95
-normalized_regret,CPU-no-cache,REUSE,default,15,123.55310136157341,2.941926422333641e-14,123.55310136157338,123.55310136157341,123.55310136157341,none
-bad_offload,CPU-no-cache,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,CPU-no-cache,REUSE,default,15,0.2039533776430348,0.05639595536903853,0.20322702891791042,0.17272233854074517,0.23518441674532445,students_t_95
-selected_model_ns,CPU-no-cache,STREAM,default,15,768409.6000000001,425148.2262665576,658636.8,532970.3598645366,1003848.8401354636,students_t_95
-cache_hit_rate,CPU-no-cache,STREAM,default,15,0.9166666666666666,0.030496877279641666,0.9375,0.8997780589538321,0.9335552743795011,students_t_95
-regret_ns,CPU-no-cache,STREAM,default,15,762863.6000000001,422173.7750566703,653858.8,529071.5560408575,996655.6439591427,students_t_95
-normalized_regret,CPU-no-cache,STREAM,default,15,136.10134581341984,3.104859696843961,136.84780242779408,134.38193182415895,137.82075980268073,students_t_95
-bad_offload,CPU-no-cache,STREAM,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,CPU-no-cache,STREAM,default,15,0.11069651741293533,0.029586522733980714,0.09048507462686567,0.09431204724376749,0.12708098758210318,students_t_95
-selected_model_ns,Cost-based,MIXED_PHASE,default,15,1322.0,0.0,1322.0,1322.0,1322.0,none
-cache_hit_rate,Cost-based,MIXED_PHASE,default,15,0.720703125,0.1457769842988342,0.751953125,0.639974521910314,0.801431728089686,students_t_95
-regret_ns,Cost-based,MIXED_PHASE,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,Cost-based,MIXED_PHASE,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,Cost-based,MIXED_PHASE,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,Cost-based,MIXED_PHASE,default,15,37.46686838124055,17.614976232853987,33.69077155824508,27.712019688382163,47.22171707409894,students_t_95
-selected_model_ns,Cost-based,RANDOM,default,15,1322.0,0.0,1322.0,1322.0,1322.0,none
-cache_hit_rate,Cost-based,RANDOM,default,15,0.6833658854166667,0.19887779544019843,0.75439453125,0.5732310332747711,0.7935007375585622,students_t_95
-regret_ns,Cost-based,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,Cost-based,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,Cost-based,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,Cost-based,RANDOM,default,15,41.978517397881994,24.031417968834386,33.39576399394856,28.67036170911122,55.28667308665277,students_t_95
-selected_model_ns,Cost-based,REUSE,default,15,1322.0,0.0,1322.0,1322.0,1322.0,none
-cache_hit_rate,Cost-based,REUSE,default,15,0.8205403645833333,0.058131215534239736,0.8212890625,0.7883483704317424,0.8527323587349243,students_t_95
-regret_ns,Cost-based,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,Cost-based,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,Cost-based,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,Cost-based,REUSE,default,15,25.40302571860817,7.024291145462625,25.3125567322239,21.513102939673427,29.292948497542913,students_t_95
-selected_model_ns,Cost-based,STREAM,default,15,5546.0,2974.451209887296,4778.0,3898.803823679127,7193.196176320873,students_t_95
-cache_hit_rate,Cost-based,STREAM,default,15,0.9166666666666666,0.030496877279641666,0.9375,0.8997780589538321,0.9335552743795011,students_t_95
-regret_ns,Cost-based,STREAM,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,Cost-based,STREAM,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,Cost-based,STREAM,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,Cost-based,STREAM,default,15,15.242190604323921,4.3708487017265565,12.47316868982838,12.821695272334988,17.662685936312855,students_t_95
-selected_model_ns,Oracle,MIXED_PHASE,default,15,1322.0,0.0,1322.0,1322.0,1322.0,none
-cache_hit_rate,Oracle,MIXED_PHASE,default,15,0.720703125,0.1457769842988342,0.751953125,0.639974521910314,0.801431728089686,students_t_95
-regret_ns,Oracle,MIXED_PHASE,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,Oracle,MIXED_PHASE,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,Oracle,MIXED_PHASE,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,Oracle,MIXED_PHASE,default,15,37.46686838124055,17.614976232853987,33.69077155824508,27.712019688382163,47.22171707409894,students_t_95
-selected_model_ns,Oracle,RANDOM,default,15,1322.0,0.0,1322.0,1322.0,1322.0,none
-cache_hit_rate,Oracle,RANDOM,default,15,0.6833658854166667,0.19887779544019843,0.75439453125,0.5732310332747711,0.7935007375585622,students_t_95
-regret_ns,Oracle,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,Oracle,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,Oracle,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,Oracle,RANDOM,default,15,41.978517397881994,24.031417968834386,33.39576399394856,28.67036170911122,55.28667308665277,students_t_95
-selected_model_ns,Oracle,REUSE,default,15,1322.0,0.0,1322.0,1322.0,1322.0,none
-cache_hit_rate,Oracle,REUSE,default,15,0.8205403645833333,0.058131215534239736,0.8212890625,0.7883483704317424,0.8527323587349243,students_t_95
-regret_ns,Oracle,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,Oracle,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,Oracle,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,Oracle,REUSE,default,15,25.40302571860817,7.024291145462625,25.3125567322239,21.513102939673427,29.292948497542913,students_t_95
-selected_model_ns,Oracle,STREAM,default,15,5546.0,2974.451209887296,4778.0,3898.803823679127,7193.196176320873,students_t_95
-cache_hit_rate,Oracle,STREAM,default,15,0.9166666666666666,0.030496877279641666,0.9375,0.8997780589538321,0.9335552743795011,students_t_95
-regret_ns,Oracle,STREAM,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,Oracle,STREAM,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,Oracle,STREAM,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,Oracle,STREAM,default,15,15.242190604323921,4.3708487017265565,12.47316868982838,12.821695272334988,17.662685936312855,students_t_95
-selected_model_ns,PIM-always,MIXED_PHASE,default,15,1322.0,0.0,1322.0,1322.0,1322.0,none
-cache_hit_rate,PIM-always,MIXED_PHASE,default,15,0.720703125,0.1457769842988342,0.751953125,0.639974521910314,0.801431728089686,students_t_95
-regret_ns,PIM-always,MIXED_PHASE,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,PIM-always,MIXED_PHASE,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,PIM-always,MIXED_PHASE,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,PIM-always,MIXED_PHASE,default,15,37.46686838124055,17.614976232853987,33.69077155824508,27.712019688382163,47.22171707409894,students_t_95
-selected_model_ns,PIM-always,RANDOM,default,15,1322.0,0.0,1322.0,1322.0,1322.0,none
-cache_hit_rate,PIM-always,RANDOM,default,15,0.6833658854166667,0.19887779544019843,0.75439453125,0.5732310332747711,0.7935007375585622,students_t_95
-regret_ns,PIM-always,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,PIM-always,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,PIM-always,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,PIM-always,RANDOM,default,15,41.978517397881994,24.031417968834386,33.39576399394856,28.67036170911122,55.28667308665277,students_t_95
-selected_model_ns,PIM-always,REUSE,default,15,1322.0,0.0,1322.0,1322.0,1322.0,none
-cache_hit_rate,PIM-always,REUSE,default,15,0.8205403645833333,0.058131215534239736,0.8212890625,0.7883483704317424,0.8527323587349243,students_t_95
-regret_ns,PIM-always,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,PIM-always,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,PIM-always,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,PIM-always,REUSE,default,15,25.40302571860817,7.024291145462625,25.3125567322239,21.513102939673427,29.292948497542913,students_t_95
-selected_model_ns,PIM-always,STREAM,default,15,5546.0,2974.451209887296,4778.0,3898.803823679127,7193.196176320873,students_t_95
-cache_hit_rate,PIM-always,STREAM,default,15,0.9166666666666666,0.030496877279641666,0.9375,0.8997780589538321,0.9335552743795011,students_t_95
-regret_ns,PIM-always,STREAM,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,PIM-always,STREAM,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,PIM-always,STREAM,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,PIM-always,STREAM,default,15,15.242190604323921,4.3708487017265565,12.47316868982838,12.821695272334988,17.662685936312855,students_t_95
-selected_model_ns,Reuse-aware,MIXED_PHASE,default,15,23550.266666666666,18255.296175030828,24883.2,13440.820609134857,33659.71272419848,students_t_95
-cache_hit_rate,Reuse-aware,MIXED_PHASE,default,15,0.720703125,0.1457769842988342,0.751953125,0.639974521910314,0.801431728089686,students_t_95
-regret_ns,Reuse-aware,MIXED_PHASE,default,15,22228.266666666666,18255.296175030828,23561.2,12118.820609134857,32337.712724198478,students_t_95
-normalized_regret,Reuse-aware,MIXED_PHASE,default,15,16.814120020171455,13.808847333608796,17.822390317700453,9.16703525653166,24.461204783811247,students_t_95
-bad_offload,Reuse-aware,MIXED_PHASE,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,Reuse-aware,MIXED_PHASE,default,15,20.652748361069087,28.769718470359784,1.0,4.720609316165991,36.58488740597218,students_t_95
-selected_model_ns,Reuse-aware,RANDOM,default,15,1322.0,0.0,1322.0,1322.0,1322.0,none
-cache_hit_rate,Reuse-aware,RANDOM,default,15,0.6833658854166667,0.19887779544019843,0.75439453125,0.5732310332747711,0.7935007375585622,students_t_95
-regret_ns,Reuse-aware,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,Reuse-aware,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,Reuse-aware,RANDOM,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,Reuse-aware,RANDOM,default,15,41.978517397881994,24.031417968834386,33.39576399394856,28.67036170911122,55.28667308665277,students_t_95
-selected_model_ns,Reuse-aware,REUSE,default,15,1322.0,0.0,1322.0,1322.0,1322.0,none
-cache_hit_rate,Reuse-aware,REUSE,default,15,0.8205403645833333,0.058131215534239736,0.8212890625,0.7883483704317424,0.8527323587349243,students_t_95
-regret_ns,Reuse-aware,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-normalized_regret,Reuse-aware,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-bad_offload,Reuse-aware,REUSE,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,Reuse-aware,REUSE,default,15,25.40302571860817,7.024291145462625,25.3125567322239,21.513102939673427,29.292948497542913,students_t_95
-selected_model_ns,Reuse-aware,STREAM,default,15,32927.066666666666,21341.149478569954,29798.4,21108.73200965792,44745.40132367541,students_t_95
-cache_hit_rate,Reuse-aware,STREAM,default,15,0.9166666666666666,0.030496877279641666,0.9375,0.8997780589538321,0.9335552743795011,students_t_95
-regret_ns,Reuse-aware,STREAM,default,15,27381.066666666666,23165.208159364047,27324.4,14552.601981502989,40209.531351830345,students_t_95
-normalized_regret,Reuse-aware,STREAM,default,15,7.505930926790005,5.49676280880077,11.044624090541634,4.461925144915881,10.549936708664129,students_t_95
-bad_offload,Reuse-aware,STREAM,default,15,0.0,0.0,0.0,0.0,0.0,none
-speedup,Reuse-aware,STREAM,default,15,7.736259677533915,9.860874466058416,1.0,2.2754894145424416,13.197029940525388,students_t_95
+metric_name,policy_name,workload_type,configuration_group,number_of_master_seeds,mean,sample_std,median,confidence_interval_low,confidence_interval_high,ci_method,bank_count,working_set_bytes
+selected_model_ns,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,24867.6,34.88266044899672,24883.2,24824.287456358914,24910.912543641083,students_t_95_over_master_seed_means,16,16384
+cache_hit_rate,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.87509765625,0.00021836601342771383,0.875,0.8748265190326956,0.8753687934673045,students_t_95_over_master_seed_means,16,16384
+regret_ns,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,21013.6,34.88266044899672,21029.2,20970.287456358914,21056.912543641083,students_t_95_over_master_seed_means,16,16384
+normalized_regret,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,5.452413077322262,0.009051027620393493,5.456460819927348,5.441174742179272,5.463651412465253,students_t_95_over_master_seed_means,16,16384
+bad_offload,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,44461.2,145.92463808418373,44539.2,44280.01063043995,44642.38936956004,students_t_95_over_master_seed_means,16,32768
+cache_hit_rate,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.75244140625,0.0009134905729428568,0.751953125,0.7513071578928783,0.7535756546071217,students_t_95_over_master_seed_means,16,32768
+regret_ns,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,37151.2,145.92463808418373,37229.2,36970.01063043995,37332.38936956004,students_t_95_over_master_seed_means,16,32768
+normalized_regret,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,5.082243502051983,0.019962330791270147,5.0929138166894665,5.057456994588229,5.1070300095157375,students_t_95_over_master_seed_means,16,32768
+bad_offload,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,32768
+selected_model_ns,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,79264.8,605.1915399276496,79249.2,78513.35545285435,80016.24454714566,students_t_95_over_master_seed_means,16,65536
+cache_hit_rate,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.5345703125,0.0037885087385294575,0.53466796875,0.5298662575924876,0.5392743674075123,students_t_95_over_master_seed_means,16,65536
+regret_ns,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,65042.8,605.1915399276496,65027.2,64291.35545285435,65794.24454714566,students_t_95_over_master_seed_means,16,65536
+normalized_regret,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,4.573393334270848,0.042553195044835616,4.572296442131908,4.520556563975132,4.626230104566563,students_t_95_over_master_seed_means,16,65536
+bad_offload,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,65536
+selected_model_ns,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,136376.4,824.7370490041053,136189.2,135352.3536982668,137400.4463017332,students_t_95_over_master_seed_means,16,131072
+cache_hit_rate,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.17705078125,0.005162867143705586,0.17822265625,0.17064023499015168,0.18346132750984834,students_t_95_over_master_seed_means,16,131072
+regret_ns,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,108330.4,824.7370490041053,108143.20000000001,107306.35369826679,109354.4463017332,students_t_95_over_master_seed_means,16,131072
+normalized_regret,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,3.8625971618056054,0.029406583791061213,3.8559224131783503,3.8260840654020822,3.8991102582091286,students_t_95_over_master_seed_means,16,131072
+bad_offload,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,131072
+selected_model_ns,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,150073.2,1045.0253585439925,149761.2,148775.62963508596,151370.77036491406,students_t_95_over_master_seed_means,16,262144
+cache_hit_rate,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.09130859375,0.006541875491686651,0.09326171875,0.08318578247124114,0.09943140502875886,students_t_95_over_master_seed_means,16,262144
+regret_ns,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,94379.20000000001,1045.0253585439925,94067.20000000001,93081.62963508596,95676.77036491406,students_t_95_over_master_seed_means,16,262144
+normalized_regret,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,1.6946026501957125,0.01876369732007024,1.6890006104786872,1.6713044427601889,1.7179008576312362,students_t_95_over_master_seed_means,16,262144
+bad_offload,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,CPU-cache,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,262144
+selected_model_ns,CPU-cache,RANDOM,bank_count=16; working_set_bytes=16384,5,24883.2,0.0,24883.2,24883.2,24883.2,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,CPU-cache,RANDOM,bank_count=16; working_set_bytes=16384,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,16384
+regret_ns,CPU-cache,RANDOM,bank_count=16; working_set_bytes=16384,5,21029.2,0.0,21029.2,21029.2,21029.2,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,CPU-cache,RANDOM,bank_count=16; working_set_bytes=16384,5,5.456460819927348,0.0,5.456460819927348,5.456460819927348,5.456460819927348,degenerate_zero_variance_t_interval,16,16384
+bad_offload,CPU-cache,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,CPU-cache,RANDOM,bank_count=16; working_set_bytes=16384,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,CPU-cache,RANDOM,bank_count=16; working_set_bytes=32768,5,44164.8,261.03792827863157,44149.2,43840.67860229073,44488.92139770927,students_t_95_over_master_seed_means,16,32768
+cache_hit_rate,CPU-cache,RANDOM,bank_count=16; working_set_bytes=32768,5,0.754296875,0.0016341016143243663,0.75439453125,0.7522678698560867,0.7563258801439132,students_t_95_over_master_seed_means,16,32768
+regret_ns,CPU-cache,RANDOM,bank_count=16; working_set_bytes=32768,5,36854.8,261.03792827863157,36839.2,36530.67860229073,37178.92139770927,students_t_95_over_master_seed_means,16,32768
+normalized_regret,CPU-cache,RANDOM,bank_count=16; working_set_bytes=32768,5,5.041696306429548,0.03570970291089365,5.0395622435020515,4.997356853938539,5.086035758920557,students_t_95_over_master_seed_means,16,32768
+bad_offload,CPU-cache,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,CPU-cache,RANDOM,bank_count=16; working_set_bytes=32768,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,32768
+selected_model_ns,CPU-cache,RANDOM,bank_count=16; working_set_bytes=65536,5,97438.8,1253.3510282438835,96643.2,95882.55915111791,98995.0408488821,students_t_95_over_master_seed_means,16,65536
+cache_hit_rate,CPU-cache,RANDOM,bank_count=16; working_set_bytes=65536,5,0.42080078125,0.007845997522560367,0.42578125,0.41105868859624084,0.4305428739037591,students_t_95_over_master_seed_means,16,65536
+regret_ns,CPU-cache,RANDOM,bank_count=16; working_set_bytes=65536,5,83216.8,1253.3510282438835,82421.2,81660.55915111791,84773.0408488821,students_t_95_over_master_seed_means,16,65536
+normalized_regret,CPU-cache,RANDOM,bank_count=16; working_set_bytes=65536,5,5.851272676135565,0.08812762116747849,5.795331177049642,5.741847781684567,5.9606975705865635,students_t_95_over_master_seed_means,16,65536
+bad_offload,CPU-cache,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,CPU-cache,RANDOM,bank_count=16; working_set_bytes=65536,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,65536
+selected_model_ns,CPU-cache,RANDOM,bank_count=16; working_set_bytes=131072,5,129200.4,1230.324835155334,129481.2,127672.74994609163,130728.05005390836,students_t_95_over_master_seed_means,16,131072
+cache_hit_rate,CPU-cache,RANDOM,bank_count=16; working_set_bytes=131072,5,0.22197265625,0.007701853184816544,0.22021484375,0.2124095424309623,0.23153577006903772,students_t_95_over_master_seed_means,16,131072
+regret_ns,CPU-cache,RANDOM,bank_count=16; working_set_bytes=131072,5,101154.4,1230.324835155334,101435.2,99626.74994609163,102682.05005390836,students_t_95_over_master_seed_means,16,131072
+normalized_regret,CPU-cache,RANDOM,bank_count=16; working_set_bytes=131072,5,3.6067317977608213,0.04386810365668313,3.6167439207017043,3.552262352780847,3.6612012427407956,students_t_95_over_master_seed_means,16,131072
+bad_offload,CPU-cache,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,CPU-cache,RANDOM,bank_count=16; working_set_bytes=131072,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,131072
+selected_model_ns,CPU-cache,RANDOM,bank_count=16; working_set_bytes=262144,5,147093.6,947.9487327909669,147499.2,145916.5661863506,148270.63381364942,students_t_95_over_master_seed_means,16,262144
+cache_hit_rate,CPU-cache,RANDOM,bank_count=16; working_set_bytes=262144,5,0.1099609375,0.005934174258757555,0.107421875,0.10259268696383322,0.11732918803616676,students_t_95_over_master_seed_means,16,262144
+regret_ns,CPU-cache,RANDOM,bank_count=16; working_set_bytes=262144,5,91399.6,947.9487327909669,91805.20000000001,90222.56618635058,92576.63381364943,students_t_95_over_master_seed_means,16,262144
+normalized_regret,CPU-cache,RANDOM,bank_count=16; working_set_bytes=262144,5,1.641103170898122,0.01702066170127779,1.6483858225302548,1.6199692280380398,1.6622371137582044,students_t_95_over_master_seed_means,16,262144
+bad_offload,CPU-cache,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,CPU-cache,RANDOM,bank_count=16; working_set_bytes=262144,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,262144
+selected_model_ns,CPU-cache,REUSE,bank_count=16; working_set_bytes=16384,5,22730.4,674.5985472857171,22855.2,21892.775270594768,23568.024729405235,students_t_95_over_master_seed_means,16,16384
+cache_hit_rate,CPU-cache,REUSE,bank_count=16; working_set_bytes=16384,5,0.8884765625,0.004222997716882745,0.8876953125,0.88323301827045,0.8937201067295499,students_t_95_over_master_seed_means,16,16384
+regret_ns,CPU-cache,REUSE,bank_count=16; working_set_bytes=16384,5,18876.4,674.5985472857171,19001.2,18038.775270594768,19714.024729405235,students_t_95_over_master_seed_means,16,16384
+normalized_regret,CPU-cache,REUSE,bank_count=16; working_set_bytes=16384,5,4.897872340425532,0.17503854366520946,4.930254281266217,4.680533282458423,5.11521139839264,students_t_95_over_master_seed_means,16,16384
+bad_offload,CPU-cache,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,CPU-cache,REUSE,bank_count=16; working_set_bytes=16384,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,CPU-cache,REUSE,bank_count=16; working_set_bytes=32768,5,33354.0,603.1775857904526,33463.2,32605.056107200533,34102.94389279947,students_t_95_over_master_seed_means,16,32768
+cache_hit_rate,CPU-cache,REUSE,bank_count=16; working_set_bytes=32768,5,0.82197265625,0.003775901353355704,0.8212890625,0.8172842554787694,0.8266610570212307,students_t_95_over_master_seed_means,16,32768
+regret_ns,CPU-cache,REUSE,bank_count=16; working_set_bytes=32768,5,26043.999999999996,603.1775857904526,26153.199999999997,25295.05610720053,26792.943892799463,students_t_95_over_master_seed_means,16,32768
+normalized_regret,CPU-cache,REUSE,bank_count=16; working_set_bytes=32768,5,3.5627906976744184,0.08251403362386482,3.577729138166894,3.4603359927770905,3.6652454025717462,students_t_95_over_master_seed_means,16,32768
+bad_offload,CPU-cache,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,CPU-cache,REUSE,bank_count=16; working_set_bytes=32768,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,32768
+selected_model_ns,CPU-cache,REUSE,bank_count=16; working_set_bytes=65536,5,44664.0,466.6981894115296,44851.2,44084.51766018082,45243.48233981918,students_t_95_over_master_seed_means,16,65536
+cache_hit_rate,CPU-cache,REUSE,bank_count=16; working_set_bytes=65536,5,0.751171875,0.0029215381448538264,0.75,0.7475443062661561,0.754799443733844,students_t_95_over_master_seed_means,16,65536
+regret_ns,CPU-cache,REUSE,bank_count=16; working_set_bytes=65536,5,30442.0,466.6981894115296,30629.199999999997,29862.517660180823,31021.482339819177,students_t_95_over_master_seed_means,16,65536
+normalized_regret,CPU-cache,REUSE,bank_count=16; working_set_bytes=65536,5,2.1404865701026576,0.03281522918095421,2.1536492757699337,2.099741081435861,2.1812320587694543,students_t_95_over_master_seed_means,16,65536
+bad_offload,CPU-cache,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,CPU-cache,REUSE,bank_count=16; working_set_bytes=65536,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,65536
+selected_model_ns,CPU-cache,REUSE,bank_count=16; working_set_bytes=131072,5,71574.0,1953.5847050998327,71293.2,69148.30420423602,73999.69579576398,students_t_95_over_master_seed_means,16,131072
+cache_hit_rate,CPU-cache,REUSE,bank_count=16; working_set_bytes=131072,5,0.58271484375,0.012229471561372149,0.58447265625,0.5675299491951875,0.5978997383048126,students_t_95_over_master_seed_means,16,131072
+regret_ns,CPU-cache,REUSE,bank_count=16; working_set_bytes=131072,5,43528.0,1953.5847050998327,43247.2,41102.30420423602,45953.69579576398,students_t_95_over_master_seed_means,16,131072
+normalized_regret,CPU-cache,REUSE,bank_count=16; working_set_bytes=131072,5,1.552021678670755,0.06965644673393113,1.5420095557298723,1.4655317765184346,1.6385115808230755,students_t_95_over_master_seed_means,16,131072
+bad_offload,CPU-cache,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,CPU-cache,REUSE,bank_count=16; working_set_bytes=131072,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,131072
+selected_model_ns,CPU-cache,REUSE,bank_count=16; working_set_bytes=262144,5,111291.6,2083.782810179602,110917.2,108704.24190452413,113878.95809547589,students_t_95_over_master_seed_means,16,262144
+cache_hit_rate,CPU-cache,REUSE,bank_count=16; working_set_bytes=262144,5,0.33408203125,0.0130445137856796,0.33642578125,0.317885128108249,0.35027893439175106,students_t_95_over_master_seed_means,16,262144
+regret_ns,CPU-cache,REUSE,bank_count=16; working_set_bytes=262144,5,55597.6,2083.782810179602,55223.2,53010.24190452412,58184.95809547588,students_t_95_over_master_seed_means,16,262144
+normalized_regret,CPU-cache,REUSE,bank_count=16; working_set_bytes=262144,5,0.9982691133694832,0.03741485277012963,0.991546665709053,0.9518124376867189,1.0447257890522474,students_t_95_over_master_seed_means,16,262144
+bad_offload,CPU-cache,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,CPU-cache,REUSE,bank_count=16; working_set_bytes=262144,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,262144
+selected_model_ns,CPU-cache,STREAM,bank_count=16; working_set_bytes=16384,5,29798.4,0.0,29798.4,29798.4,29798.4,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,CPU-cache,STREAM,bank_count=16; working_set_bytes=16384,5,0.9375,0.0,0.9375,0.9375,0.9375,degenerate_zero_variance_t_interval,16,16384
+regret_ns,CPU-cache,STREAM,bank_count=16; working_set_bytes=16384,5,25816.4,0.0,25816.4,25816.4,25816.4,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,CPU-cache,STREAM,bank_count=16; working_set_bytes=16384,5,6.48327473631341,9.930136612989092e-16,6.483274736313411,6.48327473631341,6.48327473631341,degenerate_zero_variance_t_interval,16,16384
+bad_offload,CPU-cache,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,CPU-cache,STREAM,bank_count=16; working_set_bytes=16384,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,CPU-cache,STREAM,bank_count=16; working_set_bytes=32768,5,59596.8,0.0,59596.8,59596.8,59596.8,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,CPU-cache,STREAM,bank_count=16; working_set_bytes=32768,5,0.9375,0.0,0.9375,0.9375,0.9375,degenerate_zero_variance_t_interval,16,32768
+regret_ns,CPU-cache,STREAM,bank_count=16; working_set_bytes=32768,5,51902.8,0.0,51902.8,51902.8,51902.8,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,CPU-cache,STREAM,bank_count=16; working_set_bytes=32768,5,6.745879906420588,0.0,6.745879906420588,6.745879906420588,6.745879906420588,degenerate_zero_variance_t_interval,16,32768
+bad_offload,CPU-cache,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,CPU-cache,STREAM,bank_count=16; working_set_bytes=32768,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,32768
+selected_model_ns,CPU-cache,STREAM,bank_count=16; working_set_bytes=65536,5,199065.6,0.0,199065.6,199065.6,199065.6,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,CPU-cache,STREAM,bank_count=16; working_set_bytes=65536,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,65536
+regret_ns,CPU-cache,STREAM,bank_count=16; working_set_bytes=65536,5,183947.6,0.0,183947.6,183947.6,183947.6,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,CPU-cache,STREAM,bank_count=16; working_set_bytes=65536,5,12.167456012700093,0.0,12.167456012700093,12.167456012700093,12.167456012700093,degenerate_zero_variance_t_interval,16,65536
+bad_offload,CPU-cache,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,CPU-cache,STREAM,bank_count=16; working_set_bytes=65536,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,65536
+selected_model_ns,CPU-cache,STREAM,bank_count=16; working_set_bytes=131072,5,398131.2,0.0,398131.2,398131.2,398131.2,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,CPU-cache,STREAM,bank_count=16; working_set_bytes=131072,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,131072
+regret_ns,CPU-cache,STREAM,bank_count=16; working_set_bytes=131072,5,368165.2,0.0,368165.2,368165.2,368165.2,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,CPU-cache,STREAM,bank_count=16; working_set_bytes=131072,5,12.286097577254221,0.0,12.286097577254221,12.286097577254221,12.286097577254221,degenerate_zero_variance_t_interval,16,131072
+bad_offload,CPU-cache,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,CPU-cache,STREAM,bank_count=16; working_set_bytes=131072,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,131072
+selected_model_ns,CPU-cache,STREAM,bank_count=16; working_set_bytes=262144,5,796262.4,0.0,796262.4,796262.4,796262.4,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,CPU-cache,STREAM,bank_count=16; working_set_bytes=262144,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,262144
+regret_ns,CPU-cache,STREAM,bank_count=16; working_set_bytes=262144,5,736600.4,0.0,736600.4,736600.4,736600.4,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,CPU-cache,STREAM,bank_count=16; working_set_bytes=262144,5,12.346223726995408,0.0,12.346223726995408,12.346223726995408,12.346223726995408,degenerate_zero_variance_t_interval,16,262144
+bad_offload,CPU-cache,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,CPU-cache,STREAM,bank_count=16; working_set_bytes=262144,5,1.0,0.0,1.0,1.0,1.0,degenerate_zero_variance_t_interval,16,262144
+selected_model_ns,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.87509765625,0.00021836601342771383,0.875,0.8748265190326956,0.8753687934673045,students_t_95_over_master_seed_means,16,16384
+regret_ns,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,160805.2,0.0,160805.2,160805.2,160805.2,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,41.724234561494555,0.0,41.724234561494555,41.724234561494555,41.724234561494555,degenerate_zero_variance_t_interval,16,16384
+bad_offload,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.15102466184701493,0.0002118476249671834,0.15111940298507462,0.1507616182779882,0.15128770541604167,students_t_95_over_master_seed_means,16,16384
+selected_model_ns,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.75244140625,0.0009134905729428568,0.751953125,0.7513071578928783,0.7535756546071217,students_t_95_over_master_seed_means,16,32768
+regret_ns,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,157349.2,0.0,157349.2,157349.2,157349.2,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,21.525198358413135,0.0,21.525198358413135,21.525198358413135,21.525198358413135,degenerate_zero_variance_t_interval,16,32768
+bad_offload,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.2700195312499999,0.0008862221976311301,0.2704932369402985,0.2689191410527923,0.2711199214472075,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.5345703125,0.0037885087385294575,0.53466796875,0.5298662575924876,0.5392743674075123,students_t_95_over_master_seed_means,16,65536
+regret_ns,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,150437.2,0.0,150437.2,150437.2,150437.2,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,10.577780902826607,0.0,10.577780902826607,10.577780902826607,10.577780902826607,degenerate_zero_variance_t_interval,16,65536
+bad_offload,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.481387010261194,0.003675418925439046,0.4812922691231343,0.47682337490315957,0.48595064561922846,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.17705078125,0.005162867143705586,0.17822265625,0.17064023499015168,0.18346132750984834,students_t_95_over_master_seed_means,16,131072
+regret_ns,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,136613.2,0.0,136613.2,136613.2,136613.2,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,4.871040433573415,0.0,4.871040433573415,4.871040433573415,4.871040433573415,degenerate_zero_variance_t_interval,16,131072
+bad_offload,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.8282343166977612,0.005008751706580069,0.8270974230410448,0.8220151300277591,0.8344535033677632,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.09130859375,0.006541875491686651,0.09326171875,0.08318578247124114,0.09943140502875886,students_t_95_over_master_seed_means,16,262144
+regret_ns,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,108965.2,1.626953582672133e-11,108965.20000000001,108965.19999999998,108965.20000000001,students_t_95_over_master_seed_means,16,262144
+normalized_regret,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,1.9564980069666393,0.0,1.9564980069666393,1.9564980069666393,1.9564980069666393,degenerate_zero_variance_t_interval,16,262144
+bad_offload,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,CPU-no-cache,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.9114170359141791,0.0063465956262631785,0.9095222131529851,0.9035366966138907,0.9192973752144675,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=16384,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=16384,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,16384
+regret_ns,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=16384,5,160805.2,0.0,160805.2,160805.2,160805.2,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=16384,5,41.724234561494555,0.0,41.724234561494555,41.724234561494555,41.724234561494555,degenerate_zero_variance_t_interval,16,16384
+bad_offload,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=16384,5,0.15111940298507462,0.0,0.15111940298507462,0.15111940298507462,0.15111940298507462,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=32768,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=32768,5,0.754296875,0.0016341016143243663,0.75439453125,0.7522678698560867,0.7563258801439132,students_t_95_over_master_seed_means,16,32768
+regret_ns,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=32768,5,157349.2,0.0,157349.2,157349.2,157349.2,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=32768,5,21.525198358413135,0.0,21.525198358413135,21.525198358413135,21.525198358413135,degenerate_zero_variance_t_interval,16,32768
+bad_offload,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=32768,5,0.2682194496268656,0.0015853224616579607,0.26812470848880593,0.26625101180068117,0.27018788745305006,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=65536,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=65536,5,0.42080078125,0.007845997522560367,0.42578125,0.41105868859624084,0.4305428739037591,students_t_95_over_master_seed_means,16,65536
+regret_ns,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=65536,5,150437.2,0.0,150437.2,150437.2,150437.2,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=65536,5,10.577780902826607,0.0,10.577780902826607,10.577780902826607,10.577780902826607,degenerate_zero_variance_t_interval,16,65536
+bad_offload,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=65536,5,0.5917604361007462,0.007611788641289899,0.5869286380597014,0.5823091521829202,0.6012117200185723,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=131072,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=131072,5,0.22197265625,0.007701853184816544,0.22021484375,0.2124095424309623,0.23153577006903772,students_t_95_over_master_seed_means,16,131072
+regret_ns,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=131072,5,136613.2,0.0,136613.2,136613.2,136613.2,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=131072,5,4.871040433573415,0.0,4.871040433573415,4.871040433573415,4.871040433573415,degenerate_zero_variance_t_interval,16,131072
+bad_offload,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=131072,5,0.7846533931902984,0.007471947119598153,0.786358733675373,0.775375745455411,0.7939310409251857,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=262144,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=262144,5,0.1099609375,0.005934174258757555,0.107421875,0.10259268696383322,0.11732918803616676,students_t_95_over_master_seed_means,16,262144
+regret_ns,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=262144,5,108965.2,1.626953582672133e-11,108965.20000000001,108965.19999999998,108965.20000000001,students_t_95_over_master_seed_means,16,262144
+normalized_regret,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=262144,5,1.9564980069666393,0.0,1.9564980069666393,1.9564980069666393,1.9564980069666393,degenerate_zero_variance_t_interval,16,262144
+bad_offload,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,CPU-no-cache,RANDOM,bank_count=16; working_set_bytes=262144,5,0.8933214785447762,0.005757034728645409,0.8957847481343284,0.8861731757858083,0.900469781303744,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=16384,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=16384,5,0.8884765625,0.004222997716882745,0.8876953125,0.88323301827045,0.8937201067295499,students_t_95_over_master_seed_means,16,16384
+regret_ns,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=16384,5,160805.2,0.0,160805.2,160805.2,160805.2,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=16384,5,41.724234561494555,0.0,41.724234561494555,41.724234561494555,41.724234561494555,degenerate_zero_variance_t_interval,16,16384
+bad_offload,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=16384,5,0.13804512593283583,0.00409693808354296,0.13880305503731344,0.1329581054116306,0.14313214645404104,students_t_95_over_master_seed_means,16,16384
+selected_model_ns,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=32768,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=32768,5,0.82197265625,0.003775901353355704,0.8212890625,0.8172842554787694,0.8266610570212307,students_t_95_over_master_seed_means,16,32768
+regret_ns,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=32768,5,157349.2,0.0,157349.2,157349.2,157349.2,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=32768,5,21.525198358413135,0.0,21.525198358413135,21.525198358413135,21.525198358413135,degenerate_zero_variance_t_interval,16,32768
+bad_offload,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=32768,5,0.2025638409514925,0.0036631878801212,0.20322702891791042,0.19801539244208963,0.20711228946089535,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=65536,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=65536,5,0.751171875,0.0029215381448538264,0.75,0.7475443062661561,0.754799443733844,students_t_95_over_master_seed_means,16,65536
+regret_ns,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=65536,5,150437.2,0.0,150437.2,150437.2,150437.2,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=65536,5,10.577780902826607,0.0,10.577780902826607,10.577780902826607,10.577780902826607,degenerate_zero_variance_t_interval,16,65536
+bad_offload,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=65536,5,0.27125116604477606,0.0028343280509775925,0.2723880597014925,0.2677318829447781,0.274770449144774,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=131072,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=131072,5,0.58271484375,0.012229471561372149,0.58447265625,0.5675299491951875,0.5978997383048126,students_t_95_over_master_seed_means,16,131072
+regret_ns,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=131072,5,136613.2,0.0,136613.2,136613.2,136613.2,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=131072,5,4.871040433573415,0.0,4.871040433573415,4.871040433573415,4.871040433573415,degenerate_zero_variance_t_interval,16,131072
+bad_offload,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=131072,5,0.43467962919776115,0.011864412708793862,0.4329742887126865,0.41994801507742063,0.44941124331810167,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=262144,5,164659.2,0.0,164659.2,164659.2,164659.2,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=262144,5,0.33408203125,0.0130445137856796,0.33642578125,0.317885128108249,0.35027893439175106,students_t_95_over_master_seed_means,16,262144
+regret_ns,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=262144,5,108965.2,1.626953582672133e-11,108965.20000000001,108965.19999999998,108965.20000000001,students_t_95_over_master_seed_means,16,262144
+normalized_regret,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=262144,5,1.9564980069666393,0.0,1.9564980069666393,1.9564980069666393,1.9564980069666393,degenerate_zero_variance_t_interval,16,262144
+bad_offload,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,CPU-no-cache,REUSE,bank_count=16; working_set_bytes=262144,5,0.6758905666977612,0.012655125314465275,0.6736167793843283,0.6601771532020325,0.6916039801934898,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=16384,5,329318.4,0.0,329318.4,329318.4,329318.4,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=16384,5,0.9375,0.0,0.9375,0.9375,0.9375,degenerate_zero_variance_t_interval,16,16384
+regret_ns,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=16384,5,325336.4,0.0,325336.4,325336.4,325336.4,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=16384,5,81.70175791059769,0.0,81.70175791059769,81.70175791059769,81.70175791059769,degenerate_zero_variance_t_interval,16,16384
+bad_offload,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=16384,5,0.09048507462686567,0.0,0.09048507462686567,0.09048507462686567,0.09048507462686567,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=32768,5,658636.8,0.0,658636.8,658636.8,658636.8,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=32768,5,0.9375,0.0,0.9375,0.9375,0.9375,degenerate_zero_variance_t_interval,16,32768
+regret_ns,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=32768,5,650942.8,0.0,650942.8,650942.8,650942.8,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=32768,5,84.60395113075124,0.0,84.60395113075124,84.60395113075124,84.60395113075124,degenerate_zero_variance_t_interval,16,32768
+bad_offload,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=32768,5,0.09048507462686567,0.0,0.09048507462686567,0.09048507462686567,0.09048507462686567,degenerate_zero_variance_t_interval,16,32768
+selected_model_ns,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=65536,5,1317273.6,0.0,1317273.6,1317273.6,1317273.6,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=65536,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,65536
+regret_ns,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=65536,5,1302155.6,0.0,1302155.6,1302155.6,1302155.6,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=65536,5,86.13279534329938,0.0,86.13279534329938,86.13279534329938,86.13279534329938,degenerate_zero_variance_t_interval,16,65536
+bad_offload,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=65536,5,0.15111940298507462,0.0,0.15111940298507462,0.15111940298507462,0.15111940298507462,degenerate_zero_variance_t_interval,16,65536
+selected_model_ns,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=131072,5,2634547.2,0.0,2634547.2,2634547.2,2634547.2,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=131072,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,131072
+regret_ns,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=131072,5,2604581.2,0.0,2604581.2,2604581.2,2604581.2,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=131072,5,86.91788026429954,0.0,86.91788026429954,86.91788026429954,86.91788026429954,degenerate_zero_variance_t_interval,16,131072
+bad_offload,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=131072,5,0.15111940298507462,0.0,0.15111940298507462,0.15111940298507462,0.15111940298507462,degenerate_zero_variance_t_interval,16,131072
+selected_model_ns,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=262144,5,5269094.4,0.0,5269094.4,5269094.4,5269094.4,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=262144,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,262144
+regret_ns,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=262144,5,5209432.4,0.0,5209432.4,5209432.4,5209432.4,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=262144,5,87.3157520699943,0.0,87.3157520699943,87.3157520699943,87.3157520699943,degenerate_zero_variance_t_interval,16,262144
+bad_offload,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,CPU-no-cache,STREAM,bank_count=16; working_set_bytes=262144,5,0.15111940298507462,0.0,0.15111940298507462,0.15111940298507462,0.15111940298507462,degenerate_zero_variance_t_interval,16,262144
+selected_model_ns,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,3854.0,0.0,3854.0,3854.0,3854.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.87509765625,0.00021836601342771383,0.875,0.8748265190326956,0.8753687934673045,students_t_95_over_master_seed_means,16,16384
+regret_ns,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,6.452413077322262,0.009051027620393493,6.456460819927348,6.441174742179272,6.463651412465253,students_t_95_over_master_seed_means,16,16384
+selected_model_ns,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,7310.0,0.0,7310.0,7310.0,7310.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.75244140625,0.0009134905729428568,0.751953125,0.7513071578928783,0.7535756546071217,students_t_95_over_master_seed_means,16,32768
+regret_ns,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,6.082243502051983,0.019962330791270147,6.0929138166894665,6.057456994588229,6.1070300095157375,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,14222.0,0.0,14222.0,14222.0,14222.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.5345703125,0.0037885087385294575,0.53466796875,0.5298662575924876,0.5392743674075123,students_t_95_over_master_seed_means,16,65536
+regret_ns,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,5.573393334270848,0.042553195044835616,5.572296442131908,5.520556563975132,5.626230104566563,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,28046.0,0.0,28046.0,28046.0,28046.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.17705078125,0.005162867143705586,0.17822265625,0.17064023499015168,0.18346132750984834,students_t_95_over_master_seed_means,16,131072
+regret_ns,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,4.8625971618056045,0.029406583791061473,4.85592241317835,4.826084065402081,4.899110258209128,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,55694.0,0.0,55694.0,55694.0,55694.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.09130859375,0.006541875491686651,0.09326171875,0.08318578247124114,0.09943140502875886,students_t_95_over_master_seed_means,16,262144
+regret_ns,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,Cost-based,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,2.6946026501957125,0.01876369732007021,2.689000610478687,2.671304442760189,2.717900857631236,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,Cost-based,RANDOM,bank_count=16; working_set_bytes=16384,5,3854.0,0.0,3854.0,3854.0,3854.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,Cost-based,RANDOM,bank_count=16; working_set_bytes=16384,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,16384
+regret_ns,Cost-based,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,Cost-based,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,Cost-based,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,Cost-based,RANDOM,bank_count=16; working_set_bytes=16384,5,6.456460819927348,0.0,6.456460819927348,6.456460819927348,6.456460819927348,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,Cost-based,RANDOM,bank_count=16; working_set_bytes=32768,5,7310.0,0.0,7310.0,7310.0,7310.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,Cost-based,RANDOM,bank_count=16; working_set_bytes=32768,5,0.754296875,0.0016341016143243663,0.75439453125,0.7522678698560867,0.7563258801439132,students_t_95_over_master_seed_means,16,32768
+regret_ns,Cost-based,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,Cost-based,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,Cost-based,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,Cost-based,RANDOM,bank_count=16; working_set_bytes=32768,5,6.041696306429548,0.03570970291089365,6.0395622435020515,5.997356853938539,6.086035758920557,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,Cost-based,RANDOM,bank_count=16; working_set_bytes=65536,5,14222.0,0.0,14222.0,14222.0,14222.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,Cost-based,RANDOM,bank_count=16; working_set_bytes=65536,5,0.42080078125,0.007845997522560367,0.42578125,0.41105868859624084,0.4305428739037591,students_t_95_over_master_seed_means,16,65536
+regret_ns,Cost-based,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,Cost-based,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,Cost-based,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,Cost-based,RANDOM,bank_count=16; working_set_bytes=65536,5,6.851272676135565,0.08812762116747849,6.795331177049642,6.741847781684567,6.9606975705865635,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,Cost-based,RANDOM,bank_count=16; working_set_bytes=131072,5,28046.0,0.0,28046.0,28046.0,28046.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,Cost-based,RANDOM,bank_count=16; working_set_bytes=131072,5,0.22197265625,0.007701853184816544,0.22021484375,0.2124095424309623,0.23153577006903772,students_t_95_over_master_seed_means,16,131072
+regret_ns,Cost-based,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,Cost-based,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,Cost-based,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,Cost-based,RANDOM,bank_count=16; working_set_bytes=131072,5,4.606731797760821,0.043868103656683206,4.616743920701704,4.552262352780846,4.661201242740796,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,Cost-based,RANDOM,bank_count=16; working_set_bytes=262144,5,55694.0,0.0,55694.0,55694.0,55694.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,Cost-based,RANDOM,bank_count=16; working_set_bytes=262144,5,0.1099609375,0.005934174258757555,0.107421875,0.10259268696383322,0.11732918803616676,students_t_95_over_master_seed_means,16,262144
+regret_ns,Cost-based,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,Cost-based,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,Cost-based,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,Cost-based,RANDOM,bank_count=16; working_set_bytes=262144,5,2.641103170898122,0.01702066170127781,2.648385822530255,2.6199692280380398,2.6622371137582044,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,Cost-based,REUSE,bank_count=16; working_set_bytes=16384,5,3854.0,0.0,3854.0,3854.0,3854.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,Cost-based,REUSE,bank_count=16; working_set_bytes=16384,5,0.8884765625,0.004222997716882745,0.8876953125,0.88323301827045,0.8937201067295499,students_t_95_over_master_seed_means,16,16384
+regret_ns,Cost-based,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,Cost-based,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,Cost-based,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,Cost-based,REUSE,bank_count=16; working_set_bytes=16384,5,5.897872340425532,0.17503854366520946,5.930254281266217,5.680533282458423,6.11521139839264,students_t_95_over_master_seed_means,16,16384
+selected_model_ns,Cost-based,REUSE,bank_count=16; working_set_bytes=32768,5,7310.0,0.0,7310.0,7310.0,7310.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,Cost-based,REUSE,bank_count=16; working_set_bytes=32768,5,0.82197265625,0.003775901353355704,0.8212890625,0.8172842554787694,0.8266610570212307,students_t_95_over_master_seed_means,16,32768
+regret_ns,Cost-based,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,Cost-based,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,Cost-based,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,Cost-based,REUSE,bank_count=16; working_set_bytes=32768,5,4.5627906976744175,0.08251403362386502,4.5777291381668945,4.46033599277709,4.665245402571745,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,Cost-based,REUSE,bank_count=16; working_set_bytes=65536,5,14222.0,0.0,14222.0,14222.0,14222.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,Cost-based,REUSE,bank_count=16; working_set_bytes=65536,5,0.751171875,0.0029215381448538264,0.75,0.7475443062661561,0.754799443733844,students_t_95_over_master_seed_means,16,65536
+regret_ns,Cost-based,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,Cost-based,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,Cost-based,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,Cost-based,REUSE,bank_count=16; working_set_bytes=65536,5,3.1404865701026576,0.03281522918095421,3.1536492757699337,3.099741081435861,3.1812320587694543,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,Cost-based,REUSE,bank_count=16; working_set_bytes=131072,5,28046.0,0.0,28046.0,28046.0,28046.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,Cost-based,REUSE,bank_count=16; working_set_bytes=131072,5,0.58271484375,0.012229471561372149,0.58447265625,0.5675299491951875,0.5978997383048126,students_t_95_over_master_seed_means,16,131072
+regret_ns,Cost-based,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,Cost-based,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,Cost-based,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,Cost-based,REUSE,bank_count=16; working_set_bytes=131072,5,2.552021678670755,0.06965644673393115,2.542009555729872,2.4655317765184344,2.6385115808230757,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,Cost-based,REUSE,bank_count=16; working_set_bytes=262144,5,55694.0,0.0,55694.0,55694.0,55694.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,Cost-based,REUSE,bank_count=16; working_set_bytes=262144,5,0.33408203125,0.0130445137856796,0.33642578125,0.317885128108249,0.35027893439175106,students_t_95_over_master_seed_means,16,262144
+regret_ns,Cost-based,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,Cost-based,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,Cost-based,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,Cost-based,REUSE,bank_count=16; working_set_bytes=262144,5,1.9982691133694832,0.03741485277012963,1.991546665709053,1.951812437686719,2.0447257890522477,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,Cost-based,STREAM,bank_count=16; working_set_bytes=16384,5,3982.0,0.0,3982.0,3982.0,3982.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,Cost-based,STREAM,bank_count=16; working_set_bytes=16384,5,0.9375,0.0,0.9375,0.9375,0.9375,degenerate_zero_variance_t_interval,16,16384
+regret_ns,Cost-based,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,Cost-based,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,Cost-based,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,Cost-based,STREAM,bank_count=16; working_set_bytes=16384,5,7.48327473631341,9.930136612989092e-16,7.483274736313411,7.48327473631341,7.48327473631341,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,Cost-based,STREAM,bank_count=16; working_set_bytes=32768,5,7694.0,0.0,7694.0,7694.0,7694.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,Cost-based,STREAM,bank_count=16; working_set_bytes=32768,5,0.9375,0.0,0.9375,0.9375,0.9375,degenerate_zero_variance_t_interval,16,32768
+regret_ns,Cost-based,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,Cost-based,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,Cost-based,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,Cost-based,STREAM,bank_count=16; working_set_bytes=32768,5,7.745879906420588,0.0,7.745879906420588,7.745879906420588,7.745879906420588,degenerate_zero_variance_t_interval,16,32768
+selected_model_ns,Cost-based,STREAM,bank_count=16; working_set_bytes=65536,5,15118.0,0.0,15118.0,15118.0,15118.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,Cost-based,STREAM,bank_count=16; working_set_bytes=65536,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,65536
+regret_ns,Cost-based,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,Cost-based,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,Cost-based,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,Cost-based,STREAM,bank_count=16; working_set_bytes=65536,5,13.167456012700091,1.9860273225978185e-15,13.167456012700093,13.167456012700091,13.167456012700091,degenerate_zero_variance_t_interval,16,65536
+selected_model_ns,Cost-based,STREAM,bank_count=16; working_set_bytes=131072,5,29966.0,0.0,29966.0,29966.0,29966.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,Cost-based,STREAM,bank_count=16; working_set_bytes=131072,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,131072
+regret_ns,Cost-based,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,Cost-based,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,Cost-based,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,Cost-based,STREAM,bank_count=16; working_set_bytes=131072,5,13.286097577254221,0.0,13.286097577254221,13.286097577254221,13.286097577254221,degenerate_zero_variance_t_interval,16,131072
+selected_model_ns,Cost-based,STREAM,bank_count=16; working_set_bytes=262144,5,59662.0,0.0,59662.0,59662.0,59662.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,Cost-based,STREAM,bank_count=16; working_set_bytes=262144,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,262144
+regret_ns,Cost-based,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,Cost-based,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,Cost-based,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,Cost-based,STREAM,bank_count=16; working_set_bytes=262144,5,13.346223726995408,0.0,13.346223726995408,13.346223726995408,13.346223726995408,degenerate_zero_variance_t_interval,16,262144
+selected_model_ns,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,3854.0,0.0,3854.0,3854.0,3854.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.87509765625,0.00021836601342771383,0.875,0.8748265190326956,0.8753687934673045,students_t_95_over_master_seed_means,16,16384
+regret_ns,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,6.452413077322262,0.009051027620393493,6.456460819927348,6.441174742179272,6.463651412465253,students_t_95_over_master_seed_means,16,16384
+selected_model_ns,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,7310.0,0.0,7310.0,7310.0,7310.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.75244140625,0.0009134905729428568,0.751953125,0.7513071578928783,0.7535756546071217,students_t_95_over_master_seed_means,16,32768
+regret_ns,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,6.082243502051983,0.019962330791270147,6.0929138166894665,6.057456994588229,6.1070300095157375,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,14222.0,0.0,14222.0,14222.0,14222.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.5345703125,0.0037885087385294575,0.53466796875,0.5298662575924876,0.5392743674075123,students_t_95_over_master_seed_means,16,65536
+regret_ns,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,5.573393334270848,0.042553195044835616,5.572296442131908,5.520556563975132,5.626230104566563,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,28046.0,0.0,28046.0,28046.0,28046.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.17705078125,0.005162867143705586,0.17822265625,0.17064023499015168,0.18346132750984834,students_t_95_over_master_seed_means,16,131072
+regret_ns,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,4.8625971618056045,0.029406583791061473,4.85592241317835,4.826084065402081,4.899110258209128,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,55694.0,0.0,55694.0,55694.0,55694.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.09130859375,0.006541875491686651,0.09326171875,0.08318578247124114,0.09943140502875886,students_t_95_over_master_seed_means,16,262144
+regret_ns,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,Oracle,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,2.6946026501957125,0.01876369732007021,2.689000610478687,2.671304442760189,2.717900857631236,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,Oracle,RANDOM,bank_count=16; working_set_bytes=16384,5,3854.0,0.0,3854.0,3854.0,3854.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,Oracle,RANDOM,bank_count=16; working_set_bytes=16384,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,16384
+regret_ns,Oracle,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,Oracle,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,Oracle,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,Oracle,RANDOM,bank_count=16; working_set_bytes=16384,5,6.456460819927348,0.0,6.456460819927348,6.456460819927348,6.456460819927348,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,Oracle,RANDOM,bank_count=16; working_set_bytes=32768,5,7310.0,0.0,7310.0,7310.0,7310.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,Oracle,RANDOM,bank_count=16; working_set_bytes=32768,5,0.754296875,0.0016341016143243663,0.75439453125,0.7522678698560867,0.7563258801439132,students_t_95_over_master_seed_means,16,32768
+regret_ns,Oracle,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,Oracle,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,Oracle,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,Oracle,RANDOM,bank_count=16; working_set_bytes=32768,5,6.041696306429548,0.03570970291089365,6.0395622435020515,5.997356853938539,6.086035758920557,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,Oracle,RANDOM,bank_count=16; working_set_bytes=65536,5,14222.0,0.0,14222.0,14222.0,14222.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,Oracle,RANDOM,bank_count=16; working_set_bytes=65536,5,0.42080078125,0.007845997522560367,0.42578125,0.41105868859624084,0.4305428739037591,students_t_95_over_master_seed_means,16,65536
+regret_ns,Oracle,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,Oracle,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,Oracle,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,Oracle,RANDOM,bank_count=16; working_set_bytes=65536,5,6.851272676135565,0.08812762116747849,6.795331177049642,6.741847781684567,6.9606975705865635,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,Oracle,RANDOM,bank_count=16; working_set_bytes=131072,5,28046.0,0.0,28046.0,28046.0,28046.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,Oracle,RANDOM,bank_count=16; working_set_bytes=131072,5,0.22197265625,0.007701853184816544,0.22021484375,0.2124095424309623,0.23153577006903772,students_t_95_over_master_seed_means,16,131072
+regret_ns,Oracle,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,Oracle,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,Oracle,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,Oracle,RANDOM,bank_count=16; working_set_bytes=131072,5,4.606731797760821,0.043868103656683206,4.616743920701704,4.552262352780846,4.661201242740796,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,Oracle,RANDOM,bank_count=16; working_set_bytes=262144,5,55694.0,0.0,55694.0,55694.0,55694.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,Oracle,RANDOM,bank_count=16; working_set_bytes=262144,5,0.1099609375,0.005934174258757555,0.107421875,0.10259268696383322,0.11732918803616676,students_t_95_over_master_seed_means,16,262144
+regret_ns,Oracle,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,Oracle,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,Oracle,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,Oracle,RANDOM,bank_count=16; working_set_bytes=262144,5,2.641103170898122,0.01702066170127781,2.648385822530255,2.6199692280380398,2.6622371137582044,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,Oracle,REUSE,bank_count=16; working_set_bytes=16384,5,3854.0,0.0,3854.0,3854.0,3854.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,Oracle,REUSE,bank_count=16; working_set_bytes=16384,5,0.8884765625,0.004222997716882745,0.8876953125,0.88323301827045,0.8937201067295499,students_t_95_over_master_seed_means,16,16384
+regret_ns,Oracle,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,Oracle,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,Oracle,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,Oracle,REUSE,bank_count=16; working_set_bytes=16384,5,5.897872340425532,0.17503854366520946,5.930254281266217,5.680533282458423,6.11521139839264,students_t_95_over_master_seed_means,16,16384
+selected_model_ns,Oracle,REUSE,bank_count=16; working_set_bytes=32768,5,7310.0,0.0,7310.0,7310.0,7310.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,Oracle,REUSE,bank_count=16; working_set_bytes=32768,5,0.82197265625,0.003775901353355704,0.8212890625,0.8172842554787694,0.8266610570212307,students_t_95_over_master_seed_means,16,32768
+regret_ns,Oracle,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,Oracle,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,Oracle,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,Oracle,REUSE,bank_count=16; working_set_bytes=32768,5,4.5627906976744175,0.08251403362386502,4.5777291381668945,4.46033599277709,4.665245402571745,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,Oracle,REUSE,bank_count=16; working_set_bytes=65536,5,14222.0,0.0,14222.0,14222.0,14222.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,Oracle,REUSE,bank_count=16; working_set_bytes=65536,5,0.751171875,0.0029215381448538264,0.75,0.7475443062661561,0.754799443733844,students_t_95_over_master_seed_means,16,65536
+regret_ns,Oracle,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,Oracle,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,Oracle,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,Oracle,REUSE,bank_count=16; working_set_bytes=65536,5,3.1404865701026576,0.03281522918095421,3.1536492757699337,3.099741081435861,3.1812320587694543,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,Oracle,REUSE,bank_count=16; working_set_bytes=131072,5,28046.0,0.0,28046.0,28046.0,28046.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,Oracle,REUSE,bank_count=16; working_set_bytes=131072,5,0.58271484375,0.012229471561372149,0.58447265625,0.5675299491951875,0.5978997383048126,students_t_95_over_master_seed_means,16,131072
+regret_ns,Oracle,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,Oracle,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,Oracle,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,Oracle,REUSE,bank_count=16; working_set_bytes=131072,5,2.552021678670755,0.06965644673393115,2.542009555729872,2.4655317765184344,2.6385115808230757,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,Oracle,REUSE,bank_count=16; working_set_bytes=262144,5,55694.0,0.0,55694.0,55694.0,55694.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,Oracle,REUSE,bank_count=16; working_set_bytes=262144,5,0.33408203125,0.0130445137856796,0.33642578125,0.317885128108249,0.35027893439175106,students_t_95_over_master_seed_means,16,262144
+regret_ns,Oracle,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,Oracle,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,Oracle,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,Oracle,REUSE,bank_count=16; working_set_bytes=262144,5,1.9982691133694832,0.03741485277012963,1.991546665709053,1.951812437686719,2.0447257890522477,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,Oracle,STREAM,bank_count=16; working_set_bytes=16384,5,3982.0,0.0,3982.0,3982.0,3982.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,Oracle,STREAM,bank_count=16; working_set_bytes=16384,5,0.9375,0.0,0.9375,0.9375,0.9375,degenerate_zero_variance_t_interval,16,16384
+regret_ns,Oracle,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,Oracle,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,Oracle,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,Oracle,STREAM,bank_count=16; working_set_bytes=16384,5,7.48327473631341,9.930136612989092e-16,7.483274736313411,7.48327473631341,7.48327473631341,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,Oracle,STREAM,bank_count=16; working_set_bytes=32768,5,7694.0,0.0,7694.0,7694.0,7694.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,Oracle,STREAM,bank_count=16; working_set_bytes=32768,5,0.9375,0.0,0.9375,0.9375,0.9375,degenerate_zero_variance_t_interval,16,32768
+regret_ns,Oracle,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,Oracle,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,Oracle,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,Oracle,STREAM,bank_count=16; working_set_bytes=32768,5,7.745879906420588,0.0,7.745879906420588,7.745879906420588,7.745879906420588,degenerate_zero_variance_t_interval,16,32768
+selected_model_ns,Oracle,STREAM,bank_count=16; working_set_bytes=65536,5,15118.0,0.0,15118.0,15118.0,15118.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,Oracle,STREAM,bank_count=16; working_set_bytes=65536,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,65536
+regret_ns,Oracle,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,Oracle,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,Oracle,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,Oracle,STREAM,bank_count=16; working_set_bytes=65536,5,13.167456012700091,1.9860273225978185e-15,13.167456012700093,13.167456012700091,13.167456012700091,degenerate_zero_variance_t_interval,16,65536
+selected_model_ns,Oracle,STREAM,bank_count=16; working_set_bytes=131072,5,29966.0,0.0,29966.0,29966.0,29966.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,Oracle,STREAM,bank_count=16; working_set_bytes=131072,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,131072
+regret_ns,Oracle,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,Oracle,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,Oracle,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,Oracle,STREAM,bank_count=16; working_set_bytes=131072,5,13.286097577254221,0.0,13.286097577254221,13.286097577254221,13.286097577254221,degenerate_zero_variance_t_interval,16,131072
+selected_model_ns,Oracle,STREAM,bank_count=16; working_set_bytes=262144,5,59662.0,0.0,59662.0,59662.0,59662.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,Oracle,STREAM,bank_count=16; working_set_bytes=262144,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,262144
+regret_ns,Oracle,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,Oracle,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,Oracle,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,Oracle,STREAM,bank_count=16; working_set_bytes=262144,5,13.346223726995408,0.0,13.346223726995408,13.346223726995408,13.346223726995408,degenerate_zero_variance_t_interval,16,262144
+selected_model_ns,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,3854.0,0.0,3854.0,3854.0,3854.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.87509765625,0.00021836601342771383,0.875,0.8748265190326956,0.8753687934673045,students_t_95_over_master_seed_means,16,16384
+regret_ns,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,6.452413077322262,0.009051027620393493,6.456460819927348,6.441174742179272,6.463651412465253,students_t_95_over_master_seed_means,16,16384
+selected_model_ns,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,7310.0,0.0,7310.0,7310.0,7310.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.75244140625,0.0009134905729428568,0.751953125,0.7513071578928783,0.7535756546071217,students_t_95_over_master_seed_means,16,32768
+regret_ns,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,6.082243502051983,0.019962330791270147,6.0929138166894665,6.057456994588229,6.1070300095157375,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,14222.0,0.0,14222.0,14222.0,14222.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.5345703125,0.0037885087385294575,0.53466796875,0.5298662575924876,0.5392743674075123,students_t_95_over_master_seed_means,16,65536
+regret_ns,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,5.573393334270848,0.042553195044835616,5.572296442131908,5.520556563975132,5.626230104566563,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,28046.0,0.0,28046.0,28046.0,28046.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.17705078125,0.005162867143705586,0.17822265625,0.17064023499015168,0.18346132750984834,students_t_95_over_master_seed_means,16,131072
+regret_ns,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,4.8625971618056045,0.029406583791061473,4.85592241317835,4.826084065402081,4.899110258209128,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,55694.0,0.0,55694.0,55694.0,55694.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.09130859375,0.006541875491686651,0.09326171875,0.08318578247124114,0.09943140502875886,students_t_95_over_master_seed_means,16,262144
+regret_ns,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,PIM-always,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,2.6946026501957125,0.01876369732007021,2.689000610478687,2.671304442760189,2.717900857631236,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,PIM-always,RANDOM,bank_count=16; working_set_bytes=16384,5,3854.0,0.0,3854.0,3854.0,3854.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,PIM-always,RANDOM,bank_count=16; working_set_bytes=16384,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,16384
+regret_ns,PIM-always,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,PIM-always,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,PIM-always,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,PIM-always,RANDOM,bank_count=16; working_set_bytes=16384,5,6.456460819927348,0.0,6.456460819927348,6.456460819927348,6.456460819927348,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,PIM-always,RANDOM,bank_count=16; working_set_bytes=32768,5,7310.0,0.0,7310.0,7310.0,7310.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,PIM-always,RANDOM,bank_count=16; working_set_bytes=32768,5,0.754296875,0.0016341016143243663,0.75439453125,0.7522678698560867,0.7563258801439132,students_t_95_over_master_seed_means,16,32768
+regret_ns,PIM-always,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,PIM-always,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,PIM-always,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,PIM-always,RANDOM,bank_count=16; working_set_bytes=32768,5,6.041696306429548,0.03570970291089365,6.0395622435020515,5.997356853938539,6.086035758920557,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,PIM-always,RANDOM,bank_count=16; working_set_bytes=65536,5,14222.0,0.0,14222.0,14222.0,14222.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,PIM-always,RANDOM,bank_count=16; working_set_bytes=65536,5,0.42080078125,0.007845997522560367,0.42578125,0.41105868859624084,0.4305428739037591,students_t_95_over_master_seed_means,16,65536
+regret_ns,PIM-always,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,PIM-always,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,PIM-always,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,PIM-always,RANDOM,bank_count=16; working_set_bytes=65536,5,6.851272676135565,0.08812762116747849,6.795331177049642,6.741847781684567,6.9606975705865635,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,PIM-always,RANDOM,bank_count=16; working_set_bytes=131072,5,28046.0,0.0,28046.0,28046.0,28046.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,PIM-always,RANDOM,bank_count=16; working_set_bytes=131072,5,0.22197265625,0.007701853184816544,0.22021484375,0.2124095424309623,0.23153577006903772,students_t_95_over_master_seed_means,16,131072
+regret_ns,PIM-always,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,PIM-always,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,PIM-always,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,PIM-always,RANDOM,bank_count=16; working_set_bytes=131072,5,4.606731797760821,0.043868103656683206,4.616743920701704,4.552262352780846,4.661201242740796,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,PIM-always,RANDOM,bank_count=16; working_set_bytes=262144,5,55694.0,0.0,55694.0,55694.0,55694.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,PIM-always,RANDOM,bank_count=16; working_set_bytes=262144,5,0.1099609375,0.005934174258757555,0.107421875,0.10259268696383322,0.11732918803616676,students_t_95_over_master_seed_means,16,262144
+regret_ns,PIM-always,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,PIM-always,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,PIM-always,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,PIM-always,RANDOM,bank_count=16; working_set_bytes=262144,5,2.641103170898122,0.01702066170127781,2.648385822530255,2.6199692280380398,2.6622371137582044,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,PIM-always,REUSE,bank_count=16; working_set_bytes=16384,5,3854.0,0.0,3854.0,3854.0,3854.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,PIM-always,REUSE,bank_count=16; working_set_bytes=16384,5,0.8884765625,0.004222997716882745,0.8876953125,0.88323301827045,0.8937201067295499,students_t_95_over_master_seed_means,16,16384
+regret_ns,PIM-always,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,PIM-always,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,PIM-always,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,PIM-always,REUSE,bank_count=16; working_set_bytes=16384,5,5.897872340425532,0.17503854366520946,5.930254281266217,5.680533282458423,6.11521139839264,students_t_95_over_master_seed_means,16,16384
+selected_model_ns,PIM-always,REUSE,bank_count=16; working_set_bytes=32768,5,7310.0,0.0,7310.0,7310.0,7310.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,PIM-always,REUSE,bank_count=16; working_set_bytes=32768,5,0.82197265625,0.003775901353355704,0.8212890625,0.8172842554787694,0.8266610570212307,students_t_95_over_master_seed_means,16,32768
+regret_ns,PIM-always,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,PIM-always,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,PIM-always,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,PIM-always,REUSE,bank_count=16; working_set_bytes=32768,5,4.5627906976744175,0.08251403362386502,4.5777291381668945,4.46033599277709,4.665245402571745,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,PIM-always,REUSE,bank_count=16; working_set_bytes=65536,5,14222.0,0.0,14222.0,14222.0,14222.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,PIM-always,REUSE,bank_count=16; working_set_bytes=65536,5,0.751171875,0.0029215381448538264,0.75,0.7475443062661561,0.754799443733844,students_t_95_over_master_seed_means,16,65536
+regret_ns,PIM-always,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,PIM-always,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,PIM-always,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,PIM-always,REUSE,bank_count=16; working_set_bytes=65536,5,3.1404865701026576,0.03281522918095421,3.1536492757699337,3.099741081435861,3.1812320587694543,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,PIM-always,REUSE,bank_count=16; working_set_bytes=131072,5,28046.0,0.0,28046.0,28046.0,28046.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,PIM-always,REUSE,bank_count=16; working_set_bytes=131072,5,0.58271484375,0.012229471561372149,0.58447265625,0.5675299491951875,0.5978997383048126,students_t_95_over_master_seed_means,16,131072
+regret_ns,PIM-always,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,PIM-always,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,PIM-always,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,PIM-always,REUSE,bank_count=16; working_set_bytes=131072,5,2.552021678670755,0.06965644673393115,2.542009555729872,2.4655317765184344,2.6385115808230757,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,PIM-always,REUSE,bank_count=16; working_set_bytes=262144,5,55694.0,0.0,55694.0,55694.0,55694.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,PIM-always,REUSE,bank_count=16; working_set_bytes=262144,5,0.33408203125,0.0130445137856796,0.33642578125,0.317885128108249,0.35027893439175106,students_t_95_over_master_seed_means,16,262144
+regret_ns,PIM-always,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,PIM-always,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,PIM-always,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,PIM-always,REUSE,bank_count=16; working_set_bytes=262144,5,1.9982691133694832,0.03741485277012963,1.991546665709053,1.951812437686719,2.0447257890522477,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,PIM-always,STREAM,bank_count=16; working_set_bytes=16384,5,3982.0,0.0,3982.0,3982.0,3982.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,PIM-always,STREAM,bank_count=16; working_set_bytes=16384,5,0.9375,0.0,0.9375,0.9375,0.9375,degenerate_zero_variance_t_interval,16,16384
+regret_ns,PIM-always,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,PIM-always,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,PIM-always,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,PIM-always,STREAM,bank_count=16; working_set_bytes=16384,5,7.48327473631341,9.930136612989092e-16,7.483274736313411,7.48327473631341,7.48327473631341,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,PIM-always,STREAM,bank_count=16; working_set_bytes=32768,5,7694.0,0.0,7694.0,7694.0,7694.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,PIM-always,STREAM,bank_count=16; working_set_bytes=32768,5,0.9375,0.0,0.9375,0.9375,0.9375,degenerate_zero_variance_t_interval,16,32768
+regret_ns,PIM-always,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,PIM-always,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,PIM-always,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,PIM-always,STREAM,bank_count=16; working_set_bytes=32768,5,7.745879906420588,0.0,7.745879906420588,7.745879906420588,7.745879906420588,degenerate_zero_variance_t_interval,16,32768
+selected_model_ns,PIM-always,STREAM,bank_count=16; working_set_bytes=65536,5,15118.0,0.0,15118.0,15118.0,15118.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,PIM-always,STREAM,bank_count=16; working_set_bytes=65536,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,65536
+regret_ns,PIM-always,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,PIM-always,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,PIM-always,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,PIM-always,STREAM,bank_count=16; working_set_bytes=65536,5,13.167456012700091,1.9860273225978185e-15,13.167456012700093,13.167456012700091,13.167456012700091,degenerate_zero_variance_t_interval,16,65536
+selected_model_ns,PIM-always,STREAM,bank_count=16; working_set_bytes=131072,5,29966.0,0.0,29966.0,29966.0,29966.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,PIM-always,STREAM,bank_count=16; working_set_bytes=131072,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,131072
+regret_ns,PIM-always,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,PIM-always,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,PIM-always,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,PIM-always,STREAM,bank_count=16; working_set_bytes=131072,5,13.286097577254221,0.0,13.286097577254221,13.286097577254221,13.286097577254221,degenerate_zero_variance_t_interval,16,131072
+selected_model_ns,PIM-always,STREAM,bank_count=16; working_set_bytes=262144,5,59662.0,0.0,59662.0,59662.0,59662.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,PIM-always,STREAM,bank_count=16; working_set_bytes=262144,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,262144
+regret_ns,PIM-always,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,PIM-always,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,PIM-always,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,PIM-always,STREAM,bank_count=16; working_set_bytes=262144,5,13.346223726995408,0.0,13.346223726995408,13.346223726995408,13.346223726995408,degenerate_zero_variance_t_interval,16,262144
+selected_model_ns,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,3854.0,0.0,3854.0,3854.0,3854.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.87509765625,0.00021836601342771383,0.875,0.8748265190326956,0.8753687934673045,students_t_95_over_master_seed_means,16,16384
+regret_ns,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=16384,5,6.452413077322262,0.009051027620393493,6.456460819927348,6.441174742179272,6.463651412465253,students_t_95_over_master_seed_means,16,16384
+selected_model_ns,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,7310.0,0.0,7310.0,7310.0,7310.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.75244140625,0.0009134905729428568,0.751953125,0.7513071578928783,0.7535756546071217,students_t_95_over_master_seed_means,16,32768
+regret_ns,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=32768,5,6.082243502051983,0.019962330791270147,6.0929138166894665,6.057456994588229,6.1070300095157375,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,14222.0,0.0,14222.0,14222.0,14222.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.5345703125,0.0037885087385294575,0.53466796875,0.5298662575924876,0.5392743674075123,students_t_95_over_master_seed_means,16,65536
+regret_ns,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=65536,5,5.573393334270848,0.042553195044835616,5.572296442131908,5.520556563975132,5.626230104566563,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,28046.0,0.0,28046.0,28046.0,28046.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.17705078125,0.005162867143705586,0.17822265625,0.17064023499015168,0.18346132750984834,students_t_95_over_master_seed_means,16,131072
+regret_ns,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=131072,5,4.8625971618056045,0.029406583791061473,4.85592241317835,4.826084065402081,4.899110258209128,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,55694.0,0.0,55694.0,55694.0,55694.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.09130859375,0.006541875491686651,0.09326171875,0.08318578247124114,0.09943140502875886,students_t_95_over_master_seed_means,16,262144
+regret_ns,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,Reuse-aware,MIXED_PHASE,bank_count=16; working_set_bytes=262144,5,2.6946026501957125,0.01876369732007021,2.689000610478687,2.671304442760189,2.717900857631236,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=16384,5,3854.0,0.0,3854.0,3854.0,3854.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=16384,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,16384
+regret_ns,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=16384,5,6.456460819927348,0.0,6.456460819927348,6.456460819927348,6.456460819927348,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=32768,5,7310.0,0.0,7310.0,7310.0,7310.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=32768,5,0.754296875,0.0016341016143243663,0.75439453125,0.7522678698560867,0.7563258801439132,students_t_95_over_master_seed_means,16,32768
+regret_ns,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=32768,5,6.041696306429548,0.03570970291089365,6.0395622435020515,5.997356853938539,6.086035758920557,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=65536,5,14222.0,0.0,14222.0,14222.0,14222.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=65536,5,0.42080078125,0.007845997522560367,0.42578125,0.41105868859624084,0.4305428739037591,students_t_95_over_master_seed_means,16,65536
+regret_ns,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=65536,5,6.851272676135565,0.08812762116747849,6.795331177049642,6.741847781684567,6.9606975705865635,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=131072,5,28046.0,0.0,28046.0,28046.0,28046.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=131072,5,0.22197265625,0.007701853184816544,0.22021484375,0.2124095424309623,0.23153577006903772,students_t_95_over_master_seed_means,16,131072
+regret_ns,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=131072,5,4.606731797760821,0.043868103656683206,4.616743920701704,4.552262352780846,4.661201242740796,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=262144,5,55694.0,0.0,55694.0,55694.0,55694.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=262144,5,0.1099609375,0.005934174258757555,0.107421875,0.10259268696383322,0.11732918803616676,students_t_95_over_master_seed_means,16,262144
+regret_ns,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,Reuse-aware,RANDOM,bank_count=16; working_set_bytes=262144,5,2.641103170898122,0.01702066170127781,2.648385822530255,2.6199692280380398,2.6622371137582044,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,Reuse-aware,REUSE,bank_count=16; working_set_bytes=16384,5,3854.0,0.0,3854.0,3854.0,3854.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,Reuse-aware,REUSE,bank_count=16; working_set_bytes=16384,5,0.8884765625,0.004222997716882745,0.8876953125,0.88323301827045,0.8937201067295499,students_t_95_over_master_seed_means,16,16384
+regret_ns,Reuse-aware,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,Reuse-aware,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,Reuse-aware,REUSE,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,Reuse-aware,REUSE,bank_count=16; working_set_bytes=16384,5,5.897872340425532,0.17503854366520946,5.930254281266217,5.680533282458423,6.11521139839264,students_t_95_over_master_seed_means,16,16384
+selected_model_ns,Reuse-aware,REUSE,bank_count=16; working_set_bytes=32768,5,7310.0,0.0,7310.0,7310.0,7310.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,Reuse-aware,REUSE,bank_count=16; working_set_bytes=32768,5,0.82197265625,0.003775901353355704,0.8212890625,0.8172842554787694,0.8266610570212307,students_t_95_over_master_seed_means,16,32768
+regret_ns,Reuse-aware,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,Reuse-aware,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,Reuse-aware,REUSE,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,Reuse-aware,REUSE,bank_count=16; working_set_bytes=32768,5,4.5627906976744175,0.08251403362386502,4.5777291381668945,4.46033599277709,4.665245402571745,students_t_95_over_master_seed_means,16,32768
+selected_model_ns,Reuse-aware,REUSE,bank_count=16; working_set_bytes=65536,5,14222.0,0.0,14222.0,14222.0,14222.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,Reuse-aware,REUSE,bank_count=16; working_set_bytes=65536,5,0.751171875,0.0029215381448538264,0.75,0.7475443062661561,0.754799443733844,students_t_95_over_master_seed_means,16,65536
+regret_ns,Reuse-aware,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,Reuse-aware,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,Reuse-aware,REUSE,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,Reuse-aware,REUSE,bank_count=16; working_set_bytes=65536,5,3.1404865701026576,0.03281522918095421,3.1536492757699337,3.099741081435861,3.1812320587694543,students_t_95_over_master_seed_means,16,65536
+selected_model_ns,Reuse-aware,REUSE,bank_count=16; working_set_bytes=131072,5,28046.0,0.0,28046.0,28046.0,28046.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,Reuse-aware,REUSE,bank_count=16; working_set_bytes=131072,5,0.58271484375,0.012229471561372149,0.58447265625,0.5675299491951875,0.5978997383048126,students_t_95_over_master_seed_means,16,131072
+regret_ns,Reuse-aware,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,Reuse-aware,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,Reuse-aware,REUSE,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,Reuse-aware,REUSE,bank_count=16; working_set_bytes=131072,5,2.552021678670755,0.06965644673393115,2.542009555729872,2.4655317765184344,2.6385115808230757,students_t_95_over_master_seed_means,16,131072
+selected_model_ns,Reuse-aware,REUSE,bank_count=16; working_set_bytes=262144,5,55694.0,0.0,55694.0,55694.0,55694.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,Reuse-aware,REUSE,bank_count=16; working_set_bytes=262144,5,0.33408203125,0.0130445137856796,0.33642578125,0.317885128108249,0.35027893439175106,students_t_95_over_master_seed_means,16,262144
+regret_ns,Reuse-aware,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,Reuse-aware,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,Reuse-aware,REUSE,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,Reuse-aware,REUSE,bank_count=16; working_set_bytes=262144,5,1.9982691133694832,0.03741485277012963,1.991546665709053,1.951812437686719,2.0447257890522477,students_t_95_over_master_seed_means,16,262144
+selected_model_ns,Reuse-aware,STREAM,bank_count=16; working_set_bytes=16384,5,3982.0,0.0,3982.0,3982.0,3982.0,degenerate_zero_variance_t_interval,16,16384
+cache_hit_rate,Reuse-aware,STREAM,bank_count=16; working_set_bytes=16384,5,0.9375,0.0,0.9375,0.9375,0.9375,degenerate_zero_variance_t_interval,16,16384
+regret_ns,Reuse-aware,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+normalized_regret,Reuse-aware,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+bad_offload,Reuse-aware,STREAM,bank_count=16; working_set_bytes=16384,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,16384
+speedup,Reuse-aware,STREAM,bank_count=16; working_set_bytes=16384,5,7.48327473631341,9.930136612989092e-16,7.483274736313411,7.48327473631341,7.48327473631341,degenerate_zero_variance_t_interval,16,16384
+selected_model_ns,Reuse-aware,STREAM,bank_count=16; working_set_bytes=32768,5,7694.0,0.0,7694.0,7694.0,7694.0,degenerate_zero_variance_t_interval,16,32768
+cache_hit_rate,Reuse-aware,STREAM,bank_count=16; working_set_bytes=32768,5,0.9375,0.0,0.9375,0.9375,0.9375,degenerate_zero_variance_t_interval,16,32768
+regret_ns,Reuse-aware,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+normalized_regret,Reuse-aware,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+bad_offload,Reuse-aware,STREAM,bank_count=16; working_set_bytes=32768,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,32768
+speedup,Reuse-aware,STREAM,bank_count=16; working_set_bytes=32768,5,7.745879906420588,0.0,7.745879906420588,7.745879906420588,7.745879906420588,degenerate_zero_variance_t_interval,16,32768
+selected_model_ns,Reuse-aware,STREAM,bank_count=16; working_set_bytes=65536,5,15118.0,0.0,15118.0,15118.0,15118.0,degenerate_zero_variance_t_interval,16,65536
+cache_hit_rate,Reuse-aware,STREAM,bank_count=16; working_set_bytes=65536,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,65536
+regret_ns,Reuse-aware,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+normalized_regret,Reuse-aware,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+bad_offload,Reuse-aware,STREAM,bank_count=16; working_set_bytes=65536,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,65536
+speedup,Reuse-aware,STREAM,bank_count=16; working_set_bytes=65536,5,13.167456012700091,1.9860273225978185e-15,13.167456012700093,13.167456012700091,13.167456012700091,degenerate_zero_variance_t_interval,16,65536
+selected_model_ns,Reuse-aware,STREAM,bank_count=16; working_set_bytes=131072,5,29966.0,0.0,29966.0,29966.0,29966.0,degenerate_zero_variance_t_interval,16,131072
+cache_hit_rate,Reuse-aware,STREAM,bank_count=16; working_set_bytes=131072,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,131072
+regret_ns,Reuse-aware,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+normalized_regret,Reuse-aware,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+bad_offload,Reuse-aware,STREAM,bank_count=16; working_set_bytes=131072,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,131072
+speedup,Reuse-aware,STREAM,bank_count=16; working_set_bytes=131072,5,13.286097577254221,0.0,13.286097577254221,13.286097577254221,13.286097577254221,degenerate_zero_variance_t_interval,16,131072
+selected_model_ns,Reuse-aware,STREAM,bank_count=16; working_set_bytes=262144,5,59662.0,0.0,59662.0,59662.0,59662.0,degenerate_zero_variance_t_interval,16,262144
+cache_hit_rate,Reuse-aware,STREAM,bank_count=16; working_set_bytes=262144,5,0.875,0.0,0.875,0.875,0.875,degenerate_zero_variance_t_interval,16,262144
+regret_ns,Reuse-aware,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+normalized_regret,Reuse-aware,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+bad_offload,Reuse-aware,STREAM,bank_count=16; working_set_bytes=262144,5,0.0,0.0,0.0,0.0,0.0,degenerate_zero_variance_t_interval,16,262144
+speedup,Reuse-aware,STREAM,bank_count=16; working_set_bytes=262144,5,13.346223726995408,0.0,13.346223726995408,13.346223726995408,13.346223726995408,degenerate_zero_variance_t_interval,16,262144

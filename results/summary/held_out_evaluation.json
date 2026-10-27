@@ -1,4 +1,6 @@
 {
+  "selected_lambda": 0.0,
+  "selection_objective": "minimum mean normalized regret on development master-seed means; tie-break lower modeled time; then lower lambda",
   "dev_seeds": [
     42,
     43,
@@ -13,22 +15,179 @@
     50,
     51
   ],
-  "dev_comparison": {
+  "tuning_traces_per_seed": 3,
+  "held_out_traces_per_seed": 5,
+  "tuning_candidates": [
+    {
+      "lambda_weight": 0.0,
+      "mean_normalized_regret": 0.0,
+      "mean_regret_ns": 0.0,
+      "mean_selected_model_ns": 8579.333333333334,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 0.25,
+      "mean_normalized_regret": 2.1163842212861743,
+      "mean_regret_ns": 21805.56666666667,
+      "mean_selected_model_ns": 30384.900000000005,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 0.5,
+      "mean_normalized_regret": 2.1163842212861743,
+      "mean_regret_ns": 21805.56666666667,
+      "mean_selected_model_ns": 30384.900000000005,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 1.0,
+      "mean_normalized_regret": 2.9944684734154787,
+      "mean_regret_ns": 26655.233333333337,
+      "mean_selected_model_ns": 35234.566666666666,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 1.5,
+      "mean_normalized_regret": 2.9944684734154787,
+      "mean_regret_ns": 26655.233333333337,
+      "mean_selected_model_ns": 35234.566666666666,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 2.0,
+      "mean_normalized_regret": 3.6936859699505455,
+      "mean_regret_ns": 30346.6,
+      "mean_selected_model_ns": 38925.933333333334,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 3.0,
+      "mean_normalized_regret": 3.6936859699505455,
+      "mean_regret_ns": 30346.6,
+      "mean_selected_model_ns": 38925.933333333334,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    },
+    {
+      "lambda_weight": 4.0,
+      "mean_normalized_regret": 3.6936859699505455,
+      "mean_regret_ns": 30346.6,
+      "mean_selected_model_ns": 38925.933333333334,
+      "development_master_seeds": 5,
+      "development_traces_per_seed": 3,
+      "selection_objective": "minimize mean normalized regret; tie-break mean modeled time; then lower lambda"
+    }
+  ],
+  "dev_comparison_reuse_aware_vs_cost_based": {
     "test_policy": "Reuse-aware",
     "baseline_policy": "Cost-based",
     "metric": "selected_model_ns",
-    "num_pairs": 60,
-    "mean_difference": -12404.933333333332,
-    "sample_std_difference": 19142.279352320085,
-    "p_value": 5.071586947184427e-06
+    "workload_type": "ALL",
+    "experimental_unit": "master_seed",
+    "num_pairs": 5,
+    "mean_difference_baseline_minus_test": 0.0,
+    "sample_std_difference": 0.0,
+    "confidence_interval_low": 0.0,
+    "confidence_interval_high": 0.0,
+    "ci_method": "degenerate_zero_variance",
+    "t_statistic": 0.0,
+    "p_value": 1.0,
+    "test_policy_faster_pct": 0.0
   },
-  "test_comparison": {
+  "test_comparison_reuse_aware_vs_cost_based": {
     "test_policy": "Reuse-aware",
     "baseline_policy": "Cost-based",
     "metric": "selected_model_ns",
-    "num_pairs": 60,
-    "mean_difference": -12402.333333333334,
-    "sample_std_difference": 19136.69176930658,
-    "p_value": 5.063955160743464e-06
-  }
+    "workload_type": "ALL",
+    "experimental_unit": "master_seed",
+    "num_pairs": 5,
+    "mean_difference_baseline_minus_test": 0.0,
+    "sample_std_difference": 0.0,
+    "confidence_interval_low": 0.0,
+    "confidence_interval_high": 0.0,
+    "ci_method": "degenerate_zero_variance",
+    "t_statistic": 0.0,
+    "p_value": 1.0,
+    "test_policy_faster_pct": 0.0
+  },
+  "test_comparison_by_workload": {
+    "STREAM": {
+      "test_policy": "Reuse-aware",
+      "baseline_policy": "Cost-based",
+      "metric": "selected_model_ns",
+      "workload_type": "STREAM",
+      "experimental_unit": "master_seed",
+      "num_pairs": 5,
+      "mean_difference_baseline_minus_test": 0.0,
+      "sample_std_difference": 0.0,
+      "confidence_interval_low": 0.0,
+      "confidence_interval_high": 0.0,
+      "ci_method": "degenerate_zero_variance",
+      "t_statistic": 0.0,
+      "p_value": 1.0,
+      "test_policy_faster_pct": 0.0
+    },
+    "REUSE": {
+      "test_policy": "Reuse-aware",
+      "baseline_policy": "Cost-based",
+      "metric": "selected_model_ns",
+      "workload_type": "REUSE",
+      "experimental_unit": "master_seed",
+      "num_pairs": 5,
+      "mean_difference_baseline_minus_test": 0.0,
+      "sample_std_difference": 0.0,
+      "confidence_interval_low": 0.0,
+      "confidence_interval_high": 0.0,
+      "ci_method": "degenerate_zero_variance",
+      "t_statistic": 0.0,
+      "p_value": 1.0,
+      "test_policy_faster_pct": 0.0
+    },
+    "RANDOM": {
+      "test_policy": "Reuse-aware",
+      "baseline_policy": "Cost-based",
+      "metric": "selected_model_ns",
+      "workload_type": "RANDOM",
+      "experimental_unit": "master_seed",
+      "num_pairs": 5,
+      "mean_difference_baseline_minus_test": 0.0,
+      "sample_std_difference": 0.0,
+      "confidence_interval_low": 0.0,
+      "confidence_interval_high": 0.0,
+      "ci_method": "degenerate_zero_variance",
+      "t_statistic": 0.0,
+      "p_value": 1.0,
+      "test_policy_faster_pct": 0.0
+    },
+    "MIXED_PHASE": {
+      "test_policy": "Reuse-aware",
+      "baseline_policy": "Cost-based",
+      "metric": "selected_model_ns",
+      "workload_type": "MIXED_PHASE",
+      "experimental_unit": "master_seed",
+      "num_pairs": 5,
+      "mean_difference_baseline_minus_test": 0.0,
+      "sample_std_difference": 0.0,
+      "confidence_interval_low": 0.0,
+      "confidence_interval_high": 0.0,
+      "ci_method": "degenerate_zero_variance",
+      "t_statistic": 0.0,
+      "p_value": 1.0,
+      "test_policy_faster_pct": 0.0
+    }
+  },
+  "result_classification": "analytical simulation estimates on synthetic traces; not hardware measurements"
 }

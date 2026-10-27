@@ -1,14 +1,13 @@
-"""Processing-in-Memory (PIM) analytical cost model for CachePIM.
+"""Analytical Processing-in-Memory (PIM) execution model.
 
-Calculates execution latency using analytical timing components:
-T_PIM = T_H2P + T_compute_PIM + T_P2H + T_launch + T_sync + T_imbalance
-
-Models host-to-PIM / PIM-to-host data transfers, bank parallelism,
-deterministic bank load distribution, and kernel launch/sync overheads.
+The model keeps external transfers, internal PIM memory service, arithmetic
+service, launch/synchronization, and bank imbalance as explicit components.
+All results are modeled nanoseconds, not hardware measurements.
 """
 
 from __future__ import annotations
 
+import math
 from typing import List, Optional, Tuple
 
 from cachepim.config import PIMConfig, TransferConfig
@@ -23,95 +22,98 @@ class PIMModel:
         transfer_config.validate()
         self.pim_config = pim_config
         self.transfer_config = transfer_config
+        self.bank_count = pim_config.bank_count
+        self.internal_bandwidth = pim_config.effective_bandwidth_bytes_per_ns
+        self.compute_ops_per_ns_per_bank = pim_config.compute_ops_per_ns_per_bank
+        self.launch_overhead_ns = pim_config.launch_overhead_ns
+        self.sync_overhead_ns = pim_config.sync_overhead_ns
+        self.imbalance_model = pim_config.bank_imbalance_model
+        self.h2p_bandwidth = transfer_config.host_to_pim_bandwidth_bytes_per_ns
+        self.p2h_bandwidth = transfer_config.pim_to_host_bandwidth_bytes_per_ns
+        self.h2p_fixed_ns = transfer_config.host_to_pim_fixed_ns
+        self.p2h_fixed_ns = transfer_config.pim_to_host_fixed_ns
 
-        self.bank_count: int = pim_config.bank_count
-        self.compute_ops_per_ns_per_bank: float = pim_config.compute_ops_per_ns_per_bank
-        self.launch_overhead_ns: float = pim_config.launch_overhead_ns
-        self.sync_overhead_ns: float = pim_config.sync_overhead_ns
-        self.imbalance_model: str = pim_config.bank_imbalance_model
+    def distribute_work(self, operation_count: int, skew_factor: float = 0.0) -> Tuple[List[int], float]:
+        """Deterministically distribute operations and calculate max/mean imbalance.
 
-        self.h2p_bandwidth: float = transfer_config.host_to_pim_bandwidth_bytes_per_ns
-        self.p2h_bandwidth: float = transfer_config.pim_to_host_bandwidth_bytes_per_ns
-        self.h2p_fixed_ns: float = transfer_config.host_to_pim_fixed_ns
-        self.p2h_fixed_ns: float = transfer_config.pim_to_host_fixed_ns
-
-    def distribute_work(
-        self,
-        operation_count: int,
-        skew_factor: float = 0.0,
-    ) -> Tuple[List[int], float]:
-        """Deterministically distribute operations across banks and calculate imbalance factor.
-
-        imbalance_factor = max_b(W_b) / mean_b(W_b) when mean_b(W_b) > 0, else 1.0.
+        ``skew_factor=0`` produces a round-robin-equivalent balanced allocation.
+        Positive skew increasingly favors higher-index banks. ``uniform`` mode
+        intentionally ignores skew and models a perfectly balanced placement.
+        Largest-remainder apportionment ensures per-bank work sums exactly to
+        operation_count without concentrating all rounding error in bank zero.
         """
+        if operation_count < 0:
+            raise ValueError("operation_count must be non-negative")
+        if not math.isfinite(skew_factor) or skew_factor < 0:
+            raise ValueError("skew_factor must be finite and non-negative")
         B = self.bank_count
-        if operation_count <= 0 or B <= 0:
+        if operation_count == 0:
             return [0] * B, 1.0
 
-        if skew_factor == 0.0:
-            # Deterministic round-robin / block distribution
-            base = operation_count // B
-            rem = operation_count % B
-            per_bank = [base + (1 if b < rem else 0) for b in range(B)]
+        if self.imbalance_model == "uniform" or skew_factor == 0.0:
+            base, remainder = divmod(operation_count, B)
+            loads = [base + (1 if b < remainder else 0) for b in range(B)]
         else:
-            # Deterministic exponential skew across banks
-            weights = [1.0 + (skew_factor * (b / max(1, B - 1))) for b in range(B)]
-            sum_w = sum(weights)
-            per_bank = [int(operation_count * (w / sum_w)) for w in weights]
-            diff = operation_count - sum(per_bank)
-            per_bank[0] += diff
+            weights = [1.0 + skew_factor * (b / max(1, B - 1)) for b in range(B)]
+            total_weight = sum(weights)
+            exact = [operation_count * w / total_weight for w in weights]
+            loads = [math.floor(v) for v in exact]
+            leftover = operation_count - sum(loads)
+            order = sorted(range(B), key=lambda b: (exact[b] - loads[b], -b), reverse=True)
+            for b in order[:leftover]:
+                loads[b] += 1
 
-        max_work = max(per_bank)
-        mean_work = sum(per_bank) / B
-
-        imbalance_factor = (max_work / mean_work) if mean_work > 0 else 1.0
-        return per_bank, imbalance_factor
+        mean_load = sum(loads) / B
+        imbalance = max(loads) / mean_load if mean_load > 0 else 1.0
+        return loads, float(imbalance)
 
     def evaluate(
         self,
         descriptor: WorkloadDescriptor,
         input_data_resident: bool = False,
     ) -> Optional[PIMCostBreakdown]:
-        """Compute PIM cost breakdown for the given workload descriptor.
+        """Return component costs, or ``None`` if the kernel is not PIM-eligible.
 
-        Returns None if workload is not eligible for PIM offloading.
-        Input transfer is charged in full unless input_data_resident=True.
+        Kernel-level PIM transfer volumes are explicit descriptor fields. For
+        older hand-built descriptors, they fall back to trace read/write bytes.
+        The model serially sums internal memory service and arithmetic service;
+        this deliberately simple assumption is reported as a model limitation.
         """
         if not descriptor.pim_eligible:
             return None
 
-        # Data transfers
-        input_bytes = 0 if input_data_resident else descriptor.bytes_read
-        output_bytes = descriptor.bytes_written
+        input_bytes = 0 if input_data_resident else descriptor.effective_pim_input_bytes
+        output_bytes = descriptor.effective_pim_output_bytes
+        t_h2p = input_bytes / self.h2p_bandwidth
+        if input_bytes > 0:
+            t_h2p += self.h2p_fixed_ns
+        t_p2h = output_bytes / self.p2h_bandwidth
+        if output_bytes > 0:
+            t_p2h += self.p2h_fixed_ns
 
-        t_h2p = (input_bytes / self.h2p_bandwidth) + (self.h2p_fixed_ns if input_bytes > 0 else 0.0)
-        t_p2h = (output_bytes / self.p2h_bandwidth) + (self.p2h_fixed_ns if output_bytes > 0 else 0.0)
+        skew = float(descriptor.params.get("bank_skew_factor", 0.0))
+        per_bank_work, imbalance_factor = self.distribute_work(descriptor.operation_count, skew)
 
-        # Work distribution across banks
-        per_bank_work, imbalance_factor = self.distribute_work(descriptor.operation_count)
-
-        # Base compute time assuming perfectly balanced banks
-        t_compute_base = descriptor.operation_count / (
-            self.bank_count * self.compute_ops_per_ns_per_bank
-        )
-
-        # Imbalance overhead: extra time taken by the bottleneck bank
-        # t_bottleneck = max(W_b) / ops_per_ns = t_compute_base * imbalance_factor
+        # Internal bank/memory service and arithmetic are represented as
+        # separate, serialized components; their assumptions are explicit.
+        internal_bytes = descriptor.effective_pim_input_bytes + descriptor.effective_pim_output_bytes
+        t_internal_memory = internal_bytes / self.internal_bandwidth
+        t_compute_base = descriptor.operation_count / (self.bank_count * self.compute_ops_per_ns_per_bank)
         t_imbalance = t_compute_base * (imbalance_factor - 1.0)
 
         t_launch = self.launch_overhead_ns
         t_sync = self.sync_overhead_ns
-
-        total_pim_time_ns = t_h2p + t_compute_base + t_p2h + t_launch + t_sync + t_imbalance
+        total = t_h2p + t_internal_memory + t_compute_base + t_p2h + t_launch + t_sync + t_imbalance
 
         return PIMCostBreakdown(
-            h2p_transfer_ns=t_h2p,
-            compute_ns=t_compute_base,
-            p2h_transfer_ns=t_p2h,
-            launch_overhead_ns=t_launch,
-            sync_overhead_ns=t_sync,
-            imbalance_overhead_ns=t_imbalance,
-            total_pim_time_ns=total_pim_time_ns,
+            h2p_transfer_ns=float(t_h2p),
+            compute_ns=float(t_compute_base),
+            internal_memory_service_ns=float(t_internal_memory),
+            p2h_transfer_ns=float(t_p2h),
+            launch_overhead_ns=float(t_launch),
+            sync_overhead_ns=float(t_sync),
+            imbalance_overhead_ns=float(t_imbalance),
+            total_pim_time_ns=float(total),
             bank_imbalance_factor=imbalance_factor,
             per_bank_work=per_bank_work,
         )

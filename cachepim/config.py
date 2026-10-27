@@ -51,14 +51,11 @@ class CacheConfig:
 
 @dataclass
 class CPUConfig:
-    frequency_hz: float = 2.5e9  # 2.5 GHz
     hit_service_ns: float = 2.0  # L3/LLC hit latency
     miss_service_ns: float = 80.0  # Main memory access latency
     compute_ns_per_op: float = 0.4  # ~1 cycle @ 2.5 GHz for basic arithmetic
 
     def validate(self) -> None:
-        if self.frequency_hz <= 0:
-            raise ValueError(f"CPU frequency_hz must be positive, got {self.frequency_hz}")
         if self.hit_service_ns < 0:
             raise ValueError(f"CPU hit_service_ns must be non-negative, got {self.hit_service_ns}")
         if self.miss_service_ns < self.hit_service_ns:
@@ -129,6 +126,10 @@ class ExperimentConfig:
     dev_seeds: List[int] = field(default_factory=lambda: [42, 43, 44, 45, 46])
     held_out_seeds: List[int] = field(default_factory=lambda: [47, 48, 49, 50, 51])
     traces_per_seed: int = 5
+    tuning_traces_per_seed: int = 3
+    reuse_penalty_candidates: List[float] = field(
+        default_factory=lambda: [0.0, 0.25, 0.5, 1.0, 1.5, 2.0, 3.0, 4.0]
+    )
     default_workload_patterns: List[str] = field(
         default_factory=lambda: ["STREAM", "REUSE", "RANDOM", "MIXED_PHASE"]
     )
@@ -138,12 +139,49 @@ class ExperimentConfig:
             raise ValueError("master_seeds cannot be empty")
         if self.traces_per_seed <= 0:
             raise ValueError(f"traces_per_seed must be positive, got {self.traces_per_seed}")
+        if self.tuning_traces_per_seed <= 0:
+            raise ValueError(f"tuning_traces_per_seed must be positive, got {self.tuning_traces_per_seed}")
+        if not self.reuse_penalty_candidates or any(v < 0 for v in self.reuse_penalty_candidates):
+            raise ValueError("reuse_penalty_candidates must be a non-empty list of non-negative weights")
         # Verify disjoint dev and test seeds
         dev_set = set(self.dev_seeds)
         test_set = set(self.held_out_seeds)
         overlap = dev_set.intersection(test_set)
         if overlap:
             raise ValueError(f"dev_seeds and held_out_seeds must be strictly disjoint, overlap: {overlap}")
+
+
+@dataclass
+class SweepConfig:
+    """Configured parameter grids used by the experiment runner."""
+    cache_capacities_kb: List[int] = field(default_factory=lambda: [16, 32, 64, 128])
+    working_set_sizes_kb: List[int] = field(default_factory=lambda: [8, 16, 24, 32, 48, 64, 96, 128, 256])
+    transfer_bandwidths_gb_s: List[float] = field(default_factory=lambda: [0.5, 1.0, 2.0, 4.0, 8.0])
+    pim_bank_counts: List[int] = field(default_factory=lambda: [4, 8, 16, 32, 64])
+    reuse_penalty_weights: List[float] = field(default_factory=lambda: [0.0, 0.25, 0.5, 1.0, 1.5, 2.0, 3.0, 4.0])
+    bank_skew_values: List[float] = field(default_factory=lambda: [0.0, 0.5, 1.0, 2.0, 4.0])
+    crossover_working_set_kb: int = 64
+    transfer_sensitivity_working_set_kb: int = 64
+
+    def validate(self) -> None:
+        positive_lists = {
+            "cache_capacities_kb": self.cache_capacities_kb,
+            "working_set_sizes_kb": self.working_set_sizes_kb,
+            "transfer_bandwidths_gb_s": self.transfer_bandwidths_gb_s,
+            "pim_bank_counts": self.pim_bank_counts,
+        }
+        for name, values in positive_lists.items():
+            if not values or any(not isinstance(v, (int, float)) or v <= 0 for v in values):
+                raise ValueError(f"sweeps.{name} must be a non-empty list of positive values")
+        nonnegative_lists = {
+            "reuse_penalty_weights": self.reuse_penalty_weights,
+            "bank_skew_values": self.bank_skew_values,
+        }
+        for name, values in nonnegative_lists.items():
+            if not values or any(v < 0 for v in values):
+                raise ValueError(f"sweeps.{name} must be a non-empty list of non-negative values")
+        if self.crossover_working_set_kb <= 0 or self.transfer_sensitivity_working_set_kb <= 0:
+            raise ValueError("Sweep working-set sizes must be positive")
 
 
 @dataclass
@@ -155,7 +193,8 @@ class CachePIMConfig:
     transfer: TransferConfig = field(default_factory=TransferConfig)
     policy: PolicyConfig = field(default_factory=PolicyConfig)
     experiment: ExperimentConfig = field(default_factory=ExperimentConfig)
-    version: str = "1.0.0"
+    sweeps: SweepConfig = field(default_factory=SweepConfig)
+    version: str = "1.1.0"
 
     def validate(self) -> None:
         self.cache.validate()
@@ -164,6 +203,7 @@ class CachePIMConfig:
         self.transfer.validate()
         self.policy.validate()
         self.experiment.validate()
+        self.sweeps.validate()
 
     def get_hash(self) -> str:
         """Deterministic SHA-256 hash representing configuration state."""
@@ -183,7 +223,8 @@ class CachePIMConfig:
             transfer=TransferConfig(**data.get("transfer", {})),
             policy=PolicyConfig(**data.get("policy", {})),
             experiment=ExperimentConfig(**data.get("experiment", {})),
-            version=data.get("version", "1.0.0"),
+            sweeps=SweepConfig(**data.get("sweeps", {})),
+            version=data.get("version", "1.1.0"),
         )
 
     @classmethod
@@ -213,8 +254,8 @@ def get_parameter_provenance() -> Dict[str, ParameterProvenance]:
         "cache.line_size_bytes": ParameterProvenance(
             value=64,
             unit="bytes",
-            provenance="literature-derived",
-            description="Standard modern x86-64 / ARMv8 cache line width.",
+            provenance="assumed",
+            description="Common illustrative cache-line size; no specific CPU is calibrated.",
             reference="Hennessy & Patterson, Computer Architecture: A Quantitative Approach, 6th ed."
         ),
         "cache.replacement": ParameterProvenance(
@@ -224,46 +265,39 @@ def get_parameter_provenance() -> Dict[str, ParameterProvenance]:
             description="True Least Recently Used replacement policy.",
             reference="Spec Sec 5.1"
         ),
-        "cpu.frequency_hz": ParameterProvenance(
-            value=2.5e9,
-            unit="Hz",
-            provenance="assumed",
-            description="Nominal core clock frequency (2.5 GHz).",
-            reference="Spec Sec 6 illustrative default"
-        ),
         "cpu.hit_service_ns": ParameterProvenance(
             value=2.0,
             unit="ns",
-            provenance="literature-derived",
-            description="Complete LLC hit latency (~5 clock cycles @ 2.5 GHz).",
+            provenance="assumed",
+            description="Illustrative complete cache-hit service time; not hardware calibrated.",
             reference="Intel 64 and IA-32 Architectures Optimization Reference Manual"
         ),
         "cpu.miss_service_ns": ParameterProvenance(
             value=80.0,
             unit="ns",
-            provenance="literature-derived",
-            description="Complete main memory read service latency (~200 cycles @ 2.5 GHz).",
+            provenance="assumed",
+            description="Illustrative complete miss-service time; not hardware calibrated.",
             reference="Micron DDR4 SDRAM Timing Specifications; JEDEC standard"
         ),
         "cpu.compute_ns_per_op": ParameterProvenance(
             value=0.4,
             unit="ns/op",
             provenance="assumed",
-            description="Throughput of 1 basic arithmetic operation per cycle at 2.5 GHz.",
+            description="Illustrative per-operation service time; not calibrated to a target processor.",
             reference="Spec Sec 6 illustrative default"
         ),
         "pim.bank_count": ParameterProvenance(
             value=16,
             unit="banks",
-            provenance="literature-derived",
-            description="Number of parallel PIM memory banks/processing units.",
+            provenance="assumed",
+            description="Generic modeled bank count; not tied to one PIM device.",
             reference="Gao et al., 'TETRIS: Scalable and Efficient Neural Network Acceleration with 3D Memory', ASPLOS 2017; UPMEM DPU architecture"
         ),
         "pim.effective_bandwidth_bytes_per_ns": ParameterProvenance(
             value=128.0,
             unit="bytes/ns (GB/s)",
-            provenance="literature-derived",
-            description="Internal aggregate bandwidth across all PIM banks.",
+            provenance="assumed",
+            description="Illustrative aggregate internal bandwidth; not hardware calibrated.",
             reference="HBM2/HBM3 internal crossbar bandwidth estimates"
         ),
         "pim.compute_ops_per_ns_per_bank": ParameterProvenance(
@@ -290,36 +324,43 @@ def get_parameter_provenance() -> Dict[str, ParameterProvenance]:
         "transfer.host_to_pim_bandwidth_bytes_per_ns": ParameterProvenance(
             value=16.0,
             unit="bytes/ns (GB/s)",
-            provenance="literature-derived",
-            description="Interconnect link bandwidth (PCIe Gen4 x8 or CXL 1.1 x8).",
+            provenance="assumed",
+            description="Illustrative host-to-PIM bandwidth; not calibrated to a specific link.",
             reference="PCI-SIG PCIe 4.0 Specification; CXL Consortium Specification 1.1"
         ),
         "transfer.pim_to_host_bandwidth_bytes_per_ns": ParameterProvenance(
             value=16.0,
             unit="bytes/ns (GB/s)",
-            provenance="literature-derived",
-            description="Interconnect link return bandwidth.",
+            provenance="assumed",
+            description="Illustrative PIM-to-host bandwidth; not calibrated to a specific link.",
             reference="PCI-SIG PCIe 4.0 Specification"
         ),
         "transfer.host_to_pim_fixed_ns": ParameterProvenance(
             value=100.0,
             unit="ns",
-            provenance="literature-derived",
-            description="Fixed link traversal and packet serialization overhead.",
+            provenance="assumed",
+            description="Illustrative fixed transfer overhead; not hardware calibrated.",
             reference="CXL Host-Device Round-Trip Latency benchmarks"
         ),
         "transfer.pim_to_host_fixed_ns": ParameterProvenance(
             value=100.0,
             unit="ns",
-            provenance="literature-derived",
-            description="Fixed link return traversal overhead.",
+            provenance="assumed",
+            description="Illustrative fixed return-transfer overhead; not hardware calibrated.",
             reference="CXL Host-Device Round-Trip Latency benchmarks"
+        ),
+        "policy.reuse_threshold": ParameterProvenance(
+            value=0.5,
+            unit="estimated-hit fraction",
+            provenance="assumed",
+            description="Reuse-cost gate; apply the penalty only when estimated hit fraction reaches this threshold.",
+            reference="config/default.yaml policy section"
         ),
         "policy.reuse_penalty_weight": ParameterProvenance(
             value=1.0,
             unit="dimensionless factor",
-            provenance="artifact-derived",
-            description="Tuning weight lambda applied to reuse preservation cost in ns.",
-            reference="Spec Sec 11.4; calibrated on development seeds 42-46"
+            provenance="assumed",
+            description="Initial default only; the experiment runner selects a candidate using development seeds and saves the selected value.",
+            reference="config/experiment.yaml reuse_penalty_candidates"
         ),
     }

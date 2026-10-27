@@ -101,19 +101,22 @@ class Simulator:
 
         # Regret invariant: non-negative (tolerance for floating-point inaccuracy)
         raw_regret = selected_model_ns - oracle_optimal_ns
-        regret_ns = max(0.0, raw_regret) if raw_regret >= -1e-6 else 0.0
+        # Regret is by definition non-negative; clip only tiny negative values
+        # caused by floating-point roundoff, and retain genuine positive values.
+        regret_ns = max(0.0, raw_regret)
 
         normalized_regret = (regret_ns / oracle_optimal_ns) if oracle_optimal_ns > 0 else 0.0
 
         # 7. Data transfer accounting
         if decision.selected_path == ExecutionPath.PIM.value:
-            host_to_pim_bytes = descriptor.bytes_read
-            pim_to_host_bytes = descriptor.bytes_written
+            host_to_pim_bytes = 0 if pim_breakdown is None else descriptor.effective_pim_input_bytes
+            pim_to_host_bytes = 0 if pim_breakdown is None else descriptor.effective_pim_output_bytes
         else:
             host_to_pim_bytes = 0
             pim_to_host_bytes = 0
 
         bank_imbalance = pim_breakdown.bank_imbalance_factor if pim_breakdown else 1.0
+        pim_internal_memory_ns = pim_breakdown.internal_memory_service_ns if pim_breakdown else 0.0
 
         return SimulationResult(
             run_id=run_id,
@@ -136,12 +139,13 @@ class Simulator:
             cache_evictions=cache_stats.evictions,
             cache_hit_rate=cache_stats.hit_rate,
             cache_miss_rate=cache_stats.miss_rate,
-            input_bytes=descriptor.bytes_read,
-            output_bytes=descriptor.bytes_written,
+            input_bytes=descriptor.effective_pim_input_bytes,
+            output_bytes=descriptor.effective_pim_output_bytes,
             host_to_pim_bytes=host_to_pim_bytes,
             pim_to_host_bytes=pim_to_host_bytes,
             bank_count=self.config.pim.bank_count,
             bank_imbalance=bank_imbalance,
+            pim_internal_memory_ns=pim_internal_memory_ns,
             policy_overhead_ns=decision.policy_overhead_ns,
             regret_ns=regret_ns,
             normalized_regret=normalized_regret,

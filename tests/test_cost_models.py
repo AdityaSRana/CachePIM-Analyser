@@ -9,7 +9,6 @@ from cachepim.types import CacheStats, KernelType, WorkloadDescriptor
 
 def test_cpu_model_accounting():
     config = CPUConfig(
-        frequency_hz=2.5e9,
         hit_service_ns=2.0,
         miss_service_ns=80.0,
         compute_ns_per_op=0.4,
@@ -88,7 +87,9 @@ def test_pim_model_accounting_and_imbalance():
     assert pytest.approx(breakdown.launch_overhead_ns) == 50.0
     assert pytest.approx(breakdown.sync_overhead_ns) == 20.0
 
-    expected_total = 200.0 + 250.0 + 150.0 + 50.0 + 20.0
+    # Internal PIM memory service: (1000 input + 500 output) / 100 bytes/ns = 15 ns.
+    assert pytest.approx(breakdown.internal_memory_service_ns) == 15.0
+    expected_total = 200.0 + 15.0 + 250.0 + 150.0 + 50.0 + 20.0
     assert pytest.approx(breakdown.total_pim_time_ns) == expected_total
 
 
@@ -112,3 +113,31 @@ def test_pim_unsupported_kernel_returns_none():
     )
 
     assert model.evaluate(desc) is None
+
+
+def test_pim_generated_kernel_has_output_transfer_even_for_read_only_trace():
+    from cachepim.workloads import WorkloadGenerator
+
+    gen = WorkloadGenerator(line_size_bytes=64)
+    trace, desc = gen.generate(
+        pattern="STREAM", seed=7, working_set_bytes=4096, passes=1,
+        read_write_ratio=1.0, kernel_type=KernelType.VECTOR_OP.value,
+    )
+    assert all(r.operation == "READ" for r in trace)
+    assert desc.bytes_written == 0  # CPU access trace is read-only.
+    assert desc.effective_pim_input_bytes == 2 * desc.element_count * 8
+    assert desc.effective_pim_output_bytes == desc.element_count * 8
+    breakdown = PIMModel(PIMConfig(), TransferConfig()).evaluate(desc)
+    assert breakdown is not None
+    assert breakdown.p2h_transfer_ns > 0.0
+
+
+def test_bank_skew_changes_load_distribution_and_total_work_is_preserved():
+    model = PIMModel(PIMConfig(bank_count=8, bank_imbalance_model="max_over_mean"), TransferConfig())
+    balanced, balanced_factor = model.distribute_work(1000, skew_factor=0.0)
+    skewed, skewed_factor = model.distribute_work(1000, skew_factor=4.0)
+    assert sum(balanced) == 1000
+    assert sum(skewed) == 1000
+    assert balanced_factor == 1.0
+    assert skewed_factor > balanced_factor
+    assert skewed != balanced

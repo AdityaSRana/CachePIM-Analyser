@@ -96,3 +96,38 @@ def test_reuse_aware_policy_dimensional_consistency(base_config):
     dec_cost = cost_pol.decide(desc, config_lam0)
 
     assert dec_lam0.selected_path == dec_cost.selected_path
+
+
+def test_stream_cache_estimator_accounts_for_reuse_when_working_set_fits():
+    from cachepim.policies import estimate_cache_hits_and_misses
+    from cachepim.workloads import WorkloadGenerator
+
+    trace, desc = WorkloadGenerator(line_size_bytes=64).generate(
+        pattern="STREAM", seed=42, working_set_bytes=8192, passes=2
+    )
+    hits, misses = estimate_cache_hits_and_misses(desc, capacity_bytes=32768, line_size_bytes=64)
+    unique_lines = 8192 // 64
+    assert len(trace) == desc.trace_length
+    assert misses == unique_lines
+    assert hits == desc.trace_length - unique_lines
+
+
+def test_reuse_threshold_gates_reuse_penalty(base_config):
+    desc = WorkloadDescriptor(
+        workload_type="REUSE",
+        seed=42,
+        kernel_type=KernelType.VECTOR_OP.value,
+        element_count=1000,
+        bytes_read=8000,
+        bytes_written=0,
+        operation_count=1000,
+        read_write_ratio=1.0,
+        working_set_bytes=16384,
+        trace_length=1000,
+        pim_eligible=True,
+        reusable_bytes=16384,
+    )
+    policy = ReuseAwarePolicy()
+    base_config.policy.reuse_threshold = 0.75
+    assert policy.calculate_reuse_cost(desc, base_config, estimated_hits=500) == 0.0
+    assert policy.calculate_reuse_cost(desc, base_config, estimated_hits=800) > 0.0

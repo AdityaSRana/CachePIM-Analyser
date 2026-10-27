@@ -63,7 +63,19 @@ class WorkloadDescriptor:
     reusable_bytes: int = 0
     hot_cold_ratio: Optional[float] = None
     phase_mix: Optional[Dict[str, Any]] = None
+    # Kernel-level transfer volumes are distinct from trace read/write bytes.
+    # None preserves backward compatibility for hand-created descriptors.
+    pim_input_bytes: Optional[int] = None
+    pim_output_bytes: Optional[int] = None
     params: Dict[str, Any] = field(default_factory=dict)
+
+    @property
+    def effective_pim_input_bytes(self) -> int:
+        return max(0, int(self.bytes_read if self.pim_input_bytes is None else self.pim_input_bytes))
+
+    @property
+    def effective_pim_output_bytes(self) -> int:
+        return max(0, int(self.bytes_written if self.pim_output_bytes is None else self.pim_output_bytes))
 
     def to_json(self) -> str:
         return json.dumps(self.params, sort_keys=True)
@@ -110,6 +122,7 @@ class PIMCostBreakdown:
     """Component-level analytical cost breakdown for PIM execution in nanoseconds."""
     h2p_transfer_ns: float
     compute_ns: float
+    internal_memory_service_ns: float
     p2h_transfer_ns: float
     launch_overhead_ns: float
     sync_overhead_ns: float
@@ -159,6 +172,7 @@ class SimulationResult:
     pim_to_host_bytes: int
     bank_count: int
     bank_imbalance: float
+    pim_internal_memory_ns: float
     policy_overhead_ns: float
     regret_ns: float
     normalized_regret: float

@@ -25,11 +25,119 @@ from cachepim.types import (
 )
 
 
+PRIM_PRESETS: Dict[str, Dict[str, Any]] = {
+    "PrIM-VA": {
+        "pattern": "STREAM",
+        "kernel_type": "VECTOR_OP",
+        "working_set_bytes": 65536,
+        "access_count": 4096,
+        "read_write_ratio": 0.67,
+        "hot_cold_ratio": 0.0,
+        "hot_set_fraction": 0.0,
+        "passes": 2,
+        "bank_skew_factor": 0.0,
+        "description": "Vector Addition (A[i] + B[i] = C[i]): Linear streaming, high spatial locality, zero temporal reuse.",
+    },
+    "PrIM-RED": {
+        "pattern": "STREAM",
+        "kernel_type": "REDUCTION",
+        "working_set_bytes": 65536,
+        "access_count": 2048,
+        "read_write_ratio": 1.0,
+        "hot_cold_ratio": 0.0,
+        "hot_set_fraction": 0.0,
+        "passes": 1,
+        "bank_skew_factor": 0.0,
+        "description": "Reduction (sum/min): Streaming input, single scalar output, low arithmetic intensity.",
+    },
+    "PrIM-SEL": {
+        "pattern": "STREAM",
+        "kernel_type": "FILTER",
+        "working_set_bytes": 65536,
+        "access_count": 2048,
+        "read_write_ratio": 0.8,
+        "hot_cold_ratio": 0.0,
+        "hot_set_fraction": 0.0,
+        "passes": 1,
+        "bank_skew_factor": 0.0,
+        "description": "Select / Filter: Database predicate filtering with selective output writeback.",
+    },
+    "PrIM-GEMV": {
+        "pattern": "REUSE",
+        "kernel_type": "VECTOR_OP",
+        "working_set_bytes": 65536,
+        "access_count": 4096,
+        "read_write_ratio": 0.95,
+        "hot_cold_ratio": 0.85,
+        "hot_set_fraction": 0.15,
+        "passes": 2,
+        "bank_skew_factor": 0.0,
+        "description": "Dense Matrix-Vector Multiplication: Vector operand exhibits high temporal cache reuse, CPU-cache friendly.",
+    },
+    "PrIM-HST": {
+        "pattern": "REUSE",
+        "kernel_type": "VECTOR_OP",
+        "working_set_bytes": 32768,
+        "access_count": 2048,
+        "read_write_ratio": 0.5,
+        "hot_cold_ratio": 0.75,
+        "hot_set_fraction": 0.1,
+        "passes": 2,
+        "bank_skew_factor": 0.5,
+        "description": "Histogram: Bins remain resident in cache (high temporal reuse); moderate PIM bank contention.",
+    },
+    "PrIM-SpMV": {
+        "pattern": "RANDOM",
+        "kernel_type": "VECTOR_OP",
+        "working_set_bytes": 131072,
+        "access_count": 4096,
+        "read_write_ratio": 0.85,
+        "hot_cold_ratio": 0.2,
+        "hot_set_fraction": 0.05,
+        "passes": 1,
+        "bank_skew_factor": 1.0,
+        "description": "Sparse Matrix-Vector Multiplication: Indirect pointer chasing, low cache hit rate, bank imbalance.",
+    },
+    "PrIM-BFS": {
+        "pattern": "RANDOM",
+        "kernel_type": "VECTOR_OP",
+        "working_set_bytes": 131072,
+        "access_count": 4096,
+        "read_write_ratio": 0.7,
+        "hot_cold_ratio": 0.1,
+        "hot_set_fraction": 0.05,
+        "passes": 1,
+        "bank_skew_factor": 1.5,
+        "description": "Breadth-First Search: Irregular graph frontier expansion, high LLC miss rate, high bank skew.",
+    },
+}
+
+
 class WorkloadGenerator:
     """Generates synthetic memory access traces and metadata deterministically."""
 
     def __init__(self, line_size_bytes: int = 64):
         self.line_size_bytes = line_size_bytes
+
+    def generate_preset(
+        self,
+        preset_name: str,
+        seed: int = 42,
+        override_params: Optional[Dict[str, Any]] = None,
+    ) -> Tuple[List[TraceRecord], WorkloadDescriptor]:
+        """Generate a trace and descriptor configured according to a named PrIM preset."""
+        if preset_name not in PRIM_PRESETS:
+            raise ValueError(
+                f"Unknown PrIM preset '{preset_name}'. Available presets: {list(PRIM_PRESETS.keys())}"
+            )
+        params = dict(PRIM_PRESETS[preset_name])
+        params.pop("description", None)
+        params["seed"] = seed
+        if override_params:
+            params.update(override_params)
+        records, desc = self.generate(**params)
+        desc.params["preset_name"] = preset_name
+        return records, desc
 
     def generate(
         self,
@@ -45,6 +153,7 @@ class WorkloadGenerator:
         pim_eligible: Optional[bool] = None,
         task_id: str = "task_0",
         phase_mix: Optional[List[Dict[str, Any]]] = None,
+        bank_skew_factor: float = 0.0,
     ) -> Tuple[List[TraceRecord], WorkloadDescriptor]:
         """Generate a trace and descriptor for the specified workload pattern."""
         rng = np.random.default_rng(seed)
@@ -105,6 +214,34 @@ class WorkloadGenerator:
         else:
             raise ValueError(f"Unknown workload pattern: {pattern}")
 
+        if not np.isfinite(bank_skew_factor) or bank_skew_factor < 0:
+            raise ValueError("bank_skew_factor must be finite and non-negative")
+
+        # Explicit kernel-level transfer sizes. Trace bytes describe the cache
+        # access proxy; these fields describe the data footprint of the kernel
+        # sent to PIM. The distinction avoids interpreting a read-only trace as
+        # a kernel with no output.
+        elem = 8
+        elements = max(1, int(descriptor.element_count))
+        if descriptor.kernel_type == KernelType.VECTOR_OP.value:
+            pim_input_bytes = 2 * elements * elem
+            pim_output_bytes = elements * elem
+        elif descriptor.kernel_type == KernelType.REDUCTION.value:
+            pim_input_bytes = elements * elem
+            pim_output_bytes = elem
+        elif descriptor.kernel_type == KernelType.FILTER.value:
+            pim_input_bytes = elements * elem
+            # Conservative worst-case output volume: every input element passes.
+            pim_output_bytes = elements * elem
+        else:
+            pim_input_bytes = descriptor.bytes_read
+            pim_output_bytes = descriptor.bytes_written
+
+        descriptor.pim_input_bytes = int(pim_input_bytes)
+        descriptor.pim_output_bytes = int(pim_output_bytes)
+        descriptor.params["pim_input_bytes"] = descriptor.pim_input_bytes
+        descriptor.params["pim_output_bytes"] = descriptor.pim_output_bytes
+        descriptor.params["bank_skew_factor"] = float(bank_skew_factor)
         return records, descriptor
 
     def _determine_op(self, rng: np.random.Generator, read_write_ratio: float) -> str:

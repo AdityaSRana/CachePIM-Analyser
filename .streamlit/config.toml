@@ -1,0 +1,20 @@
+[server]
+port = 8505
+headless = false
+enableCORS = false
+enableXsrfProtection = false
+
+[browser]
+serverPort = 8505
+gatherUsageStats = false
+
+[client]
+showErrorDetails = "none"
+toolbarMode = "minimal"
+
+[theme]
+base = "dark"
+backgroundColor = "#151A22"
+secondaryBackgroundColor = "#222B36"
+textColor = "#E2E8F0"
+primaryColor = "#91B8D8"

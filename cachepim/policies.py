@@ -30,47 +30,71 @@ def estimate_cache_hits_and_misses(
     capacity_bytes: int,
     line_size_bytes: int,
 ) -> tuple[int, int]:
-    """Analytically estimate hits and misses from workload descriptor without executing trace."""
-    total_accesses = descriptor.operation_count
-    if total_accesses <= 0:
+    """Estimate cache hits/misses from workload metadata without using oracle costs.
+
+    This is a deliberately transparent profile-level estimate. It preserves
+    spatial locality for streaming traces and uses simple expected-hit models
+    for uniform random and hot-set traces. It is not a substitute for the exact
+    LRU trace replay used to score actual modeled CPU execution time.
+    """
+    accesses = int(descriptor.trace_length or descriptor.operation_count)
+    if accesses <= 0:
         return 0, 0
+    if capacity_bytes <= 0 or line_size_bytes <= 0:
+        raise ValueError("Cache capacity and line size must be positive")
 
-    working_set_bytes = max(line_size_bytes, descriptor.working_set_bytes)
-    unique_lines = max(1, working_set_bytes // line_size_bytes)
+    unique_lines = max(1, int((descriptor.working_set_bytes + line_size_bytes - 1) // line_size_bytes))
     cache_lines = max(1, capacity_bytes // line_size_bytes)
+    compulsory = min(accesses, unique_lines)
+    pattern = descriptor.workload_type.upper()
 
-    # Compulsory misses
-    compulsory_misses = min(total_accesses, unique_lines)
-
-    if working_set_bytes <= capacity_bytes:
-        # Working set fits completely in cache: compulsory misses only, remainder hits
-        estimated_misses = compulsory_misses
-        estimated_hits = total_accesses - estimated_misses
-    else:
-        # Working set exceeds cache capacity: capacity thrashing occurs
-        if descriptor.reusable_bytes > 0:
-            # Hot-set partially fits in cache
-            hot_lines = max(1, descriptor.reusable_bytes // line_size_bytes)
-            if hot_lines <= cache_lines:
-                # Hot set fits in cache: accesses to hot set hit after compulsory miss
-                hot_ratio = descriptor.hot_cold_ratio if descriptor.hot_cold_ratio is not None else 0.8
-                hot_accesses = int(total_accesses * hot_ratio)
-                cold_accesses = total_accesses - hot_accesses
-
-                hot_hits = max(0, hot_accesses - hot_lines)
-                estimated_hits = hot_hits
-                estimated_misses = total_accesses - estimated_hits
-            else:
-                # Even hot set thrashes
-                fit_ratio = cache_lines / hot_lines
-                estimated_hits = int((total_accesses - compulsory_misses) * fit_ratio * 0.5)
-                estimated_misses = total_accesses - estimated_hits
+    if pattern == "STREAM":
+        passes = max(1, int(descriptor.params.get("passes", 1)))
+        # If the full line working set fits, it is retained after the first
+        # pass. Otherwise each sequential pass reloads the lines, while word
+        # references within a cache line still benefit from spatial locality.
+        misses_per_pass = unique_lines
+        estimated_misses = unique_lines if unique_lines <= cache_lines else unique_lines * passes
+        misses = min(accesses, estimated_misses)
+        hits = accesses - misses
+    elif pattern in ("REUSE", "MIXED_PHASE") and descriptor.reusable_bytes > 0:
+        hot_lines = max(1, int((descriptor.reusable_bytes + line_size_bytes - 1) // line_size_bytes))
+        cold_lines = max(1, unique_lines - hot_lines)
+        hot_ratio = descriptor.hot_cold_ratio
+        if hot_ratio is None:
+            hot_ratio = 0.5 if pattern == "MIXED_PHASE" else 0.8
+        hot_ratio = min(1.0, max(0.0, float(hot_ratio)))
+        hot_accesses = int(accesses * hot_ratio)
+        cold_accesses = accesses - hot_accesses
+        if hot_lines <= cache_lines:
+            # Hot set fits: account for warm-up misses, then repeated hits.
+            hot_hits = max(0, hot_accesses - min(hot_accesses, hot_lines))
+            spare = max(0, cache_lines - hot_lines)
+            cold_repeats = max(0, cold_accesses - min(cold_accesses, cold_lines))
+            cold_hit_probability = min(1.0, spare / cold_lines)
+            cold_hits = int(cold_repeats * cold_hit_probability)
         else:
-            # Low/no reuse (streaming or uniform random exceeding cache)
-            estimated_hits = 0
-            estimated_misses = total_accesses
+            # Hot set does not fit: use cache coverage as an expected hit ratio.
+            hot_hit_probability = min(1.0, cache_lines / hot_lines)
+            hot_hits = max(0, int((hot_accesses - min(hot_accesses, hot_lines)) * hot_hit_probability))
+            cold_hits = 0
+        hits = min(accesses - compulsory, hot_hits + cold_hits)
+        misses = accesses - hits
+    elif pattern == "RANDOM":
+        # Approximate steady-state hit probability for uniform references over
+        # the working set, after compulsory misses.
+        remaining = max(0, accesses - compulsory)
+        hit_probability = min(1.0, cache_lines / unique_lines)
+        hits = min(remaining, int(remaining * hit_probability))
+        misses = accesses - hits
+    else:
+        # No temporal-reuse claim: retain only spatial/compulsory locality.
+        misses = compulsory
+        hits = accesses - misses
 
-    return max(0, estimated_hits), max(0, estimated_misses)
+    hits = max(0, min(accesses, int(hits)))
+    misses = accesses - hits
+    return hits, misses
 
 
 class BasePolicy(ABC):
@@ -108,7 +132,7 @@ class CPUCachePolicy(BasePolicy):
             descriptor, config.cache.capacity_bytes, config.cache.line_size_bytes
         )
         stats = CacheStats(
-            accesses=descriptor.operation_count,
+            accesses=descriptor.trace_length or descriptor.operation_count,
             hits=hits_est,
             misses=misses_est,
             dirty_evictions=0,
@@ -176,7 +200,7 @@ class PIMAlwaysPolicy(BasePolicy):
             descriptor, config.cache.capacity_bytes, config.cache.line_size_bytes
         )
         stats = CacheStats(
-            accesses=descriptor.operation_count,
+            accesses=descriptor.trace_length or descriptor.operation_count,
             hits=hits_est,
             misses=misses_est,
             dirty_evictions=0,
@@ -224,7 +248,7 @@ class CostBasedPolicy(BasePolicy):
             descriptor, config.cache.capacity_bytes, config.cache.line_size_bytes
         )
         stats = CacheStats(
-            accesses=descriptor.operation_count,
+            accesses=descriptor.trace_length or descriptor.operation_count,
             hits=hits_est,
             misses=misses_est,
             dirty_evictions=0,
@@ -279,9 +303,16 @@ class ReuseAwarePolicy(BasePolicy):
         config: CachePIMConfig,
         estimated_hits: int,
     ) -> float:
-        """Compute dimensionally consistent reuse preservation cost in nanoseconds."""
+        """Compute dimensionally consistent reuse cost, gated by estimated hit ratio."""
         cap_bytes = config.cache.capacity_bytes
-        if cap_bytes <= 0 or descriptor.working_set_bytes <= 0 or estimated_hits <= 0:
+        accesses = int(descriptor.trace_length or descriptor.operation_count)
+        if cap_bytes <= 0 or descriptor.working_set_bytes <= 0 or estimated_hits <= 0 or accesses <= 0:
+            return 0.0
+
+        # The configured threshold is an explicit gate: only apply a reuse
+        # preservation penalty when the estimated hit fraction reaches it.
+        estimated_hit_fraction = min(1.0, max(0.0, estimated_hits / accesses))
+        if estimated_hit_fraction < config.policy.reuse_threshold:
             return 0.0
 
         # Cache coverage ratio: how much of the working set can be retained in cache
@@ -309,7 +340,7 @@ class ReuseAwarePolicy(BasePolicy):
             descriptor, config.cache.capacity_bytes, config.cache.line_size_bytes
         )
         stats = CacheStats(
-            accesses=descriptor.operation_count,
+            accesses=descriptor.trace_length or descriptor.operation_count,
             hits=hits_est,
             misses=misses_est,
             dirty_evictions=0,

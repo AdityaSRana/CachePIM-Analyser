@@ -1,0 +1,9 @@
+lambda_weight,mean_normalized_regret,mean_regret_ns,mean_selected_model_ns,development_master_seeds,development_traces_per_seed,selection_objective
+0.0,0.0,0.0,8579.333333333334,5,3,minimize mean normalized regret; tie-break mean modeled time; then lower lambda
+0.25,2.1163842212861743,21805.56666666667,30384.900000000005,5,3,minimize mean normalized regret; tie-break mean modeled time; then lower lambda
+0.5,2.1163842212861743,21805.56666666667,30384.900000000005,5,3,minimize mean normalized regret; tie-break mean modeled time; then lower lambda
+1.0,2.9944684734154787,26655.233333333337,35234.566666666666,5,3,minimize mean normalized regret; tie-break mean modeled time; then lower lambda
+1.5,2.9944684734154787,26655.233333333337,35234.566666666666,5,3,minimize mean normalized regret; tie-break mean modeled time; then lower lambda
+2.0,3.6936859699505455,30346.6,38925.933333333334,5,3,minimize mean normalized regret; tie-break mean modeled time; then lower lambda
+3.0,3.6936859699505455,30346.6,38925.933333333334,5,3,minimize mean normalized regret; tie-break mean modeled time; then lower lambda
+4.0,3.6936859699505455,30346.6,38925.933333333334,5,3,minimize mean normalized regret; tie-break mean modeled time; then lower lambda

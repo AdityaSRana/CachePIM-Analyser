@@ -1,24 +1,29 @@
-cat > .gitignore <<'EOF'
-# Python virtual environments
-.venv/
-venv/
-env/
-
-# Python cache files
+# Python Bytecode and Cache
 __pycache__/
 *.py[cod]
+*$py.class
+*.so
 
-# Test caches
+# Environments
+.venv/
+env/
+venv/
+ENV/
+
+# Testing and Coverage
 .pytest_cache/
 .coverage
 htmlcov/
 
-# Environment variables and secrets
-.env
-.env.*
-!.env.example
-
-# macOS files
+# Operating System Metadata
 .DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak
+*~
 
-EOF
+# IDE and Editor Cache
+.vscode/
+.idea/
+*.swp

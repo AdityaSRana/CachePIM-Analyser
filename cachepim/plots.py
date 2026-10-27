@@ -1,14 +1,14 @@
 """Publication-quality figure generation for CachePIM.
 
-Generates all 8 required figures directly from actual experimental result CSV files:
+Generates nine research figures directly from saved experimental result CSV files:
 1. Cache hit/miss rate vs working-set size
 2. CPU vs PIM execution latency vs working-set size (crossover characterization)
 3. Performance comparison across all execution policies
 4. Cache capacity vs transfer bandwidth crossover heatmap
 5. Policy speedup relative to CPU-cache across workload types
 6. Decision regret and bad-offload rate
-7. Reuse-aware ablation results across lambda values
-8. Multi-seed variability analysis with error bars / distributions
+8. Reuse-aware ablation results across lambda values
+9. Multi-seed variability analysis with error bars / distributions
 """
 
 from __future__ import annotations
@@ -60,7 +60,7 @@ def plot_cache_hit_miss_vs_workingset(
     ax.axvline(32, color="gray", linestyle=":", linewidth=1.5, label="LLC Capacity (32 KiB)")
     ax.set_xlabel("Working-Set Size (KiB)")
     ax.set_ylabel("Rate (%)")
-    ax.set_title("Figure 1: Cache Hit and Miss Rates vs. Working-Set Size")
+
     ax.set_ylim(-5, 105)
     ax.legend(loc="best", frameon=True)
     fig.tight_layout()
@@ -91,7 +91,7 @@ def plot_cpu_pim_crossover(
     ax.axvline(32, color="gray", linestyle=":", linewidth=1.5, label="LLC Capacity (32 KiB)")
     ax.set_xlabel("Working-Set Size (KiB)")
     ax.set_ylabel("Execution Time (μs)")
-    ax.set_title("Figure 2: CPU vs. PIM Latency and Crossover Boundary")
+
     ax.legend(loc="best", frameon=True)
     fig.tight_layout()
 
@@ -118,7 +118,7 @@ def plot_policy_performance_comparison(
     fig, ax = plt.subplots(figsize=(7.5, 4.5))
     bars = ax.bar(grouped.index, grouped.values, color=colors, edgecolor="black", linewidth=0.8, width=0.6)
     ax.set_ylabel("Mean Execution Latency (μs)")
-    ax.set_title("Figure 3: Overall Execution Latency Across Offloading Policies")
+
     ax.set_xticks(range(len(grouped.index)))
     ax.set_xticklabels(grouped.index, rotation=20, ha="right")
 
@@ -138,61 +138,86 @@ def plot_policy_performance_comparison(
 
 
 def plot_crossover_heatmap(
-    crossover_csv: str = "results/raw/crossover_sweep_raw.csv",
-    transfer_csv: str = "results/raw/transfer_sensitivity_raw.csv",
+    joint_csv: str = "results/raw/joint_crossover_sweep_raw.csv",
     output_dir: str = "results/figures",
 ) -> Path:
-    """Figure 4: Cache Capacity vs Transfer Bandwidth Crossover Winner Heatmap."""
+    """Figure 4: render a speedup heatmap from the saved joint-sweep CSV.
+
+    The plotter does not run or recompute simulations. Every cell is derived
+    from the exact CPU-cache and PIM-always records in ``joint_csv``.
+    """
     set_paper_style()
-    # Compute relative speedup grid of PIM vs CPU across Cache Capacity and Transfer Bandwidth
-    caps = [16, 32, 64, 128]
-    bws = [4.0, 8.0, 16.0, 32.0, 64.0]
-    grid = np.zeros((len(bws), len(caps)))
-
-    # Compute modeled PIM speedup for a representative 64 KiB STREAM workload
-    from cachepim.config import CachePIMConfig
-    from cachepim.simulator import Simulator
-    from cachepim.workloads import WorkloadGenerator
-
-    gen = WorkloadGenerator(64)
-    trace, desc = gen.generate("STREAM", seed=42, working_set_bytes=64 * 1024, access_count=2048)
-
-    for i, bw in enumerate(bws):
-        for j, cap in enumerate(caps):
-            cfg = CachePIMConfig()
-            cfg.cache.capacity_bytes = cap * 1024
-            cfg.transfer.host_to_pim_bandwidth_bytes_per_ns = bw
-            cfg.transfer.pim_to_host_bandwidth_bytes_per_ns = bw
-            sim = Simulator(cfg)
-            res = sim.run_all_policies_on_trace(trace, desc)
-            res_dict = {r.policy_name: r.selected_model_ns for r in res}
-            # Speedup of PIM over CPU-cache
-            speedup = res_dict["CPU-cache"] / res_dict["PIM-always"]
-            grid[i, j] = speedup
+    df = pd.read_csv(joint_csv)
+    required = {"policy_name", "selected_model_ns", "cache_capacity_kb", "transfer_bandwidth_gb_s"}
+    missing = required - set(df.columns)
+    if missing:
+        raise ValueError(f"Joint crossover CSV is missing required columns: {sorted(missing)}")
+    sub = df[df["policy_name"].isin(["CPU-cache", "PIM-always"])].copy()
+    grouped = sub.groupby(["cache_capacity_kb", "transfer_bandwidth_gb_s", "policy_name"])["selected_model_ns"].mean().unstack("policy_name")
+    if not {"CPU-cache", "PIM-always"}.issubset(grouped.columns):
+        raise ValueError("Joint crossover CSV must contain CPU-cache and PIM-always rows for each configuration")
+    grouped["speedup"] = grouped["CPU-cache"] / grouped["PIM-always"].replace(0, np.nan)
+    pivot = grouped["speedup"].unstack("cache_capacity_kb").sort_index().sort_index(axis=1)
+    if pivot.empty or pivot.isna().all().all():
+        raise ValueError("No valid speedup observations found in joint crossover CSV")
 
     fig, ax = plt.subplots(figsize=(6.5, 4.5))
-    im = ax.imshow(grid, cmap="RdYlGn", origin="lower", aspect="auto")
-
-    ax.set_xticks(range(len(caps)))
-    ax.set_xticklabels([f"{c} KiB" for c in caps])
-    ax.set_yticks(range(len(bws)))
-    ax.set_yticklabels([f"{int(b)} GB/s" for b in bws])
-
+    im = ax.imshow(pivot.to_numpy(), cmap="RdYlGn", origin="lower", aspect="auto")
+    ax.set_xticks(range(len(pivot.columns)))
+    ax.set_xticklabels([f"{int(c)} KiB" for c in pivot.columns])
+    ax.set_yticks(range(len(pivot.index)))
+    ax.set_yticklabels([f"{float(b):g} GB/s" for b in pivot.index])
     ax.set_xlabel("CPU Cache Capacity")
-    ax.set_ylabel("Host-to-PIM Bandwidth")
-    ax.set_title("Figure 4: PIM vs. CPU Speedup Heatmap (64 KiB Stream)")
+    ax.set_ylabel("Host-to-PIM and PIM-to-host Bandwidth")
 
     cbar = fig.colorbar(im, ax=ax)
-    cbar.set_label("Speedup (PIM / CPU-cache)")
-
-    for i in range(len(bws)):
-        for j in range(len(caps)):
-            ax.text(j, i, f"{grid[i, j]:.2f}x", ha="center", va="center",
-                    color="black" if 0.8 < grid[i, j] < 2.5 else "white", fontweight="bold")
-
+    cbar.set_label("Modeled speedup (CPU-cache time / PIM time)")
+    for i in range(pivot.shape[0]):
+        for j in range(pivot.shape[1]):
+            value = pivot.iloc[i, j]
+            if pd.notna(value):
+                ax.text(j, i, f"{value:.2f}x", ha="center", va="center", fontsize=8,
+                        color="black" if 0.8 < value < 2.5 else "white")
     fig.tight_layout()
     out_p = Path(output_dir) / "fig4_crossover_heatmap.png"
-    fig.savefig(out_p)
+    fig.savefig(out_p, dpi=300)
+    fig.savefig(out_p.with_suffix(".pdf"))
+    plt.close(fig)
+    return out_p
+
+
+
+def plot_bank_count_sensitivity(
+    bank_count_csv: str = "results/raw/bank_count_sweep_raw.csv",
+    output_dir: str = "results/figures",
+) -> Path:
+    """Figure 7: speedup sensitivity to PIM bank count from saved experiment data."""
+    set_paper_style()
+    df = pd.read_csv(bank_count_csv)
+    required = {"trace_id", "policy_name", "selected_model_ns", "bank_count", "workload_type"}
+    missing = required - set(df.columns)
+    if missing:
+        raise ValueError(f"Bank-count CSV is missing required columns: {sorted(missing)}")
+    cpu = df[df["policy_name"] == "CPU-cache"].set_index("trace_id")["selected_model_ns"]
+    pim = df[df["policy_name"] == "PIM-always"].copy()
+    pim["cpu_cache_ns"] = pim["trace_id"].map(cpu)
+    pim["speedup"] = pim["cpu_cache_ns"] / pim["selected_model_ns"].replace(0, np.nan)
+    grouped = pim.groupby(["bank_count", "workload_type"])["speedup"].mean().reset_index()
+
+    fig, ax = plt.subplots(figsize=(7.0, 4.5))
+    colors = {"STREAM": "#1f77b4", "REUSE": "#2ca02c", "RANDOM": "#ff7f0e", "MIXED_PHASE": "#9467bd"}
+    for workload in ["STREAM", "REUSE", "RANDOM", "MIXED_PHASE"]:
+        sub = grouped[grouped["workload_type"] == workload].sort_values("bank_count")
+        if not sub.empty:
+            ax.plot(sub["bank_count"], sub["speedup"], marker="o", label=workload, color=colors[workload])
+    ax.axhline(1.0, color="black", linestyle="--", linewidth=1.2, label="CPU-cache baseline")
+    ax.set_xlabel("Number of PIM Banks")
+    ax.set_ylabel("Modeled Speedup vs. CPU-cache")
+
+    ax.legend(frameon=True, ncol=2)
+    fig.tight_layout()
+    out_p = Path(output_dir) / "fig7_bank_count_sensitivity.png"
+    fig.savefig(out_p, dpi=300)
     fig.savefig(out_p.with_suffix(".pdf"))
     plt.close(fig)
     return out_p
@@ -230,7 +255,7 @@ def plot_policy_speedup_by_workload(
     ax.set_xticks(x)
     ax.set_xticklabels(workloads)
     ax.set_ylabel("Speedup vs. CPU-cache (Higher is Better)")
-    ax.set_title("Figure 5: Policy Speedup Across Workload Access Patterns")
+
     ax.legend(loc="upper left", frameon=True)
     fig.tight_layout()
 
@@ -281,7 +306,6 @@ def plot_regret_and_bad_offload(
                      xytext=(0, 3), textcoords="offset points",
                      ha="center", va="bottom", fontsize=9)
 
-    fig.suptitle("Figure 6: Offloading Decision Quality Metrics", fontsize=13)
     fig.tight_layout()
 
     out_p = Path(output_dir) / "fig6_regret_and_bad_offload.png"
@@ -295,7 +319,7 @@ def plot_reuse_ablation(
     ablation_csv: str = "results/raw/ablation_sweep_raw.csv",
     output_dir: str = "results/figures",
 ) -> Path:
-    """Figure 7: Reuse-aware ablation across lambda weights."""
+    """Figure 8: Reuse-aware ablation across lambda weights."""
     set_paper_style()
     df = pd.read_csv(ablation_csv)
 
@@ -314,14 +338,13 @@ def plot_reuse_ablation(
     ax1.set_xlabel("Reuse Penalty Weight (lambda)")
     ax1.set_ylabel("Mean Execution Latency (us)", color="#1f77b4")
     ax2.set_ylabel("Mean Decision Regret (us)", color="#d62728")
-    ax1.set_title("Figure 7: Reuse-Aware Policy Ablation and Sensitivity to lambda")
 
     lines = l1 + l2
     labels = [l.get_label() for l in lines]
     ax1.legend(lines, labels, loc="center right", frameon=True)
     fig.tight_layout()
 
-    out_p = Path(output_dir) / "fig7_reuse_ablation.png"
+    out_p = Path(output_dir) / "fig8_reuse_ablation.png"
     fig.savefig(out_p)
     fig.savefig(out_p.with_suffix(".pdf"))
     plt.close(fig)
@@ -332,7 +355,7 @@ def plot_multi_seed_variability(
     baseline_csv: str = "results/raw/baseline_comparison_raw.csv",
     output_dir: str = "results/figures",
 ) -> Path:
-    """Figure 8: Execution latency variability across master seeds 42-51."""
+    """Figure 9: Execution latency variability across held-out master seeds."""
     set_paper_style()
     df = pd.read_csv(baseline_csv)
 
@@ -356,12 +379,12 @@ def plot_multi_seed_variability(
         patch.set_alpha(0.7)
 
     ax.set_ylabel("Seed Mean Execution Latency (us)")
-    ax.set_title("Figure 8: Empirical Variability Across Master Seeds (42-51)")
+
     ax.set_xticks(range(1, len(eval_policies) + 1))
     ax.set_xticklabels(eval_policies, rotation=15, ha="right")
     fig.tight_layout()
 
-    out_p = Path(output_dir) / "fig8_multi_seed_variability.png"
+    out_p = Path(output_dir) / "fig9_multi_seed_variability.png"
     fig.savefig(out_p)
     fig.savefig(out_p.with_suffix(".pdf"))
     plt.close(fig)
@@ -369,7 +392,7 @@ def plot_multi_seed_variability(
 
 
 def generate_all_plots(results_dir: str = "results") -> None:
-    """Batch generate all 8 publication figures from executed simulation CSV results."""
+    """Batch generate all 9 publication figures from executed simulation CSV results."""
     raw_dir = Path(results_dir) / "raw"
     fig_dir = Path(results_dir) / "figures"
     fig_dir.mkdir(parents=True, exist_ok=True)
@@ -384,7 +407,7 @@ def generate_all_plots(results_dir: str = "results") -> None:
     plot_policy_performance_comparison(str(raw_dir / "baseline_comparison_raw.csv"), str(fig_dir))
 
     print("Generating Figure 4: PIM vs. CPU Speedup Crossover Heatmap...")
-    plot_crossover_heatmap(str(raw_dir / "crossover_sweep_raw.csv"), str(raw_dir / "transfer_sensitivity_raw.csv"), str(fig_dir))
+    plot_crossover_heatmap(str(raw_dir / "joint_crossover_sweep_raw.csv"), str(fig_dir))
 
     print("Generating Figure 5: Policy Speedup Across Workload Types...")
     plot_policy_speedup_by_workload(str(raw_dir / "baseline_comparison_raw.csv"), str(fig_dir))
@@ -392,11 +415,14 @@ def generate_all_plots(results_dir: str = "results") -> None:
     print("Generating Figure 6: Decision Regret and Bad-Offload Metrics...")
     plot_regret_and_bad_offload(str(raw_dir / "baseline_comparison_raw.csv"), str(fig_dir))
 
-    print("Generating Figure 7: Reuse-Aware Policy Ablation (lambda sweep)...")
+    print("Generating Figure 7: PIM Bank-Count Sensitivity...")
+    plot_bank_count_sensitivity(str(raw_dir / "bank_count_sweep_raw.csv"), str(fig_dir))
+
+    print("Generating Figure 8: Reuse-Aware Policy Ablation (lambda sweep)...")
     plot_reuse_ablation(str(raw_dir / "ablation_sweep_raw.csv"), str(fig_dir))
 
-    print("Generating Figure 8: Multi-Seed Empirical Variability...")
+    print("Generating Figure 9: Multi-Seed Variability...")
     plot_multi_seed_variability(str(raw_dir / "baseline_comparison_raw.csv"), str(fig_dir))
 
-    print(f"All 8 publication figures saved to {fig_dir} (PNG and PDF formats).")
+    print(f"All 9 publication figures saved to {fig_dir} (PNG and PDF formats).")
 

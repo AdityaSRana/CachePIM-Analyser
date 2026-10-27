@@ -14,18 +14,32 @@ import pandas as pd
 
 from cachepim.config import CachePIMConfig
 from cachepim.simulator import Simulator
-from cachepim.workloads import WorkloadGenerator
+from cachepim.trace_loader import load_trace
+from cachepim.workloads import PRIM_PRESETS, WorkloadGenerator
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="CachePIM: Single Workload Simulation CLI")
     parser.add_argument("--config", type=str, default="config/default.yaml", help="Path to config YAML")
     parser.add_argument(
+        "--trace-file",
+        type=str,
+        default=None,
+        help="Path to real memory trace file (e.g. Valgrind lackey or generic trace)",
+    )
+    parser.add_argument(
+        "--preset",
+        type=str,
+        default=None,
+        choices=list(PRIM_PRESETS.keys()),
+        help="Optional PrIM benchmark preset (e.g., PrIM-VA, PrIM-GEMV, PrIM-SpMV)",
+    )
+    parser.add_argument(
         "--workload",
         type=str,
         default="STREAM",
         choices=["STREAM", "REUSE", "RANDOM", "MIXED_PHASE"],
-        help="Workload memory pattern",
+        help="Workload memory pattern (used when --preset and --trace-file are not specified)",
     )
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
     parser.add_argument("--working-set-kb", type=int, default=32, help="Working-set size in KiB")
@@ -42,15 +56,29 @@ def main() -> None:
     config = CachePIMConfig.from_yaml(cfg_path)
     config.validate()
 
-    # Generate workload
-    working_set_bytes = args.working_set_kb * 1024
-    gen = WorkloadGenerator(line_size_bytes=config.cache.line_size_bytes)
-    trace, descriptor = gen.generate(
-        pattern=args.workload,
-        seed=args.seed,
-        working_set_bytes=working_set_bytes,
-        access_count=args.access_count,
-    )
+    # Generate or load workload
+    if args.trace_file:
+        trace, descriptor = load_trace(
+            source=args.trace_file,
+            max_records=args.access_count if args.access_count > 0 else None,
+            line_size_bytes=config.cache.line_size_bytes,
+            workload_name=Path(args.trace_file).stem,
+        )
+        workload_label = f"Real Trace: {Path(args.trace_file).name}"
+    elif args.preset:
+        gen = WorkloadGenerator(line_size_bytes=config.cache.line_size_bytes)
+        trace, descriptor = gen.generate_preset(args.preset, seed=args.seed)
+        workload_label = args.preset
+    else:
+        gen = WorkloadGenerator(line_size_bytes=config.cache.line_size_bytes)
+        working_set_bytes = args.working_set_kb * 1024
+        trace, descriptor = gen.generate(
+            pattern=args.workload,
+            seed=args.seed,
+            working_set_bytes=working_set_bytes,
+            access_count=args.access_count,
+        )
+        workload_label = f"{args.workload} ({args.working_set_kb} KiB)"
 
     # Run simulator for all 6 policies
     sim = Simulator(config)
@@ -61,7 +89,7 @@ def main() -> None:
     df = pd.DataFrame(rows)
 
     print("\n" + "=" * 80)
-    print(f"CachePIM Simulation Results (Workload: {args.workload}, Seed: {args.seed}, Size: {args.working_set_kb} KiB)")
+    print(f"CachePIM Simulation Results (Workload: {workload_label}, Seed: {args.seed})")
     print("=" * 80)
 
     display_cols = [

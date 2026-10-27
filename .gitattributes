@@ -1,0 +1,26 @@
+# Auto-detect text files and perform LF normalization
+* text=auto
+
+# Enforce Unix LF line endings on shell scripts
+*.sh text eol=lf
+
+# Enforce Windows CRLF line endings on batch scripts
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Source and documentation files
+*.py text
+*.md text
+*.toml text
+*.yaml text
+*.yml text
+*.json text
+*.txt text
+*.csv text
+
+# Binary files
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
