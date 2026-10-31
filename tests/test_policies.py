@@ -88,14 +88,44 @@ def test_reuse_aware_policy_dimensional_consistency(base_config):
     assert r_cost >= 0.0
     assert isinstance(r_cost, float)
 
-    # When lambda = 0 (ablation), decision should match cost-based
+    # When lambda = 0 (ablation without footprint estimator), decision matches cost-based
     config_lam0 = CachePIMConfig()
     config_lam0.policy.reuse_penalty_weight = 0.0
+    config_lam0.policy.use_footprint_estimator = False
     dec_lam0 = policy.decide(desc, config_lam0)
     cost_pol = CostBasedPolicy()
     dec_cost = cost_pol.decide(desc, config_lam0)
 
     assert dec_lam0.selected_path == dec_cost.selected_path
+
+
+def test_dynamic_footprint_estimator():
+    """Verify Dynamic Working-Set Footprint Estimator credits cache residency and keeps high-reuse kernel on CPU (M2)."""
+    cfg = CachePIMConfig()
+    cfg.cache.capacity_bytes = 65536  # 64 KiB LLC
+    cfg.transfer.host_to_pim_bandwidth_bytes_per_ns = 1.0  # Calibrated UPMEM link: 1 GB/s
+    cfg.transfer.pim_to_host_bandwidth_bytes_per_ns = 1.0
+
+    desc_reuse = WorkloadDescriptor(
+        workload_type="REUSE",
+        seed=42,
+        kernel_type=KernelType.VECTOR_OP.value,
+        element_count=2048,
+        bytes_read=16384,  # 16 KiB working set fits in 64 KiB cache
+        bytes_written=16384,
+        operation_count=2048,
+        read_write_ratio=0.8,
+        working_set_bytes=16384,
+        trace_length=2048,
+        pim_eligible=True,
+        reusable_bytes=16384,
+    )
+
+    policy = ReuseAwarePolicy()
+    dec = policy.decide(desc_reuse, cfg)
+    # Under 1 GB/s link and 16 KiB working set fitting in 64 KiB cache, CPU is favored
+    assert dec.selected_path == "CPU"
+    assert "CPU" in dec.decision_reason
 
 
 def test_stream_cache_estimator_accounts_for_reuse_when_working_set_fits():

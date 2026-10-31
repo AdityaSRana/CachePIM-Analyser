@@ -1,0 +1,6 @@
+Bank_Count,Seeds_Evaluated,Latencies_us,Mean_Latency_us,Variance_us2,Deterministic_Status
+4,47-51,"[18.19, 18.19, 18.19, 18.19, 18.19]",18.19,0.0,Strictly Deterministic (Zero Variance across seeds)
+8,47-51,"[16.142, 16.142, 16.142, 16.142, 16.142]",16.142,0.0,Strictly Deterministic (Zero Variance across seeds)
+16,47-51,"[15.118, 15.118, 15.118, 15.118, 15.118]",15.118,0.0,Strictly Deterministic (Zero Variance across seeds)
+32,47-51,"[14.606, 14.606, 14.606, 14.606, 14.606]",14.606,0.0,Strictly Deterministic (Zero Variance across seeds)
+64,47-51,"[14.35, 14.35, 14.35, 14.35, 14.35]",14.35,0.0,Strictly Deterministic (Zero Variance across seeds)

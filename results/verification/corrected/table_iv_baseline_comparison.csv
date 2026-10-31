@@ -1,0 +1,5 @@
+Pattern,Working_Set_KiB,Access_Count,Cache_Hit_Rate_Pct,CPU_Cache_Latency_us,PIM_Flat_Latency_us,Eta_Row_Buffer,PIM_RowBuffer_Latency_us,Speedup_Flat_PIM,Speedup_RowBuffer_PIM,Latency_Per_kop_ns,Latency_Per_Byte_ns
+STREAM,32,8192,93.75,59.597,7.694,0.9,7.779,7.75,7.66,7275.0,1.819
+REUSE,32,2048,82.42,32.995,7.31,0.6,7.822,4.51,4.22,16110.94,1.007
+RANDOM,32,2048,75.59,43.915,7.31,0.25,9.614,6.01,4.57,21442.97,1.34
+MIXED_PHASE,32,2048,75.15,44.617,7.31,0.6,7.822,6.1,5.7,21785.74,1.362

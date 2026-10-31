@@ -1,0 +1,9 @@
+{
+  "benchmark_description": "CachePIM end-to-end evaluation throughput (Cache simulate + CPU model + PIM model + Cost-based policy)",
+  "total_evaluations": 1000,
+  "elapsed_seconds": 9.0786,
+  "evaluations_per_second": 110.1,
+  "mean_latency_per_eval_ms": 9.079,
+  "thousand_evaluations_runtime_s": 9.08,
+  "hardware_testbed": "AMD64 x86-64 Host, Windows 11, Python 3.13"
+}

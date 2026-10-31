@@ -1,0 +1,208 @@
+{
+  "metadata": {
+    "config_version": "1.1.0",
+    "config_sha256_hash_16": "fff7e9ba223ae65a",
+    "generated_by": "scripts/verification/generate_parameter_and_trace_manifests.py",
+    "description": "Comprehensive parameter manifest documenting every architectural, policy, and sweep parameter, default values, units, empirical/literature provenance, hardware calibration status, and sensitivity."
+  },
+  "parameters": {
+    "cache.capacity_bytes": {
+      "default_value": 32768,
+      "unit": "bytes",
+      "provenance_type": "assumed",
+      "reference": "Spec Sec 6",
+      "description": "LLC cache capacity modeled for baseline; sweep 16-128 KiB",
+      "hardware_calibrated": false,
+      "sensitivity_level": "High"
+    },
+    "cache.line_size_bytes": {
+      "default_value": 64,
+      "unit": "bytes",
+      "provenance_type": "assumed",
+      "reference": "Hennessy & Patterson 6th ed.",
+      "description": "Standard cache line size",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "cache.replacement": {
+      "default_value": "LRU",
+      "unit": "policy",
+      "provenance_type": "assumed",
+      "reference": "Spec Sec 5.1",
+      "description": "Least Recently Used replacement policy",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "cache.ways": {
+      "default_value": null,
+      "unit": "ways",
+      "provenance_type": "assumed",
+      "reference": "Spec Sec 5.1 (M6)",
+      "description": "Associativity geometry (None=fully associative; 4/8/16-way)",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "cpu.hit_service_ns": {
+      "default_value": 2.0,
+      "unit": "ns",
+      "provenance_type": "assumed",
+      "reference": "Intel 64 Optimization Reference Manual (M4: 10-15 ns Xeon)",
+      "description": "L3/LLC cache hit service latency",
+      "hardware_calibrated": false,
+      "sensitivity_level": "High"
+    },
+    "cpu.miss_service_ns": {
+      "default_value": 80.0,
+      "unit": "ns",
+      "provenance_type": "assumed",
+      "reference": "Micron DDR4 SDRAM Timing (M4: 50-70 ns Xeon)",
+      "description": "Main memory DRAM access latency",
+      "hardware_calibrated": false,
+      "sensitivity_level": "High"
+    },
+    "cpu.compute_ns_per_op": {
+      "default_value": 0.4,
+      "unit": "ns/op",
+      "provenance_type": "assumed",
+      "reference": "Spec Sec 6 illustrative default",
+      "description": "CPU ALU service time (~1 cycle @ 2.5 GHz)",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "pim.bank_count": {
+      "default_value": 16,
+      "unit": "banks",
+      "provenance_type": "assumed",
+      "reference": "TETRIS (ASPLOS 2017); UPMEM DPU architecture",
+      "description": "Modeled internal PIM DRAM banks (sweep 4-64)",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "pim.effective_bandwidth_bytes_per_ns": {
+      "default_value": 128.0,
+      "unit": "bytes/ns (GB/s)",
+      "provenance_type": "assumed",
+      "reference": "HBM2/HBM3 internal bandwidth estimates",
+      "description": "Aggregate internal PIM bandwidth across banks",
+      "hardware_calibrated": false,
+      "sensitivity_level": "High"
+    },
+    "pim.compute_ops_per_ns_per_bank": {
+      "default_value": 1.0,
+      "unit": "ops/ns/bank",
+      "provenance_type": "assumed",
+      "reference": "UPMEM DPU / Samsung Aquabolt-XL",
+      "description": "PIM bank compute throughput (~1 GHz SIMD/ALU unit)",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "pim.launch_overhead_ns": {
+      "default_value": 50.0,
+      "unit": "ns",
+      "provenance_type": "assumed",
+      "reference": "Spec Sec 6 illustrative default",
+      "description": "Kernel launch overhead and command dispatch",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "pim.sync_overhead_ns": {
+      "default_value": 20.0,
+      "unit": "ns",
+      "provenance_type": "assumed",
+      "reference": "Spec Sec 6 illustrative default",
+      "description": "Inter-bank barrier synchronization overhead",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "pim.bank_imbalance_model": {
+      "default_value": "max_over_mean",
+      "unit": "model",
+      "provenance_type": "assumed",
+      "reference": "CachePIM model specification",
+      "description": "Bank work imbalance distribution model (max_over_mean)",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "pim.overlap_factor": {
+      "default_value": 0.0,
+      "unit": "dimensionless factor [0, 1]",
+      "provenance_type": "assumed",
+      "reference": "Spec Sec 6.3 (M8)",
+      "description": "PIM transfer and compute overlap factor (0=serial, 1=fully overlapped)",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "pim.row_buffer_locality_enabled": {
+      "default_value": false,
+      "unit": "boolean",
+      "provenance_type": "literature-derived",
+      "reference": "G\u00f3mez-Luna et al., IEEE Access 2022 (M7)",
+      "description": "Enables DRAM row-buffer factor eta_row (0.90 stream, 0.60 reuse, 0.25 random)",
+      "hardware_calibrated": true,
+      "sensitivity_level": "Moderate"
+    },
+    "transfer.host_to_pim_bandwidth_bytes_per_ns": {
+      "default_value": 16.0,
+      "unit": "bytes/ns (GB/s)",
+      "provenance_type": "assumed",
+      "reference": "PCI-SIG PCIe 4.0; G\u00f3mez-Luna et al. (M4)",
+      "description": "Interconnect host-to-device bandwidth (16 GB/s PCIe 4.0; 1.0 GB/s UPMEM link)",
+      "hardware_calibrated": false,
+      "sensitivity_level": "High"
+    },
+    "transfer.pim_to_host_bandwidth_bytes_per_ns": {
+      "default_value": 16.0,
+      "unit": "bytes/ns (GB/s)",
+      "provenance_type": "assumed",
+      "reference": "PCI-SIG PCIe 4.0; G\u00f3mez-Luna et al. (M4)",
+      "description": "Interconnect device-to-host bandwidth (16 GB/s PCIe 4.0; 1.0 GB/s UPMEM link)",
+      "hardware_calibrated": false,
+      "sensitivity_level": "High"
+    },
+    "transfer.host_to_pim_fixed_ns": {
+      "default_value": 100.0,
+      "unit": "ns",
+      "provenance_type": "assumed",
+      "reference": "CXL Host-Device Round-Trip Latency benchmarks",
+      "description": "Fixed round-trip link overhead",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "transfer.pim_to_host_fixed_ns": {
+      "default_value": 100.0,
+      "unit": "ns",
+      "provenance_type": "assumed",
+      "reference": "CXL Host-Device Round-Trip Latency benchmarks",
+      "description": "Fixed return-trip link overhead",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "policy.reuse_threshold": {
+      "default_value": 0.5,
+      "unit": "ratio [0, 1]",
+      "provenance_type": "assumed",
+      "reference": "config/default.yaml",
+      "description": "Hit fraction gate threshold for reuse penalty / temporal credit",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "policy.reuse_penalty_weight": {
+      "default_value": 1.0,
+      "unit": "dimensionless factor",
+      "provenance_type": "assumed",
+      "reference": "config/experiment.yaml",
+      "description": "Weight lambda for reuse preservation cost",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    },
+    "policy.use_footprint_estimator": {
+      "default_value": true,
+      "unit": "boolean",
+      "provenance_type": "assumed",
+      "reference": "Spec Sec 5.2 (M2)",
+      "description": "Dynamic Working-Set Footprint Estimator gating cache temporal residency",
+      "hardware_calibrated": false,
+      "sensitivity_level": "Moderate"
+    }
+  }
+}

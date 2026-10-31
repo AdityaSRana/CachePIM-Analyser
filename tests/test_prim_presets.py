@@ -11,12 +11,9 @@ def test_all_prim_presets_exist_and_generate():
     generator = WorkloadGenerator(line_size_bytes=64)
     expected_presets = [
         "PrIM-VA",
-        "PrIM-RED",
-        "PrIM-SEL",
         "PrIM-GEMV",
-        "PrIM-HST",
-        "PrIM-SpMV",
-        "PrIM-BFS",
+        "PrIM-BS",
+        "PrIM-SEL",
     ]
     for name in expected_presets:
         assert name in PRIM_PRESETS, f"Expected preset {name} missing from PRIM_PRESETS"

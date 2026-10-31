@@ -1,0 +1,4 @@
+Loop_Construct,Extracted_Pattern,Working_Set_Bytes,Estimated_Ops,Memory_Intensity_Bytes_per_Op,Transfer_BW_GB_s,Estimated_CPU_us,Estimated_PIM_us,Compiler_Offload_Decision,Speedup_Potential,Compiler_Model_Classification
+for (i = 0; i < N; i++) C[i] = A[i] + B[i],STREAM,65536,4096,16.0,16.0,62.43,7.69,Offload to PIM,8.12,Analytical Polyhedral Loop Descriptor (Not LLVM IR lowering)
+for (i = 0; i < N; i++) for (j = 0; j < M; j++) y[i] += A[i][j] * x[j],REUSE,16384,4096,4.0,2.0,9.42,25.1,Keep on CPU Cache,2.66,Analytical Polyhedral Loop Descriptor (Not LLVM IR lowering)
+while (low <= high) { mid = (low+high)/2; ... },RANDOM,65536,2048,8.0,8.0,43.92,12.35,Offload to PIM,3.56,Analytical Polyhedral Loop Descriptor (Not LLVM IR lowering)

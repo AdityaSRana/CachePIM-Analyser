@@ -1,0 +1,6 @@
+Overlap_Factor_Alpha,Transfer_Time_ns,Internal_Exec_Time_ns,Pipelined_Phase_Time_ns,Total_PIM_Latency_us,Latency_Reduction_Pct,Model_Equation
+0.0,8292.0,2560.0,10852.0,15.118,0.0,"max(T_xfer, T_exec) + (1 - alpha) * min(T_xfer, T_exec)"
+0.25,8292.0,2560.0,10212.0,14.478,5.9,"max(T_xfer, T_exec) + (1 - alpha) * min(T_xfer, T_exec)"
+0.5,8292.0,2560.0,9572.0,13.838,11.8,"max(T_xfer, T_exec) + (1 - alpha) * min(T_xfer, T_exec)"
+0.75,8292.0,2560.0,8932.0,13.198,17.69,"max(T_xfer, T_exec) + (1 - alpha) * min(T_xfer, T_exec)"
+1.0,8292.0,2560.0,8292.0,12.558,23.59,"max(T_xfer, T_exec) + (1 - alpha) * min(T_xfer, T_exec)"

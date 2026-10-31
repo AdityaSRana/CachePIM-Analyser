@@ -22,7 +22,7 @@ class CacheLineEntry:
 
 
 class CacheModel:
-    """Fully associative cache model with exact Least-Recently-Used (LRU) replacement policy."""
+    """Last-Level Cache (LLC) model with configurable associativity (fully associative or N-way set associative) and exact LRU replacement."""
 
     def __init__(self, config: CacheConfig):
         config.validate()
@@ -30,9 +30,17 @@ class CacheModel:
         self.capacity_bytes: int = config.capacity_bytes
         self.line_size_bytes: int = config.line_size_bytes
         self.number_of_lines: int = config.number_of_lines
+        self.ways: Optional[int] = config.ways
 
-        # State storage: OrderedDict maintains access recency (front = LRU, end = MRU)
-        self._lines: OrderedDict[int, CacheLineEntry] = OrderedDict()
+        if self.ways is not None and self.ways > 0:
+            self.num_sets: int = self.number_of_lines // self.ways
+            self._sets: List[OrderedDict[int, CacheLineEntry]] = [OrderedDict() for _ in range(self.num_sets)]
+            self._lines: Optional[OrderedDict[int, CacheLineEntry]] = None
+        else:
+            self.num_sets = 1
+            self._sets = []
+            self._lines = OrderedDict()
+
         self._unique_lines_seen: Set[int] = set()
 
         # Running statistics
@@ -47,7 +55,10 @@ class CacheModel:
 
     def reset(self) -> None:
         """Reset cache to cold initial state and clear all counters."""
-        self._lines.clear()
+        if self._lines is not None:
+            self._lines.clear()
+        for s in self._sets:
+            s.clear()
         self._unique_lines_seen.clear()
         self._seq = 0
         self._accesses = 0
@@ -83,53 +94,90 @@ class CacheModel:
 
         evicted_line_id: Optional[int] = None
 
-        if line_id in self._lines:
-            # Cache HIT: mark line as Most Recently Used (move to end)
-            entry = self._lines[line_id]
-            if is_write:
-                entry.is_dirty = True
-            if task_id:
-                entry.task_id = task_id
-            self._lines.move_to_end(line_id, last=True)
-            self._hits += 1
+        if self.ways is not None and self.ways > 0:
+            set_idx = line_id % self.num_sets
+            tag = line_id // self.num_sets
+            target_set = self._sets[set_idx]
 
-            return CacheEvent(
-                line_id=line_id,
-                hit=True,
-                miss=False,
-                evicted_line_id=None,
-                operation=operation,
-                sequence_number=seq,
-            )
+            if tag in target_set:
+                entry = target_set[tag]
+                if is_write:
+                    entry.is_dirty = True
+                if task_id:
+                    entry.task_id = task_id
+                target_set.move_to_end(tag, last=True)
+                self._hits += 1
+                return CacheEvent(
+                    line_id=line_id,
+                    hit=True,
+                    miss=False,
+                    evicted_line_id=None,
+                    operation=operation,
+                    sequence_number=seq,
+                )
+            else:
+                self._misses += 1
+                if len(target_set) >= self.ways:
+                    evicted_tag, evicted_entry = target_set.popitem(last=False)
+                    evicted_line_id = evicted_tag * self.num_sets + set_idx
+                    self._evictions += 1
+                    if evicted_entry.is_dirty:
+                        self._dirty_evictions += 1
+
+                new_entry = CacheLineEntry(line_id=line_id, is_dirty=is_write, task_id=task_id)
+                target_set[tag] = new_entry
+                return CacheEvent(
+                    line_id=line_id,
+                    hit=False,
+                    miss=True,
+                    evicted_line_id=evicted_line_id,
+                    operation=operation,
+                    sequence_number=seq,
+                )
         else:
-            # Cache MISS
-            self._misses += 1
+            # Fully associative LRU
+            if line_id in self._lines:
+                entry = self._lines[line_id]
+                if is_write:
+                    entry.is_dirty = True
+                if task_id:
+                    entry.task_id = task_id
+                self._lines.move_to_end(line_id, last=True)
+                self._hits += 1
 
-            # Check capacity; if full, evict the least recently used line (front of OrderedDict)
-            if len(self._lines) >= self.number_of_lines:
-                evicted_id, evicted_entry = self._lines.popitem(last=False)
-                evicted_line_id = evicted_id
-                self._evictions += 1
-                if evicted_entry.is_dirty:
-                    self._dirty_evictions += 1
+                return CacheEvent(
+                    line_id=line_id,
+                    hit=True,
+                    miss=False,
+                    evicted_line_id=None,
+                    operation=operation,
+                    sequence_number=seq,
+                )
+            else:
+                self._misses += 1
 
-            # Insert new line as MRU
-            new_entry = CacheLineEntry(line_id=line_id, is_dirty=is_write, task_id=task_id)
-            self._lines[line_id] = new_entry
+                if len(self._lines) >= self.number_of_lines:
+                    evicted_id, evicted_entry = self._lines.popitem(last=False)
+                    evicted_line_id = evicted_id
+                    self._evictions += 1
+                    if evicted_entry.is_dirty:
+                        self._dirty_evictions += 1
 
-            # Enforce capacity invariant
-            assert len(self._lines) <= self.number_of_lines, (
-                f"Cache invariant violated: resident lines ({len(self._lines)}) > capacity ({self.number_of_lines})"
-            )
+                new_entry = CacheLineEntry(line_id=line_id, is_dirty=is_write, task_id=task_id)
+                self._lines[line_id] = new_entry
 
-            return CacheEvent(
-                line_id=line_id,
-                hit=False,
-                miss=True,
-                evicted_line_id=evicted_line_id,
-                operation=operation,
-                sequence_number=seq,
-            )
+                assert len(self._lines) <= self.number_of_lines, (
+                    f"Cache invariant violated: resident lines ({len(self._lines)}) > capacity ({self.number_of_lines})"
+                )
+
+                return CacheEvent(
+                    line_id=line_id,
+                    hit=False,
+                    miss=True,
+                    evicted_line_id=evicted_line_id,
+                    operation=operation,
+                    sequence_number=seq,
+                )
 
     def run(self, trace: Iterable[TraceRecord]) -> CacheStats:
         """Process an entire stream of trace records and return aggregated CacheStats."""
@@ -162,11 +210,18 @@ class CacheModel:
 
     def snapshot(self) -> Dict[str, Any]:
         """Capture diagnostic snapshot of cache residency and recency order."""
+        if self._lines is not None:
+            res_count = len(self._lines)
+            res_keys = list(self._lines.keys())
+        else:
+            res_count = sum(len(s) for s in self._sets)
+            res_keys = [tag * self.num_sets + set_idx for set_idx, s in enumerate(self._sets) for tag in s.keys()]
         return {
             "capacity_bytes": self.capacity_bytes,
             "line_size_bytes": self.line_size_bytes,
             "number_of_lines": self.number_of_lines,
-            "resident_count": len(self._lines),
-            "resident_line_ids_lru_order": list(self._lines.keys()),
+            "ways": self.ways,
+            "resident_count": res_count,
+            "resident_line_ids_lru_order": res_keys,
             "stats": self.get_stats(),
         }

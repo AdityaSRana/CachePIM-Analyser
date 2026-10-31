@@ -141,3 +141,52 @@ def test_bank_skew_changes_load_distribution_and_total_work_is_preserved():
     assert balanced_factor == 1.0
     assert skewed_factor > balanced_factor
     assert skewed != balanced
+
+
+def test_pim_row_buffer_locality_factor():
+    """Verify that row-buffer locality factor eta_row differentiates STREAM and RANDOM internal memory service (M7)."""
+    p_cfg_enabled = PIMConfig(
+        effective_bandwidth_bytes_per_ns=100.0,
+        row_buffer_locality_enabled=True,
+    )
+    t_cfg = TransferConfig()
+    model = PIMModel(p_cfg_enabled, t_cfg)
+
+    desc_stream = WorkloadDescriptor(
+        workload_type="STREAM", seed=42, kernel_type=KernelType.VECTOR_OP.value,
+        element_count=1000, bytes_read=1000, bytes_written=500, operation_count=1000,
+        read_write_ratio=1.0, working_set_bytes=1000, trace_length=1000, pim_eligible=True,
+    )
+    desc_random = WorkloadDescriptor(
+        workload_type="RANDOM", seed=42, kernel_type=KernelType.VECTOR_OP.value,
+        element_count=1000, bytes_read=1000, bytes_written=500, operation_count=1000,
+        read_write_ratio=1.0, working_set_bytes=1000, trace_length=1000, pim_eligible=True,
+    )
+
+    bd_stream = model.evaluate(desc_stream)
+    bd_random = model.evaluate(desc_random)
+    assert bd_stream is not None and bd_random is not None
+    # 1500 bytes / (100 * 0.90) = 16.67 ns for STREAM
+    # 1500 bytes / (100 * 0.25) = 60.00 ns for RANDOM
+    assert bd_random.internal_memory_service_ns > bd_stream.internal_memory_service_ns
+    assert pytest.approx(bd_stream.internal_memory_service_ns) == 1500.0 / 90.0
+    assert pytest.approx(bd_random.internal_memory_service_ns) == 1500.0 / 25.0
+
+
+def test_pim_overlap_pipelining_model():
+    """Verify that PIM overlap factor alpha reduces total execution time via pipelining (M8)."""
+    t_cfg = TransferConfig(host_to_pim_bandwidth_bytes_per_ns=10.0, host_to_pim_fixed_ns=0.0)
+    p_cfg_serial = PIMConfig(overlap_factor=0.0, launch_overhead_ns=0.0, sync_overhead_ns=0.0)
+    p_cfg_pipelined = PIMConfig(overlap_factor=1.0, launch_overhead_ns=0.0, sync_overhead_ns=0.0)
+
+    desc = WorkloadDescriptor(
+        workload_type="STREAM", seed=42, kernel_type=KernelType.VECTOR_OP.value,
+        element_count=1000, bytes_read=1000, bytes_written=0, operation_count=1000,
+        read_write_ratio=1.0, working_set_bytes=1000, trace_length=1000, pim_eligible=True,
+    )
+
+    bd_serial = PIMModel(p_cfg_serial, t_cfg).evaluate(desc)
+    bd_pipelined = PIMModel(p_cfg_pipelined, t_cfg).evaluate(desc)
+    assert bd_serial is not None and bd_pipelined is not None
+    # Pipelined must be faster or equal to serial execution
+    assert bd_pipelined.total_pim_time_ns < bd_serial.total_pim_time_ns

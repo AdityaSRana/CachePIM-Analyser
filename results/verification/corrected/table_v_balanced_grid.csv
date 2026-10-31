@@ -1,0 +1,8 @@
+Policy,Total_Decisions,True_Offloads,Bad_Offloads,True_CPUs,Missed_Offloads,Decision_Accuracy_Pct,Bad_Offload_Rate_Pct,Missed_Offload_Rate_Pct,Mean_Regret_us,Max_Regret_us
+CPU-cache,500,0,0,170,330,34.0,0.0,66.0,33.4192,367.8239
+CPU-no-cache,500,0,0,170,330,34.0,0.0,66.0,33.4192,367.8239
+PIM-always,500,330,170,0,0,66.0,34.0,0.0,20.4003,330.1708
+Cost-based,500,330,20,150,0,96.0,4.0,0.0,0.671,35.2588
+Reuse-aware (Tuned/Clamped),500,290,20,150,40,88.0,4.0,8.0,18.68,367.8239
+Reuse-aware (Uncorrected Eq8),500,260,20,150,70,82.0,4.0,14.0,18.869,367.8239
+Oracle,500,330,0,170,0,100.0,0.0,0.0,0.0,0.0

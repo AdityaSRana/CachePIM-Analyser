@@ -1,0 +1,5 @@
+Kernel,Pattern,Description,Eta_Row_Buffer,Working_Set_KiB,Cache_Hit_Rate_Pct,Baseline_CPU_Latency_us,Baseline_PIM_Latency_us,Baseline_Speedup,Calibrated_CPU_Latency_us,Calibrated_PIM_Latency_us,Calibrated_Speedup,Calibrated_Offload_Decision,Scientific_Takeaway
+RED,STREAM,Parallel Reduction (Vector Sum),0.9,32,93.75,59.597,7.779,7.66,126.157,101.744,1.24,PIM,Near parity / PIM competitive
+HST,REUSE,Histogram / Local Binning,0.6,32,82.42,32.995,7.822,4.22,42.675,101.5,0.42,CPU,CPU outperforms PIM under realistic link constraints and row-buffer penalty
+SpMV,RANDOM,Sparse Matrix-Vector,0.25,32,75.59,43.915,9.614,4.57,49.395,105.084,0.47,CPU,CPU outperforms PIM under realistic link constraints and row-buffer penalty
+BFS,RANDOM,Breadth-First Search,0.25,32,75.59,43.915,9.614,4.57,49.395,105.084,0.47,CPU,CPU outperforms PIM under realistic link constraints and row-buffer penalty

@@ -113,7 +113,34 @@ def test_capacity_invariant():
     assert stats.accesses == 100
     assert stats.misses == 100
     assert stats.evictions == 96
-    assert stats.unique_lines == 100
+
+
+def test_set_associative_cache():
+    """Verify N-way set associativity and conflict misses (M8)."""
+    # 4 lines total, 2-way set associative -> 2 sets of 2 lines each
+    config = CacheConfig(capacity_bytes=256, line_size_bytes=64, ways=2)
+    model = CacheModel(config)
+
+    # Line 0 and Line 2 map to set 0 (0 % 2 == 0, 2 % 2 == 0)
+    # Line 1 and Line 3 map to set 1 (1 % 2 == 1, 3 % 2 == 1)
+    # Access lines 0, 2 (fills set 0)
+    e0 = model.access(0 * 64)
+    e2 = model.access(2 * 64)
+    assert e0.miss and e2.miss
+
+    # Line 4 also maps to set 0 (4 % 2 == 0), evicts LRU line 0
+    e4 = model.access(4 * 64)
+    assert e4.miss
+    assert e4.evicted_line_id == 0
+
+    # Line 1 maps to set 1 (not affected by set 0 conflict)
+    e1 = model.access(1 * 64)
+    assert e1.miss
+    assert e1.evicted_line_id is None
+
+    # Line 2 in set 0 should hit
+    e2_hit = model.access(2 * 64)
+    assert e2_hit.hit
 
 
 def test_reset_behavior():

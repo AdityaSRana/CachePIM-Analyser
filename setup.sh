@@ -25,12 +25,22 @@ fi
 
 echo "[INFO] Detected system Python: $($PYTHON_BIN --version)"
 
-# 2. Create virtual environment if missing
-if [ ! -d ".venv" ]; then
-    echo "[INFO] Creating virtual environment at .venv..."
+# 2. Create virtual environment if missing or broken
+RECREATE_VENV=0
+if [ ! -f ".venv/bin/python" ]; then
+    RECREATE_VENV=1
+else
+    if ! .venv/bin/python -c "import sys" &>/dev/null; then
+        RECREATE_VENV=1
+    fi
+fi
+
+if [ "$RECREATE_VENV" -eq 1 ]; then
+    echo "[INFO] Creating clean virtual environment at .venv..."
+    rm -rf .venv
     $PYTHON_BIN -m venv .venv
 else
-    echo "[INFO] Existing virtual environment found at .venv."
+    echo "[INFO] Healthy virtual environment found at .venv."
 fi
 
 # 3. Upgrade pip and install dependencies

@@ -362,17 +362,36 @@ class ReuseAwarePolicy(BasePolicy):
         pim_cost = pim_model.evaluate(descriptor)
         pim_est = pim_cost.total_pim_time_ns if pim_cost else float("inf")
 
-        lam = config.policy.reuse_penalty_weight
-        r_cost = self.calculate_reuse_cost(descriptor, config, hits_est)
-        pim_adjusted = pim_est + (lam * r_cost)
+        # Dynamic Working-Set Footprint Estimator (M2)
+        use_footprint = getattr(config.policy, "use_footprint_estimator", True)
+        accesses = max(1, int(descriptor.trace_length or descriptor.operation_count))
+        hit_fraction = hits_est / accesses
+        is_resident = descriptor.working_set_bytes <= config.cache.capacity_bytes
+        reusability = max(0.0, float(descriptor.reusable_bytes or 0)) / max(1, descriptor.working_set_bytes)
+        fit_ratio = min(1.0, config.cache.capacity_bytes / max(1, descriptor.working_set_bytes))
 
-        if pim_adjusted < cpu_est:
+        if use_footprint and is_resident and (hit_fraction >= config.policy.reuse_threshold or reusability >= 0.4):
+            # When working set fits in cache with high temporal locality, repeated hits
+            # benefit from innermost cache residency without bus arbitration.
+            # Clamped physically to never exceed total hit service time (M2 repair).
+            # Tuned credit multiplier is 0.25 based on dev seeds 42-46.
+            raw_credit = hits_est * (config.cpu.hit_service_ns * 0.25 * fit_ratio)
+            temporal_credit = min(hits_est * config.cpu.hit_service_ns, raw_credit)
+            refined_cpu_est = max(0.0, cpu_est - temporal_credit)
+            pim_adjusted = pim_est
+        else:
+            refined_cpu_est = cpu_est
+            lam = config.policy.reuse_penalty_weight
+            r_cost = self.calculate_reuse_cost(descriptor, config, hits_est)
+            pim_adjusted = pim_est + (lam * r_cost)
+
+        if pim_adjusted < refined_cpu_est:
             selected = ExecutionPath.PIM.value
             reason = "REUSE_AWARE_PIM_LOWER"
         else:
             selected = ExecutionPath.CPU.value
             if pim_est < cpu_est:
-                reason = "REUSE_AWARE_PRESERVED_CPU_DUE_TO_REUSE"
+                reason = "REUSE_AWARE_PRESERVED_CPU_DUE_TO_FOOTPRINT" if use_footprint else "REUSE_AWARE_PRESERVED_CPU_DUE_TO_REUSE"
             else:
                 reason = "REUSE_AWARE_CPU_LOWER_NATURALLY"
 
@@ -380,7 +399,7 @@ class ReuseAwarePolicy(BasePolicy):
             policy_name=self.name,
             selected_path=selected,
             decision_reason=reason,
-            cpu_estimated_ns=cpu_est,
+            cpu_estimated_ns=refined_cpu_est,
             pim_estimated_ns=pim_est,
             policy_overhead_ns=0.0,  # Zero runtime overhead for analytical descriptor inspection
         )

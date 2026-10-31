@@ -1,0 +1,169 @@
+{
+  "project_root": "C:\\Users\\harsh\\Desktop\\CD_final_5\\CDv2AV\\CachePIM-Analyser-corrected",
+  "workspace_root": "C:\\Users\\harsh\\Desktop\\CD_final_5",
+  "os_system": "Windows",
+  "os_release": "11",
+  "os_version": "10.0.26300",
+  "architecture": "AMD64",
+  "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+  "python_executable": "C:\\Users\\harsh\\Desktop\\CD_final_5\\CDv2AV\\CachePIM-Analyser-corrected\\.venv\\Scripts\\python.exe",
+  "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+  "dependencies": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "matplotlib": "3.11.2",
+    "scipy": "1.18.1",
+    "streamlit": "1.66.1",
+    "plotly": "7.1.0",
+    "pytest": "9.2.0",
+    "pyyaml": "6.0.3"
+  },
+  "git_status": "",
+  "git_head": "",
+  "model_version": "1.1.0",
+  "model_version_source": "cachepim/config.py:CachePIMConfig.version",
+  "config_hash": "fff7e9ba223ae65a",
+  "config_dict_keys": [
+    "cache",
+    "cpu",
+    "pim",
+    "transfer",
+    "policy",
+    "experiment",
+    "sweeps",
+    "version"
+  ],
+  "config_to_dict_full": {
+    "cache": {
+      "capacity_bytes": 32768,
+      "line_size_bytes": 64,
+      "replacement": "LRU",
+      "ways": null
+    },
+    "cpu": {
+      "hit_service_ns": 2.0,
+      "miss_service_ns": 80.0,
+      "compute_ns_per_op": 0.4
+    },
+    "pim": {
+      "bank_count": 16,
+      "effective_bandwidth_bytes_per_ns": 128.0,
+      "compute_ops_per_ns_per_bank": 1.0,
+      "launch_overhead_ns": 50.0,
+      "sync_overhead_ns": 20.0,
+      "bank_imbalance_model": "max_over_mean",
+      "overlap_factor": 0.0,
+      "row_buffer_locality_enabled": false
+    },
+    "transfer": {
+      "host_to_pim_bandwidth_bytes_per_ns": 16.0,
+      "pim_to_host_bandwidth_bytes_per_ns": 16.0,
+      "host_to_pim_fixed_ns": 100.0,
+      "pim_to_host_fixed_ns": 100.0
+    },
+    "policy": {
+      "reuse_threshold": 0.5,
+      "reuse_penalty_weight": 1.0,
+      "use_footprint_estimator": true
+    },
+    "experiment": {
+      "master_seeds": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "dev_seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "held_out_seeds": [
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "traces_per_seed": 5,
+      "tuning_traces_per_seed": 3,
+      "reuse_penalty_candidates": [
+        0.0,
+        0.25,
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        3.0,
+        4.0
+      ],
+      "default_workload_patterns": [
+        "STREAM",
+        "REUSE",
+        "RANDOM",
+        "MIXED_PHASE"
+      ]
+    },
+    "sweeps": {
+      "cache_capacities_kb": [
+        16,
+        32,
+        64,
+        128
+      ],
+      "working_set_sizes_kb": [
+        8,
+        16,
+        24,
+        32,
+        48,
+        64,
+        96,
+        128,
+        256
+      ],
+      "transfer_bandwidths_gb_s": [
+        0.5,
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ],
+      "pim_bank_counts": [
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "reuse_penalty_weights": [
+        0.0,
+        0.25,
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        3.0,
+        4.0
+      ],
+      "bank_skew_values": [
+        0.0,
+        0.5,
+        1.0,
+        2.0,
+        4.0
+      ],
+      "crossover_working_set_kb": 64,
+      "transfer_sensitivity_working_set_kb": 64
+    },
+    "version": "1.1.0"
+  }
+}

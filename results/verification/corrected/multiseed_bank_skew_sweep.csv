@@ -1,0 +1,6 @@
+Bank_Skew_Factor,Seeds_Evaluated,Latencies_us,Mean_Latency_us,Variance_us2,Deterministic_Status
+0.0,47-51,"[15.118, 15.118, 15.118, 15.118, 15.118]",15.118,0.0,Strictly Deterministic (Zero Variance across seeds)
+0.5,47-51,"[15.323, 15.323, 15.323, 15.323, 15.323]",15.323,0.0,Strictly Deterministic (Zero Variance across seeds)
+1.0,47-51,"[15.459, 15.459, 15.459, 15.459, 15.459]",15.459,0.0,Strictly Deterministic (Zero Variance across seeds)
+2.0,47-51,"[15.63, 15.63, 15.63, 15.63, 15.63]",15.63,0.0,Strictly Deterministic (Zero Variance across seeds)
+4.0,47-51,"[15.801, 15.801, 15.801, 15.801, 15.801]",15.801,0.0,Strictly Deterministic (Zero Variance across seeds)

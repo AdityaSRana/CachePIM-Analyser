@@ -94,16 +94,38 @@ class PIMModel:
         skew = float(descriptor.params.get("bank_skew_factor", 0.0))
         per_bank_work, imbalance_factor = self.distribute_work(descriptor.operation_count, skew)
 
-        # Internal bank/memory service and arithmetic are represented as
-        # separate, serialized components; their assumptions are explicit.
+        # Workload-dependent DRAM row-buffer locality factor (M7)
+        if getattr(self.pim_config, "row_buffer_locality_enabled", True):
+            w_type = (descriptor.workload_type or "").upper()
+            if "STREAM" in w_type or "VA" in w_type or "RED" in w_type:
+                eta_row = 0.90  # Sequential streaming hits DRAM row buffer
+            elif "RANDOM" in w_type or "BS" in w_type or "SPMV" in w_type or "BFS" in w_type:
+                eta_row = 0.25  # Frequent row-buffer misses and precharge overheads
+            else:
+                eta_row = 0.60  # Mixed / moderate reuse locality
+        else:
+            eta_row = 1.0
+
         internal_bytes = descriptor.effective_pim_input_bytes + descriptor.effective_pim_output_bytes
-        t_internal_memory = internal_bytes / self.internal_bandwidth
+        effective_internal_bw = max(0.1, self.internal_bandwidth * eta_row)
+        t_internal_memory = internal_bytes / effective_internal_bw
+
         t_compute_base = descriptor.operation_count / (self.bank_count * self.compute_ops_per_ns_per_bank)
         t_imbalance = t_compute_base * (imbalance_factor - 1.0)
 
         t_launch = self.launch_overhead_ns
         t_sync = self.sync_overhead_ns
-        total = t_h2p + t_internal_memory + t_compute_base + t_p2h + t_launch + t_sync + t_imbalance
+
+        # PIM Overlap / Pipelining Model (M8)
+        alpha = getattr(self.pim_config, "overlap_factor", 0.0)
+        t_exec = t_compute_base + t_internal_memory
+        if alpha > 0.0:
+            # Overlapped execution: double-buffered host-to-device transfer and bank compute
+            t_pipelined_h2p_exec = max(t_h2p, t_exec) + (1.0 - alpha) * min(t_h2p, t_exec)
+        else:
+            t_pipelined_h2p_exec = t_h2p + t_exec
+
+        total = t_pipelined_h2p_exec + t_p2h + t_launch + t_sync + t_imbalance
 
         return PIMCostBreakdown(
             h2p_transfer_ns=float(t_h2p),

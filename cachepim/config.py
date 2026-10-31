@@ -31,6 +31,7 @@ class CacheConfig:
     capacity_bytes: int = 32768  # 32 KiB default
     line_size_bytes: int = 64
     replacement: str = "LRU"
+    ways: Optional[int] = None  # None or 0 = fully associative; >0 = N-way set associative
 
     def validate(self) -> None:
         if self.capacity_bytes <= 0:
@@ -43,6 +44,11 @@ class CacheConfig:
             )
         if self.replacement.upper() != "LRU":
             raise ValueError(f"Only 'LRU' replacement supported in v1, got '{self.replacement}'")
+        if self.ways is not None and self.ways > 0:
+            if self.number_of_lines % self.ways != 0:
+                raise ValueError(
+                    f"Number of cache lines ({self.number_of_lines}) must be divisible by ways ({self.ways})"
+                )
 
     @property
     def number_of_lines(self) -> int:
@@ -74,6 +80,8 @@ class PIMConfig:
     launch_overhead_ns: float = 50.0  # Kernel launch overhead
     sync_overhead_ns: float = 20.0  # Bank synchronization overhead
     bank_imbalance_model: str = "max_over_mean"  # Imbalance calculation model
+    overlap_factor: float = 0.0  # 0.0 = serial (default), 1.0 = fully pipelined/overlapped
+    row_buffer_locality_enabled: bool = False  # Enable workload-dependent DRAM row-buffer factor (M7)
 
     def validate(self) -> None:
         if self.bank_count <= 0:
@@ -86,6 +94,8 @@ class PIMConfig:
             raise ValueError(f"PIM launch_overhead_ns must be non-negative, got {self.launch_overhead_ns}")
         if self.sync_overhead_ns < 0:
             raise ValueError(f"PIM sync_overhead_ns must be non-negative, got {self.sync_overhead_ns}")
+        if not (0.0 <= self.overlap_factor <= 1.0):
+            raise ValueError(f"overlap_factor must be in [0.0, 1.0], got {self.overlap_factor}")
         if self.bank_imbalance_model not in ("max_over_mean", "uniform"):
             raise ValueError(f"Unsupported bank_imbalance_model: {self.bank_imbalance_model}")
 
@@ -112,6 +122,7 @@ class TransferConfig:
 class PolicyConfig:
     reuse_threshold: float = 0.5  # Reusability ratio threshold
     reuse_penalty_weight: float = 1.0  # lambda: weight for reuse-preservation cost in ns
+    use_footprint_estimator: bool = True  # Dynamic Working-Set Footprint Estimator (M2)
 
     def validate(self) -> None:
         if not (0.0 <= self.reuse_threshold <= 1.0):
@@ -362,5 +373,33 @@ def get_parameter_provenance() -> Dict[str, ParameterProvenance]:
             provenance="assumed",
             description="Initial default only; the experiment runner selects a candidate using development seeds and saves the selected value.",
             reference="config/experiment.yaml reuse_penalty_candidates"
+        ),
+        "policy.use_footprint_estimator": ParameterProvenance(
+            value=True,
+            unit="boolean",
+            provenance="assumed",
+            description="Dynamic Working-Set Footprint Estimator gating cache temporal residency (M2).",
+            reference="Spec Sec 5.2"
+        ),
+        "cache.ways": ParameterProvenance(
+            value=None,
+            unit="ways",
+            provenance="assumed",
+            description="Set associativity (None/0 = fully associative; >0 = N-way set associative).",
+            reference="Spec Sec 5.1 (M6)"
+        ),
+        "pim.overlap_factor": ParameterProvenance(
+            value=0.0,
+            unit="dimensionless factor [0, 1]",
+            provenance="assumed",
+            description="PIM transfer/compute overlap pipelining factor (0 = serial, 1 = fully overlapped).",
+            reference="Spec Sec 6.3 (M8)"
+        ),
+        "pim.row_buffer_locality_enabled": ParameterProvenance(
+            value=False,
+            unit="boolean",
+            provenance="literature-derived",
+            description="Enables DRAM row-buffer locality factor eta_row (0.90 stream, 0.60 reuse, 0.25 random).",
+            reference="SAFARI PrIM benchmark paper (Gomez-Luna et al., IEEE Access 2022) (M7)"
         ),
     }

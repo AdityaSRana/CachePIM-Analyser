@@ -1,0 +1,202 @@
+{
+  "PrIM-VA": {
+    "file_path": "data\\traces\\stream_va.txt",
+    "file_sha256": "a76ebe945aafb7c129c9b6e29f7972538bfc8a550a5832f3071a9e7b57d4a9aa",
+    "file_bytes": 900922,
+    "raw_opcode_counts": {
+      "L": 38769,
+      "S": 20308,
+      "M": 923,
+      "I": 0,
+      "OTHER": 0
+    },
+    "min_address": "0x4003fd0",
+    "max_address": "0x1ffefffafc",
+    "real_trace_metrics": {
+      "parsed_records": 60923,
+      "reads": 39692,
+      "writes": 21231,
+      "unique_lines": 128,
+      "working_set_bytes": 8192,
+      "operation_count": 60923,
+      "cache_hits": 60795,
+      "cache_misses": 128,
+      "hit_rate": 0.997898987246196,
+      "cpu_latency_ns": 156199.2,
+      "pim_latency_ns": 4942.0
+    },
+    "synthetic_preset_metrics": {
+      "preset_config": {
+        "pattern": "STREAM",
+        "kernel_type": "VECTOR_OP",
+        "working_set_bytes": 65536,
+        "access_count": 4096,
+        "read_write_ratio": 0.67,
+        "hot_cold_ratio": 0.0,
+        "hot_set_fraction": 0.0,
+        "passes": 2,
+        "bank_skew_factor": 0.0,
+        "description": "Vector Addition (A[i] + B[i] = C[i]): Linear streaming, high spatial locality, zero temporal reuse."
+      },
+      "records": 16384,
+      "unique_lines": 1024,
+      "working_set_bytes": 65536,
+      "operation_count": 16384,
+      "cache_hits": 14336,
+      "cache_misses": 2048,
+      "hit_rate": 0.875,
+      "cpu_latency_ns": 316345.6,
+      "pim_latency_ns": 15118.0
+    }
+  },
+  "PrIM-GEMV": {
+    "file_path": "data\\traces\\reuse_gemv.txt",
+    "file_sha256": "6d47cabfc1c65a72b3c0d8a4d43dd90d01ce8a7428b90996007aeb34d29ca633",
+    "file_bytes": 923300,
+    "raw_opcode_counts": {
+      "L": 50682,
+      "S": 4659,
+      "M": 4659,
+      "I": 0,
+      "OTHER": 0
+    },
+    "min_address": "0x4002040",
+    "max_address": "0x1ffefffb48",
+    "real_trace_metrics": {
+      "parsed_records": 64659,
+      "reads": 55341,
+      "writes": 9318,
+      "unique_lines": 588,
+      "working_set_bytes": 37632,
+      "operation_count": 64659,
+      "cache_hits": 64071,
+      "cache_misses": 588,
+      "hit_rate": 0.9909061383566092,
+      "cpu_latency_ns": 207045.6,
+      "pim_latency_ns": 8281.0
+    },
+    "synthetic_preset_metrics": {
+      "preset_config": {
+        "pattern": "REUSE",
+        "kernel_type": "VECTOR_OP",
+        "working_set_bytes": 65536,
+        "access_count": 4096,
+        "read_write_ratio": 0.95,
+        "hot_cold_ratio": 0.85,
+        "hot_set_fraction": 0.15,
+        "passes": 2,
+        "bank_skew_factor": 0.0,
+        "description": "Dense Matrix-Vector Multiplication: Vector operand exhibits high temporal cache reuse, CPU-cache friendly."
+      },
+      "records": 4096,
+      "unique_lines": 585,
+      "working_set_bytes": 65536,
+      "operation_count": 4096,
+      "cache_hits": 3505,
+      "cache_misses": 591,
+      "hit_rate": 0.855712890625,
+      "cpu_latency_ns": 56328.4,
+      "pim_latency_ns": 14350.0
+    }
+  },
+  "PrIM-BS": {
+    "file_path": "data\\traces\\random_bs.txt",
+    "file_sha256": "f8285b9f8a07f292a600faa2f10cb4613483aa9d67dd8350dd3e575d37d774e0",
+    "file_bytes": 908102,
+    "raw_opcode_counts": {
+      "L": 40538,
+      "S": 17841,
+      "M": 1621,
+      "I": 0,
+      "OTHER": 0
+    },
+    "min_address": "0x4003fd0",
+    "max_address": "0x1ffefffb08",
+    "real_trace_metrics": {
+      "parsed_records": 61621,
+      "reads": 42159,
+      "writes": 19462,
+      "unique_lines": 319,
+      "working_set_bytes": 20416,
+      "operation_count": 61621,
+      "cache_hits": 61302,
+      "cache_misses": 319,
+      "hit_rate": 0.9948231933918632,
+      "cpu_latency_ns": 172772.4,
+      "pim_latency_ns": 6275.25
+    },
+    "synthetic_preset_metrics": {
+      "preset_config": {
+        "pattern": "RANDOM",
+        "kernel_type": "VECTOR_OP",
+        "working_set_bytes": 65536,
+        "access_count": 4096,
+        "read_write_ratio": 1.0,
+        "hot_cold_ratio": 0.1,
+        "hot_set_fraction": 0.05,
+        "passes": 1,
+        "bank_skew_factor": 0.5,
+        "description": "Binary Search: Non-contiguous branching memory accesses over sorted table, CPU cache miss penalties favor PIM."
+      },
+      "records": 4096,
+      "unique_lines": 1004,
+      "working_set_bytes": 65536,
+      "operation_count": 4096,
+      "cache_hits": 1901,
+      "cache_misses": 2195,
+      "hit_rate": 0.464111328125,
+      "cpu_latency_ns": 181040.4,
+      "pim_latency_ns": 14401.0
+    }
+  },
+  "PrIM-SEL": {
+    "file_path": "data\\traces\\mixed_sel.txt",
+    "file_sha256": "305d84c77e4e59713969f54ec13a1280810cb42e38d70c7792e2a4adf6fb1993",
+    "file_bytes": 912000,
+    "raw_opcode_counts": {
+      "L": 42000,
+      "S": 12000,
+      "M": 6000,
+      "I": 0,
+      "OTHER": 0
+    },
+    "min_address": "0x4004050",
+    "max_address": "0x1ffefffa7c",
+    "real_trace_metrics": {
+      "parsed_records": 66000,
+      "reads": 48000,
+      "writes": 18000,
+      "unique_lines": 1504,
+      "working_set_bytes": 96256,
+      "operation_count": 66000,
+      "cache_hits": 64496,
+      "cache_misses": 1504,
+      "hit_rate": 0.9772121212121212,
+      "cpu_latency_ns": 355072.0,
+      "pim_latency_ns": 14547.0
+    },
+    "synthetic_preset_metrics": {
+      "preset_config": {
+        "pattern": "MIXED_PHASE",
+        "kernel_type": "FILTER",
+        "working_set_bytes": 65536,
+        "access_count": 2048,
+        "read_write_ratio": 0.8,
+        "hot_cold_ratio": 0.0,
+        "hot_set_fraction": 0.0,
+        "passes": 1,
+        "bank_skew_factor": 0.0,
+        "description": "Select / Filter: Database predicate filtering with selective output writeback."
+      },
+      "records": 2048,
+      "unique_lines": 945,
+      "working_set_bytes": 65536,
+      "operation_count": 2048,
+      "cache_hits": 1103,
+      "cache_misses": 945,
+      "hit_rate": 0.53857421875,
+      "cpu_latency_ns": 92945.2,
+      "pim_latency_ns": 9614.0
+    }
+  }
+}

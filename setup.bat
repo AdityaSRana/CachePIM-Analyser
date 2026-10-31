@@ -34,9 +34,21 @@ if "%PYTHON_CMD%"=="" (
 echo [INFO] Detected system Python:
 %PYTHON_CMD% --version
 
-rem 2. Create virtual environment if missing
+rem 2. Create virtual environment if missing or broken
+set "RECREATE_VENV=0"
 if not exist "%~dp0.venv\Scripts\python.exe" (
-    echo [INFO] Creating virtual environment at .venv ...
+    set "RECREATE_VENV=1"
+) else (
+    "%~dp0.venv\Scripts\python.exe" -c "import sys" >nul 2>nul
+    if errorlevel 1 set "RECREATE_VENV=1"
+)
+
+if "%RECREATE_VENV%"=="1" (
+    echo [INFO] Creating clean virtual environment at .venv ...
+    if exist "%~dp0.venv" (
+        echo [INFO] Removing stale or non-portable virtual environment...
+        rmdir /s /q "%~dp0.venv" 2>nul
+    )
     %PYTHON_CMD% -m venv "%~dp0.venv"
     if %ERRORLEVEL% neq 0 (
         echo [ERROR] Failed to create virtual environment.
@@ -44,7 +56,7 @@ if not exist "%~dp0.venv\Scripts\python.exe" (
         exit /b 1
     )
 ) else (
-    echo [INFO] Existing virtual environment found at .venv.
+    echo [INFO] Healthy virtual environment found at .venv.
 )
 
 rem 3. Upgrade pip and install dependencies

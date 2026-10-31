@@ -1,0 +1,5 @@
+Kernel,Real_Trace_Accesses,Real_Trace_WS_KiB,Real_Trace_HitRate_Pct,Real_Trace_CPU_Latency_us,Real_Trace_PIM_Latency_us,Real_Trace_Speedup,Synthetic_Preset_Accesses,Synthetic_Preset_WS_KiB,Synthetic_Preset_HitRate_Pct,Synthetic_Preset_CPU_Latency_us,Synthetic_Preset_PIM_Latency_us,Synthetic_Preset_Speedup,Paper_Table_VI_Speedup,Provenance_Conclusion
+VA,60923,8.0,99.79,156.2,4.94,31.61,16384,64.0,87.5,199.07,15.12,13.17,20.95x,"Table VI was derived from 64 KiB Synthetic Presets, NOT 60,000-line Valgrind traces."
+GEMV,64659,36.75,99.09,207.05,8.28,25.0,4096,64.0,80.66,71.61,14.35,4.99,4.02x,"Table VI was derived from 64 KiB Synthetic Presets, NOT 60,000-line Valgrind traces."
+BS,61621,19.94,99.48,172.77,6.28,27.53,4096,64.0,46.41,181.04,14.35,12.62,5.65x,"Table VI was derived from 64 KiB Synthetic Presets, NOT 60,000-line Valgrind traces."
+SEL,66000,94.0,97.72,355.07,14.55,24.41,4096,64.0,75.29,88.77,14.35,6.19,13.38x,"Table VI was derived from 64 KiB Synthetic Presets, NOT 60,000-line Valgrind traces."
